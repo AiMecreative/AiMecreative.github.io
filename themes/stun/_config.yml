@@ -292,16 +292,16 @@ author:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: /images/icons/stun-logo.svg
+    url: https://img-blog.csdnimg.cn/adbe75f1a881467bb62b2718829762e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
     # If true, the avatar would be displayed in a circle.
-    rounded: false
+    rounded: ture
     # Opacity of avatar (value: 0 ~ 1)
     opacity: 1
     # Mouse hover animation
     # Optional values: turn | shake
-    animation: turn
+    animation: shake
   # Your favorite motto.
-  motto: hello world
+  motto: We call today present
 
 # Social links
 # Value before `||` is the target link, value after `||` is the name of FontAwesome icon.
@@ -310,7 +310,7 @@ author:
 # If you can`t find a suitable icon, you can choose to display text by adding the `origin:` prefix.
 # e.g. `origin:sf`, so `sf` will be displayed.
 social:
-  github: https://github.com/ || fab fa-github
+  github: https://github.com/Andrew-Rey || fab fa-github
   google: https://plus.google.com/ || fab fa-google
   twitter: https://twitter.com/ || fab fa-twitter
   youtube: https://youtube.com/ || fab fa-youtube
@@ -322,7 +322,7 @@ social:
   # qq: yournumber || fab fa-qq
 
 social_setting:
-  enable: false
+  enable: ture
   # Only show by icon.
   icon_only: true
 
