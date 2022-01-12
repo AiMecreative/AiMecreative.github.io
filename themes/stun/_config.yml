@@ -299,7 +299,7 @@ author:
     opacity: 1
     # Mouse hover animation
     # Optional values: turn | shake
-    animation: turn
+    animation: shake
   # Your favorite motto.
   motto: We call today present
 
