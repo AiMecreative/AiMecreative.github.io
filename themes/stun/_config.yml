@@ -294,7 +294,7 @@ author:
     # You can also use a link of image.
     url: https://img-blog.csdnimg.cn/adbe75f1a881467bb62b2718829762e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
     # If true, the avatar would be displayed in a circle.
-    rounded: true
+    rounded: false
     # Opacity of avatar (value: 0 ~ 1)
     opacity: 1
     # Mouse hover animation
