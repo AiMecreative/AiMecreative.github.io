@@ -141,14 +141,14 @@ header:
     # Whether to show on the article page.
     post: true
   # If you set a percentage, it will be calculated based on the height of screen (Supports all CSS units)
-  height: 80%
+  height: 100%
   # Background image of site header.
   bg_image:
     enable: ture
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: # https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
+    url: https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
   # Mask effect of the background image.
   mask:
     enable: false
