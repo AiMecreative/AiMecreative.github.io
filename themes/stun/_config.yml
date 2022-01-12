@@ -75,14 +75,20 @@ menu_settings:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/icons/favicon-16x16.png
-  medium: /images/icons/favicon-32x32.png
+  small: /favicon-16x16.png
+  medium: /favicon-32x32.png
   # ! --------------------------------------------------
   # ! If you don't know the following, please ignore it.
   # ! --------------------------------------------------
-  # apple_touch_icon: /images/icons/apple-touch-icon.png
-  # safari_pinned_tab: /images/icons/stun-logo.svg
-  # msapplication: /images/icons/favicon-144x144.png
+  apple_touch_icon:
+    image: /apple-touch-icon.png
+
+  safari_pinned_tab:
+    image: /safari-pinned-tab.svg
+
+  msapplication:
+    image: /favicon-144x144.png
+    config: browserconfig.xml
 
 # Progressive Web Apps
 # See: https://github.com/lavas-project/hexo-pwa/
