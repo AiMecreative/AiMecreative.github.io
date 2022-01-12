@@ -225,12 +225,12 @@ footer:
   powered:
     enable: true
     # Whether to show version after Hexo link (e.g. vX.X.X)
-    version: true
+    version: false
   # Theme link
   theme:
-    enable: true
+    enable: false
     # Whether to show version after theme link (e.g. vX.X.X)
-    version: true
+    version: false
   # Beian information for Chinese users, see: http://www.miitbeian.gov.cn/
   beian:
     enable: false
@@ -243,7 +243,7 @@ footer:
 
 # Creative Commons 4.0 International License
 creative_commons:
-  enable: true
+  enable: ture
   # Optional values: BY | BY-SA | BY-ND | BY-NC | BY-NC-SA | BY-NC-ND
   # For details, please see: https://creativecommons.org/share-your-work/licensing-types-examples/
   license: BY-NC-SA
