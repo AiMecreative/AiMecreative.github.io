@@ -205,7 +205,7 @@ footer:
     opacity: 0.5
   # Copyright information.
   copyright:
-    enable: true
+    enable: false
     # If not set, will be used `author` from Hexo main config (e.g. liuyib All Rights Reserved)
     text:
     # Start time. If not set, the current year will be used.
@@ -214,7 +214,7 @@ footer:
     end:
   # The icon between the copyright and the owner.
   icon:
-    enable: true
+    enable: false
     # Icon name in FontAwesome, see: https://fontawesome.com/icons
     name: fas fa-heart
     # Heartbeat animation.
@@ -223,7 +223,7 @@ footer:
     color: "#ff0000"
   # Hexo link
   powered:
-    enable: true
+    enable: false
     # Whether to show version after Hexo link (e.g. vX.X.X)
     version: false
   # Theme link
