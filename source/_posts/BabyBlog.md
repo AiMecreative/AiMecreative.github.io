@@ -6,6 +6,8 @@ tags: 随笔
 ## Finished! My First Blog!
 After a long time deploying my blog webpage and a lot of other borthering settings, I finally finished it! I mean, FINALLY!!! :laughing: :laughing: :laughing:
 
+<!--more-->
+
 ### Original Intention
 
 Can a programmer without a personal blog? I have seen many blogers writing their own blogs no metter answering a question or just taking notes from time to time on websites such as [zhihu][1] and [csdn][2], but among which I prefer more is to establish a personal website where I can put my blogs on.
