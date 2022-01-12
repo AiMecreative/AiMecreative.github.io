@@ -299,7 +299,7 @@ author:
     opacity: 1
     # Mouse hover animation
     # Optional values: turn | shake
-    animation: shake
+    animation: turn
   # Your favorite motto.
   motto: We call today present
 
@@ -322,7 +322,7 @@ social:
   # qq: yournumber || fab fa-qq
 
 social_setting:
-  enable: ture
+  enable: false
   # Only show by icon.
   icon_only: true
 
