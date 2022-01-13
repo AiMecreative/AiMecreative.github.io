@@ -14,12 +14,13 @@ tags: 随笔
 # hexo-github搭博客步骤
 ## 安装、环境配置（略）
 ## 连接本地库和远程库
-_**(免责声明：首先说本人毫无使用git和hexo的经验，如果我敲的逻辑有问题或者解释完全错误，不要打我；其次如果按我这样写有问题，那我不管，反正我搭完了:stuck_out_tongue_winking_eye:)**_
+_**(免责声明：首先说本人毫无使用git和hexo的经验，如果我敲的逻辑有问题或者解释完全错误，不要打我；其次如果按我这样写有问题，那我不管，反正我搭完了)**_
+:stuck_out_tongue_winking_eye:
 
 以我为例
 
 打开git bash
-```
+```git
 mkdir D:/Documents/Repo/Blog  // 创建存放博客的空文件夹
 cd D:/Documents/Repo/Blog  // 转到此文件夹
 npm install -g hexo-cli  // 下 hexo
