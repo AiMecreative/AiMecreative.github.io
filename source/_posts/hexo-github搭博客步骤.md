@@ -19,7 +19,7 @@ _**(免责声明：首先说本人毫无使用git和hexo的经验，如果我敲
 以我为例
 
 打开git bash
-```java
+```
 mkdir D:/Documents/Repo/Blog  // 创建存放博客的空文件夹
 cd D:/Documents/Repo/Blog  // 转到此文件夹
 npm install -g hexo-cli  // 下 hexo
