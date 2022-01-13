@@ -14,6 +14,8 @@ tags: 随笔
 # hexo-github搭博客步骤
 ## 安装、环境配置（略）
 ## 连接本地库和远程库
+_**(免责声明：首先说本人毫无使用git和hexo的经验，如果我敲的逻辑有问题或者解释完全错误，不要打我；其次如果按我这样写有问题，那我不管，反正我搭完了:stuck_out_tongue_winking_eye:)**_
+
 以我为例
 
 打开git bash
@@ -24,18 +26,11 @@ npm install -g hexo-cli  // 下 hexo
 hexo init  // 此处会认定你的分支名为master，若想更换名字，见文末[1]代码
 npm install
 git init  // 生成.git隐藏文件夹
-// 将自己的仓库设置为远端(remote),叫做origin
-git remote add origin https:/ /github/your_user_name/your_user_name.github.io
-// 将内容上传至本地库
-git add --all
-// 提交至暂存区(-m 后面接本次提交的注释)
-git commit -m "initail commit"
-// 将暂存区的内容同步至远端库
-git push origin master
-// hexo 生成网页内容 (generate)
-hexo g
-// hexo 部署网页内容 (deploy)
-hexo d
-// 运行服务器查看预览效果 (server)
-hexo s
+git remote add origin https:/ /github/your_user_name/your_user_name.github.io// 将自己的仓库设置为远端(remote),叫做origin
+git add --all  // 将内容上传至本地库
+git commit -m "initail commit"  // 提交至暂存区(-m 后面接本次提交的注释)
+git push origin master  // 将暂存区的内容同步至远端库
+hexo g  // hexo 生成网页内容 (generate)
+hexo d  // hexo 部署网页内容 (deploy)
+hexo s  // 运行服务器查看预览效果 (server)
 ```
