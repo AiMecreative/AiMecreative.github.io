@@ -10,7 +10,7 @@ After a long time deploying my blog webpage and a lot of other borthering settin
 
 ### Original Intention
 
-Can a programmer without a personal blog? I have seen many blogers writing their own blogs no metter answering a question or just taking notes from time to time on websites such as [zhihu][1] and [csdn][2], but among which I prefer more is to establish a personal website where I can put my blogs on.
+Can a programmer has no personal blog? I have seen many blogers writing their own blogs no metter answering a question or just taking notes from time to time on websites such as [zhihu][1] and [csdn][2], but among which I prefer is to establish a personal website where I can put my blogs on.
 
 [1]: https://zhihu.com
 [2]: https://csdn.net
