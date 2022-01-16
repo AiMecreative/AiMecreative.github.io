@@ -20,7 +20,7 @@ _**(免责声明：首先说本人毫无使用git和hexo的经验，如果我敲
 以我为例
 
 打开git bash
-```git
+```
 mkdir D:/Documents/Repo/Blog  // 创建存放博客的空文件夹
 cd D:/Documents/Repo/Blog  // 转到此文件夹
 npm install -g hexo-cli  // 下 hexo
@@ -34,4 +34,14 @@ git push origin master  // 将暂存区的内容同步至远端库
 hexo g  // hexo 生成网页内容 (generate)
 hexo d  // hexo 部署网页内容 (deploy)
 hexo s  // 运行服务器查看预览效果 (server)
+```
+
+## 附录
+1. 更换分支名
+```
+git branch old_name new_name
+```
+2. 创建新的post文件
+```
+hexo new post "post_name"
 ```
