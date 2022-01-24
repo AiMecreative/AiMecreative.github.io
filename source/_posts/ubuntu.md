@@ -1,5 +1,5 @@
 ---
-title: Operating System
+title: Ubuntu基本命令
 date: 2022-01-23
 tags: Notes
 ---
@@ -380,8 +380,7 @@ winodws: rar
 mac: zip  
 Linux: tar.gz  
 
-```tar```
-只负责打包解包, 不负责压缩解压.
+* ```tar```只负责打包解包, 不负责压缩解压.
 
 * 打包:
   * ```tar -cvf 打包文件名.tar 被打包的文件/路径```
@@ -394,18 +393,19 @@ Linux: tar.gz
   * v : 列出归档解档的详细过程, 显示进度
   * f : 指定档案文件名称, f后面一定是档案名称, 因此必须在最后
 
-```gzip```压缩和解压缩文件命令, 先用```tar```进行打包, 然后再用```gzip```压缩; 或者在```tar```增加 -z 选项, 可以自动调用 gzip 命令.
+* ```gzip```压缩和解压缩文件命令, 先用```tar```进行打包, 然后再用```gzip```压缩; 或者在```tar```增加 -z 选项, 可以自动调用 gzip 命令.
 * 打包且压缩文件的扩展名为: .tar.gz
 * 压缩:
   * ```tar -zcvf 打包文件名.tar.gz 被打包的文件/路径```
 * 解压 [到指定路径]:
   * ```tar -zxvf 打包文件.tar.gz [-C] [目标路径]```
 
-```bzip2```的用法与```gzip```相同, 但扩展名为.tar.bz2, 在```tar```增加选项 -j .
+* ```bzip2```的用法与```gzip```相同, 但扩展名为.tar.bz2, 在```tar```增加选项 -j .
 
 #### 软件安装
-```apt```: Advanced Packaging Tool, 是Linux下一款安装包管理工具, 可以在终端下安装, 卸载, 更新软件包.
-```
+* ```apt```: Advanced Packaging Tool, 是Linux下一款安装包管理工具, 可以在终端下安装, 卸载, 更新软件包.
+
+```editor
   安装:
   sudo apt install 软件包
 
