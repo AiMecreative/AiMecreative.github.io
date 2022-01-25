@@ -1,7 +1,7 @@
 ---
 title: Ubuntu基本命令
 date: 2022-01-23
-tags: Notes
+tags: 操作系统
 ---
 
 "终于要开始学习了."
