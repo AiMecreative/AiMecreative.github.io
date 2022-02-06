@@ -18,6 +18,10 @@ https://www.cnblogs.com/machangwei-8/p/10353004.html
 
 https://blog.csdn.net/Kris__zhang/article/details/106841466
 
+**fork原文**
+
+https://gist.github.com/Andrew-Rey/5580fc668bbd66a63b86adb24a0cfa2f
+
 # 原理
 
 nmap拥有许多协议包.
