@@ -2,6 +2,8 @@
 title: Ubuntu虚拟机偶遇问题
 date: 2022-01-25 10:42:43
 tags: 随笔
+category:
+- SEU_Study
 ---
 
 "一杯茶一根烟, 一个bug调一天."

@@ -2,6 +2,8 @@
 title: hexo-github搭博客步骤
 date: 2022-01-13 16:17:02
 tags: 随笔
+category:
+- SEU_Study
 ---
 
 “大家有问题可以来问我，我可以帮你们去查。”

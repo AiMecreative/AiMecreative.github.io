@@ -2,6 +2,9 @@
 title: 计算机网络
 date: 2022-01-26
 tags: 网络
+math: true
+category:
+- SEU_Study
 ---
 
 "十天能学完吗, 呜呜呜."

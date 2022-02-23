@@ -2,6 +2,8 @@
 title: BabyBlog
 date: 2022-01-11 09:09:04
 tags: 随笔
+category:
+- Life
 ---
 ## Finished! My First Blog!
 After a long time deploying my blog webpage and a lot of other borthering settings, I finally finished it! I mean, FINALLY!!! :laughing: :laughing: :laughing:

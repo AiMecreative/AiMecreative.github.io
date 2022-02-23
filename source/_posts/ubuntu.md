@@ -2,6 +2,8 @@
 title: Ubuntu基本命令
 date: 2022-01-23
 tags: 操作系统
+category:
+- SEU_Study
 ---
 
 "终于要开始学习了."
