@@ -66,7 +66,7 @@ submenu:
 
 menu_settings:
   # Only show by icon.
-  icon_only: ture
+  icon_only: true
   # Only show by text.
   text_only: false
 
@@ -144,7 +144,7 @@ header:
   height: 100%
   # Background image of site header.
   bg_image:
-    enable: ture
+    enable: true
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
@@ -162,7 +162,7 @@ header:
     bg_color: "#333"
   # The icon that prompts the user to pull down.
   scroll_down_icon:
-    enable: ture
+    enable: true
     # Icon name in FontAwesome, see: https://fontawesome.com/icons
     name: fas fa-angle-down
     animation: true
