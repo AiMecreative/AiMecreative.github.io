@@ -2,7 +2,7 @@
 title: Statiscal Learning Method
 date: 2022-3-4
 math: true
-category: Artificial Intellgence
+category: Artificial Intelligence
 ---
 <!--more-->
 # Supervised Learning

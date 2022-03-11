@@ -149,7 +149,7 @@ header:
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
     # url: https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
-    images: /images/bg1.jpg
+    image: /images/bg1.jpg
   # Mask effect of the background image.
   mask:
     enable: false
