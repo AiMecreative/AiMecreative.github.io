@@ -244,7 +244,7 @@ footer:
 
 # Creative Commons 4.0 International License
 creative_commons:
-  enable: ture
+  enable: false
   # Optional values: BY | BY-SA | BY-ND | BY-NC | BY-NC-SA | BY-NC-ND
   # For details, please see: https://creativecommons.org/share-your-work/licensing-types-examples/
   license: BY-NC-SA
