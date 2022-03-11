@@ -313,18 +313,18 @@ author:
 # e.g. `origin:sf`, so `sf` will be displayed.
 social:
   github: https://github.com/Andrew-Rey || fab fa-github
-  google: https://plus.google.com/ || fab fa-google
-  twitter: https://twitter.com/ || fab fa-twitter
-  youtube: https://youtube.com/ || fab fa-youtube
+  # google: https://plus.google.com/ || fab fa-google
+  # twitter: https://twitter.com/ || fab fa-twitter
+  # youtube: https://youtube.com/ || fab fa-youtube
   # segmentfault: https://segmentfault.com/ || origin:sf
   # weibo: https://weibo.com/ || fab fa-weibo
   # zhihu: https://www.zhihu.com/ || origin:知
   # wechat: yournumber || fab fa-weixin
   # telegram: yournumber || fab fa-telegram
-  # qq: yournumber || fab fa-qq
+  qq: 1402850762 || fab fa-qq
 
 social_setting:
-  enable: false
+  enable: true
   # Only show by icon.
   icon_only: true
 
