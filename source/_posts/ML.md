@@ -5,6 +5,10 @@ math: true
 category: Artificial Intelligence
 ---
 
+"In fact, I have no idea if I can finish this blog."
+
+"You can."
+
 <!--more-->
 
 # Introduction

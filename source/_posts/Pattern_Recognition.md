@@ -4,7 +4,13 @@ date: 2022-2-28
 math: true
 category: Artificial Intelligence
 ---
+
+"This is really a great lesson."
+
+"If there are no such many homework."
+
 <!--more-->
+
 # Introduction
 ## What is Patter Recognition?
 - Pattern

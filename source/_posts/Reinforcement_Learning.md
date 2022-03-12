@@ -6,6 +6,10 @@ category: Artificial Intelligence
 
 ---
 
+"Guess what, this class has a relatively high requirement for coding."
+
+"And the examination is in 16th week..."
+
 <!--more-->
 
 # Introduction

@@ -149,8 +149,7 @@ header:
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
     # url: https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
-    url: http://photonj.photo.store.qq.com/psc?/V54H7oWq4PuKyu1PtDcl2Hmkgd3d6xYL/ruAMsa53pVQWN7FLK88i5irgLmSTsJh8DvP4jdCD1xzoY*SYtJt2Klp1.VYyE*Xk7i8oXCbmMUwYXvXqX3MG5ZZcjxLxyWHlTaQ*f9M2RaM!/b&bo=OASABzgEgAcRECc!
-  # Mask effect of the background image.
+    url: http://photonj.photo.store.qq.com/psc?/V54H7oWq4PuKyu1PtDcl2Hmkgd3d6xYL/ruAMsa53pVQWN7FLK88i5irgLmSTsJh8DvP4jdCD1xwUu39sVB6ZJqiihu9zOgWE1sjxEt8T0r7.0j3FbeB8ULzjSdc9j.*3MK*qmGGl.Bs!/b&bo=OASABzgEgAcRECc!  # Mask effect of the background image.
   mask:
     enable: false
     # Opacity of the mask (value: 0 ~ 1)
