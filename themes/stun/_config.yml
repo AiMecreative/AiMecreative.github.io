@@ -149,7 +149,7 @@ header:
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
     # url: https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
-    url: http://m.qpic.cn/psc?/V54H7oWq4PuKyu1PtDcl2Hmkgd3d6xYL/45NBuzDIW489QBoVep5mcQyog1ALqpC2owpZ285L*6TlWC1oRrXLIj7g0*G*g76VZfvMnLqJVcxQjroYpSBFfwE3mmttH78UnNlq2Hm6Wpo!/b&bo=OASABzgEgAcBJwA!&rf=viewer_4
+    url: https://pic3.zhimg.com/80/v2-e6fd0babf62cb517120c8ed864d41526_720w.jpg
   mask:
     enable: false
     # Opacity of the mask (value: 0 ~ 1)
