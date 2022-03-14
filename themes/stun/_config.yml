@@ -248,9 +248,9 @@ creative_commons:
   # For details, please see: https://creativecommons.org/share-your-work/licensing-types-examples/
   license: BY-NC-SA
   # Show the CC license in the sidebar.
-  sidebar: true
+  sidebar: false
   # Show the CC license at the post bottom.
-  post: true
+  post: false
   # Optional values:
   #   id | ms | ca | da | de | en | es | es_ES | eo | eu | fr | gl | hr
   #   it | lv | lt | hu | nl | no | pt | pt_BR | pl | ro | sl | fi | sv
@@ -295,7 +295,7 @@ author:
     url: https://img-blog.csdnimg.cn/767867d96c854f3eaf5c2378d400bfd8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
     # https://img-blog.csdnimg.cn/adbe75f1a881467bb62b2718829762e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
     # If true, the avatar would be displayed in a circle.
-    rounded: false
+    rounded: true
     # Opacity of avatar (value: 0 ~ 1)
     opacity: 1
     # Mouse hover animation
