@@ -24,18 +24,33 @@ category: Artificial Intelligence
   - Process (处理): learn to distinguish patterns of interest
   - Prediction (预测): make sound and reasonable decisions about the categories
 
-## Process
+# Bayesian Decision Theory
+## Basic Theory
+### Bayesian Formula
+$$
+P(\omega_i | \mathbf{x}) = \frac{P(\omega_i)p(\mathbf{x} | \omega_i)}{p(\mathbf{x})}
+$$
+Where $\omega_i(i = 1,\dots, c)$ is the category of research object. $\mathbf{x}$ is the **feature vector**, has $d$ dimensions. We call $P(\omega_i | \mathbf{x})$ **posterior**, $P(\omega_i)$ **prior probability** and $p(\mathbf{x} | \omega_i)$ **likelihood** of $\mathbf{x}$ in category $\omega_i$. Note that $p(\omega{x})$ is a constant, we call it **evidence coefficient**.
+$$
+p(\mathbf{x}) = \sum_{i = 1}^c P(\omega_i)p(\mathbf{x} | \omega_i)
 $$
 
-pre-procession \Leftrightarrow Feature\ Extraction \Leftrightarrow Classification
-
+### Loss function
+We use 
 $$
+\lambda(\alpha_i | \omega_j)
+$$
+to describe the loss or penetrate we get since we take action $\alpha_i$ while the true category is $\omega_j$.
+
+### Class-Conditional Probability
+We define the **class conditional probability** relative to the action $\alpha_i$
+$$
+R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) p(\omega_j | \mathbf{x})
 $$
 
-input \Rightarrow sensing \Leftrightarrow segmentation \Leftrightarrow Feature\ Extraction \Leftrightarrow classiffication \Leftrightarrow post-procession
-
+So the **total risk** is defined as:
+$$
+R = \int_{feature\ space} R(\alpha_i | \mathbf{x}) p(\mathbf{x}) d\mathbf{x}
 $$
 
-this is a <font color=blue>Feedback</font> progress.
-
-# Bayesian Decision theory
+**Ongoing update...**
