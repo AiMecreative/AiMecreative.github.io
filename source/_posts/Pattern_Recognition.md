@@ -1,7 +1,7 @@
 ---
 title: Pattern Recognition
 date: 2022-2-28
-math: true
+mathjax: true
 category: Artificial Intelligence
 ---
 

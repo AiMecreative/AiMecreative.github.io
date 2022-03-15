@@ -1,7 +1,7 @@
 ---
 title: Statiscal Learning Method
 date: 2022-3-4
-math: true
+mathjax: true
 category: Artificial Intelligence
 ---
 

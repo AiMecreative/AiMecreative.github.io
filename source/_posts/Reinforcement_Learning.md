@@ -1,6 +1,6 @@
 ---
 title: Reinforcment Learning
-math: true
+mathjax: true
 date: 2022-2-28
 category: Artificial Intelligence
 
