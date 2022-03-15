@@ -62,8 +62,7 @@ NFL tells us we should discuss our model in <font color=orange>specific situatio
 The mathematical proof:
 
 considering the binary classification task and the true goal function can be anyone who satisfys $\mathcal{X}\mapsto\{0,1\}$, so our function space is $\{0, 1\}^{|\mathcal{X}|}$. Add all errors for any function $f$ submiting the uniform distribution.
-$$
-
+<p>\[
 \begin{aligned}
 \sum_f E_{ote}(\mathfrak{L}_a | X,f) =& \sum_f\sum_h\sum_{x\in\mathcal{X}-X}P(\boldsymbol{x})\mathbb{I}(h(\boldsymbol{x})\neq f(\boldsymbol{x}))P(h|X, \mathfrak{L}_a) \\
 =& \sum_{x\in\mathcal{X}-X}P(\boldsymbol{x})\sum_h P(h|X,\mathfrak{L}_a)\sum_f\mathbb{I}(h(\boldsymbol{x})\neq f(\boldsymbol{x})) \\
@@ -71,8 +70,7 @@ $$
 =& \frac{1}{2}2^{|\mathcal{X}|}\sum_{x\in\mathcal{X}-X}P(\boldsymbol{x})\sum_h P(h|X,\mathfrak{L}_a) \\
 =& \frac{1}{2}2^{|\mathcal{X}|}\sum_{x\in\mathcal{X}-X}P(\boldsymbol{x})\cdot\boldsymbol{1}
 \end{aligned}
-
-$$
+\]</p>
 
 $\mathcal{X}$ represents the sample space, $\mathcal{H}$ represents the hypothesis space, which are all <font color=orange> discrete </font>.
 
