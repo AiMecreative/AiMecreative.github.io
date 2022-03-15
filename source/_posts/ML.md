@@ -1,7 +1,7 @@
 ---
 title: Machine Learning
 date: 2022-3-1
-mathjax: true
+math: true
 category: Artificial Intelligence
 ---
 
