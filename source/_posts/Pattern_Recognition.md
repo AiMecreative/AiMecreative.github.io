@@ -47,10 +47,47 @@ We define the **class conditional probability** relative to the action $\alpha_i
 $$
 R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) p(\omega_j | \mathbf{x})
 $$
-
 So the **total risk** is defined as:
 $$
 R = \int_{feature\ space} R(\alpha_i | \mathbf{x}) p(\mathbf{x}) d\mathbf{x}
 $$
+
+### The Decision Theory
+**Bayesian Decision Theory**: In order to minimize the total risk $R$, for $i = 1, \dots, a$ we calculate the class-conditional probability
+$$
+R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) p(\omega_j | \mathbf{x})
+$$
+and choose a proper action $\alpha_i$ to make the $R(\alpha_i | \mathbf{x})$ minimized.
+
+## Two-class classification
+The loss function is
+$$
+\lambda_{ij} \doteq \lambda(\alpha_i | \omega_j)
+$$
+And our class conditional function are:
+<p>\[
+\begin{aligned}
+  R(\alpha_1 | \mathbf{x}) &= \lambda_{11} p(\omega_1 | \mathbf{x}) + \lambda_{12} p(\omega_2 | \mathbf{x})
+
+  R(\alpha_2 | \mathbf{x}) &= \lambda_{21} p(\omega_1 | \mathbf{x}) + \lambda_{22} p(\omega_2 | \mathbf{x})
+\end{aligned}
+\]</p>
+The decision is: if $R(\alpha_1 | \mathbf{x}) < R(\alpha_2 | \mathbf{x})$, then it means $\alpha_1$ takes smaller risk, and so we choose the action $\alpha_1$.
+
+Using the posterior probability to describe is:
+$$
+(\lambda_{21} - \lambda_{11})P(\omega_1 | \mathbf{x}) > (\lambda_{12} - \lambda_{22})P(\omega_2 | \mathbf{x})
+$$
+
+Using the Bayes' Formula, converting the prior probability to posterior probability:
+$$
+(\lambda_{21} - \lambda_{11})p(\omega_1 | \mathbf{x})P(\omega_1) > (\lambda_{12} - \lambda_{22})p(\omega_2 | \mathbf{x})P(\omega_2)
+$$
+
+Or writing with fraction form:
+$$
+\frac{p(\omega_1 | \mathbf{x})}{p(\omega_2 | \mathbf{x})} > \frac{\lambda_{12} - \lambda_{22}}{\lambda_{21} - \lambda_{11}}\frac{P(\omega_2)}{P(\omega_1)}
+$$
+
 
 **Ongoing update...**
