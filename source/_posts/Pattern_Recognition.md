@@ -45,7 +45,7 @@ to describe the loss or penetrate we get since we take action $\alpha_i$ while t
 ### Class-Conditional Probability
 We define the **class conditional probability** relative to the action $\alpha_i$
 $$
-R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) p(\omega_j | \mathbf{x})
+R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) P(\omega_j | \mathbf{x})
 $$
 So the **total risk** is defined as:
 $$
@@ -67,11 +67,11 @@ $$
 And our class conditional function are:
 <p>\[
 \begin{aligned}
-  R(\alpha_1 | \mathbf{x}) &= \lambda_{11} p(\omega_1 | \mathbf{x}) + \lambda_{12} p(\omega_2 | \mathbf{x})
-
-  R(\alpha_2 | \mathbf{x}) &= \lambda_{21} p(\omega_1 | \mathbf{x}) + \lambda_{22} p(\omega_2 | \mathbf{x})
+R(\alpha_1 | \mathbf{x}) &= \lambda_{11} p(\omega_1 | \mathbf{x}) + \lambda_{12} p(\omega_2 | \mathbf{x})\\
+R(\alpha_2 | \mathbf{x}) &= \lambda_{21} p(\omega_1 | \mathbf{x}) + \lambda_{22} p(\omega_2 | \mathbf{x})
 \end{aligned}
 \]</p>
+
 The decision is: if $R(\alpha_1 | \mathbf{x}) < R(\alpha_2 | \mathbf{x})$, then it means $\alpha_1$ takes smaller risk, and so we choose the action $\alpha_1$.
 
 Using the posterior probability to describe is:
@@ -81,13 +81,44 @@ $$
 
 Using the Bayes' Formula, converting the prior probability to posterior probability:
 $$
-(\lambda_{21} - \lambda_{11})p(\omega_1 | \mathbf{x})P(\omega_1) > (\lambda_{12} - \lambda_{22})p(\omega_2 | \mathbf{x})P(\omega_2)
+(\lambda_{21} - \lambda_{11})p(\mathbf{x} | \omega_1)P(\omega_1) > (\lambda_{12} - \lambda_{22})p(\mathbf{x} | \omega_2)P(\omega_2)
 $$
 
 Or writing with fraction form:
 $$
-\frac{p(\omega_1 | \mathbf{x})}{p(\omega_2 | \mathbf{x})} > \frac{\lambda_{12} - \lambda_{22}}{\lambda_{21} - \lambda_{11}}\frac{P(\omega_2)}{P(\omega_1)}
+\frac{p(\mathbf{x} | \omega_1)}{p(\mathbf{x} | \omega_2)} > \frac{\lambda_{12} - \lambda_{22}}{\lambda_{21} - \lambda_{11}}\frac{P(\omega_2)}{P(\omega_1)}
 $$
+
+## The Minimum-error Classification
+We define the minimum-error classification is a problem that uses the **symmetric loss** or **"0-1" loss**:
+<p>\[
+\lambda(\alpha_i | \omega_j) = \left\{\begin{aligned}
+&0&\ &i=j,\\
+&1&\ &i\neq j
+\end{aligned}\right.\ \ \ i,j = 1,\dots,c
+\]</p>
+
+If you use this symmetric loss in a classification problem, you mean **all the error decisions make the same consequence**.
+
+Our decision is made based on conditional risk:
+<p>
+\[
+\begin{aligned}
+R(\alpha_i | \omega_j) &= \sum_{j = 1}^c \lambda_{ij} P(\omega_j | \mathbf{x})\\
+&= \sum_{i\neq j} 1 \cdot P(\omega_j | \mathbf{x})\\
+&= 1 - P(\omega_i | \mathbf{x})
+\end{aligned}  
+\]
+</p>
+
+### Minimax Rule
+I will not write this part until I make it clear...
+
+## The Discriminant Function, Decision Surface Based on Gaussian Distribution
+### Gaussian Distribution
+<p>\[\begin{aligned}
+\varphi(\mathbf{x}) = \frac{1}{(2\pi)^{\frac{d}{2}}|\Sigma|^{\frac{1}{2}}}exp(-\frac{1}{2}(\mathbf{x} - \mathbf{\mu})^T\Sigma^{-1}(\mathbf{x} - \mathbf{\mu}))
+\end{aligned}\]</p>
 
 
 **Ongoing update...**
