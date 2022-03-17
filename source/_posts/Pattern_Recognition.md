@@ -26,7 +26,7 @@ category: Artificial Intelligence
 
 # Bayesian Decision Theory
 ## Basic Theory
-### Bayesian Formula
+### :cherry_blossom:Bayesian Formula
 $$
 P(\omega_i | \mathbf{x}) = \frac{P(\omega_i)p(\mathbf{x} | \omega_i)}{p(\mathbf{x})}
 $$
@@ -35,14 +35,14 @@ $$
 p(\mathbf{x}) = \sum_{i = 1}^c P(\omega_i)p(\mathbf{x} | \omega_i)
 $$
 
-### Loss function
+### :cherry_blossom:Loss function
 We use 
 $$
 \lambda(\alpha_i | \omega_j)
 $$
 to describe the loss or penetrate we get since we take action $\alpha_i$ while the true category is $\omega_j$.
 
-### Class-Conditional Probability
+### :cherry_blossom:Class-Conditional Probability
 We define the **class conditional probability** relative to the action $\alpha_i$
 $$
 R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) P(\omega_j | \mathbf{x})
@@ -52,7 +52,7 @@ $$
 R = \int_{feature\ space} R(\alpha_i | \mathbf{x}) p(\mathbf{x}) d\mathbf{x}
 $$
 
-### The Decision Theory
+### :cherry_blossom:The Decision Theory
 **Bayesian Decision Theory**: In order to minimize the total risk $R$, for $i = 1, \dots, a$ we calculate the class-conditional probability
 $$
 R(\alpha_i | \mathbf{x}) = \sum_{j=1}^c \lambda(\alpha_i | \omega_j) p(\omega_j | \mathbf{x})
@@ -111,11 +111,11 @@ R(\alpha_i | \omega_j) &= \sum_{j = 1}^c \lambda_{ij} P(\omega_j | \mathbf{x})\\
 \]
 </p>
 
-### Minimax Rule
+### :cherry_blossom:Minimax Rule
 I will not write this part until I make it clear...
 
 ## The Discriminant Function, Decision Surface Based on Gaussian Distribution
-### Gaussian Distribution
+### :cherry_blossom:Gaussian Distribution
 <p>\[\begin{aligned}
 \varphi(\mathbf{x}) = \frac{1}{(2\pi)^{\frac{d}{2}}|\Sigma|^{\frac{1}{2}}}exp(-\frac{1}{2}(\mathbf{x} - \mathbf{\mu})^T\Sigma^{-1}(\mathbf{x} - \mathbf{\mu}))
 \end{aligned}\]</p>
