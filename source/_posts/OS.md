@@ -101,8 +101,43 @@ In Linux, file access control: **rwx**, **owner**, **user(u)**, **group(g)**, **
 
 ## Operating system services
 ### :cherry_blossom:Core operating system services
-### :cherry_blossom:Additional operating system functions
+From the view of an user:
 
+**Program execution**
+- load a program into memory and to run it
+  - process management, memory management, disk management and so on.
+
+**I/O operations**
+- user programs cannot execute I/O operations directly, the OS must provide some means to perform I/O.
+
+**File-system manipulation**
+- programs capability to read, write, create and delete files
+
+**Communication**
+- exchange information between processes
+
+**Error detection**
+- ensure correct computing in CPU, memory hardware, I/O devices, user programs
+
+### :cherry_blossom:Additional operating system functions
+From a view of system:
+
+This part is user for **efficient system operations**, not for helping users.
+- Resource allocation
+- Accounting
+- Protection
 
 ## System call
-An **interface** between a running program and the OS.
+An user how to use system services:
+
+Normally, we write C code and define the ``main`` function, this is a *system call*, but has been packaged to a convenient-to-use API.
+
+**System call** is an **interface** between a running program and the OS.
+- generally available as assembly-language instructions. (汇编语言形式呈现)
+- user programs (in **user mode**, ``mode bit=1``) send a ``system call`` to the OS (in **kernel mode**, ``mode bit=0``), and the OS execute the system call, then the OS returns (and change the mode bit to 1), finally the user programs continue to execute.
+- Common in the OS
+- Some language like ``C`` language and ``C++`` are defined to replace assembly-language for system programming, which allow system call to be made directly.
+
+![system_call1](system_call1.png)
+
+### The implementation of system call
