@@ -138,6 +138,31 @@ Normally, we write C code and define the ``main`` function, this is a *system ca
 - Common in the OS
 - Some language like ``C`` language and ``C++`` are defined to replace assembly-language for system programming, which allow system call to be made directly.
 
-![system_call1](system_call1.png)
+![system_call1](OS/system_call1.png)
 
 ### The implementation of system call
+Typically, a number associated with each system call.
+- System call interface maintains a table indexed according to these numbers
+
+The system call interface invokes intended system call in OS kernel and returns status of the system call and any return values. (系统调用的接口使用OS内核中的系统调用, 并返回系统调用状态和相应参数)
+
+The caller need to know **nothing** about how the system call in implemented.
+- just need to **obey API** and understand what OS will do as a result call.
+- Most details of OS interface hidden from programmer by API
+  - manage run-time support library <u>(set of functions built into libraries included with compiler)</u>
+
+![system_call2](OS/system_call2.png)
+
+In this picture, ``open()`` function acts as an API, and ``open()`` gives a system call (in the function library) to OS (maybe in the library, ``open()`` function use other system functions to give a system call, because ``open()`` is just an <u>API</u> of system call functions). Then the OS look up this system call in its number table and then execute a specific system program (according to the index number). Finally, the OS returns the states.
+
+### Parameter passing in system call
+Often, more information is required than simply identity of desired system call.
+
+Three types:
+- simplest: pass the parameters in ***registers***
+  - maybe more parameters than registers
+- Parameters stored in a ***block***, or *table*, in memory. and pass the block address to registers.
+  - taken by Linux and Solaris
+- Parameters placed, or <u>pushed</u> onto the ***stack*** by program and <u>popped</u> off the stack by the OS.
+
+<u>Block and stack don't limit the number and the length of parameters.</u>
