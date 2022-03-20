@@ -1,6 +1,6 @@
 ---
 title: Operating System
-date: 2022-2-28
+date: today
 mathjax: true
 category: Computer Science
 ---
@@ -20,31 +20,36 @@ Framework of this chapter:
 - Structure
 - virtual machine
 
+These contents will be detailed written in the following chapters
 
 ## Operating system components
 ### :cherry_blossom:Process management
 **process**: A process is a <font color=blue>program</font> in <font color=red>execution</font>.
 - program has its own address space
 
-OS activities:
+{%note primary%}
+### OS activities:
 - Process creation and deletion
   - using **fork** system call
 - Process suspension and resumption (挂起或恢复)
 - Provision of mechanism for:
   - process synchronization (进程同步)
-    - such as two process should share a variable to achieve a task or job. And synchronization mechanism helps to finish this job in a proper order.
+    - such as two processes should share a variable to achieve a task or job. And synchronization mechanism helps to finish this job in a proper order.
   - process communication (进程通信)
   - deadlock handling (死锁处理)
+{%endnote%}
 
 ### :cherry_blossom:Main memory management
 **memory**: Memory is a large array of words or bytes, each with its own address. It is a repository of quickly accessible data shared by the CPU and I/O devices.
 
 **Main memory** or **primary storage** is a volatile storage device (掉电易失设备).
 
-OS activities:
+{%note primary%}
+### OS activities:
 - Keep track of which parts of memory are currently being used and by whom.
 - Decide which processes to load when memory space becomes available (Job scheduling, 任务调度).
 - Allocate and deallocate memory space as needed.
+{%endnote%}
 
 **Virtual memory**: Virtual memory allows programs to address memory from a logical point of view. This technique allows applications **regard** that they have a continuous address space rather than fragmented spaces from main memory to disk memory.
 - without regard to the limits of physical memory.
@@ -53,13 +58,15 @@ OS activities:
 **file**: A file is a collection of related information defined by its creator. Commonly, files represent programs (both source and object form) and data.
 - this a uniform logical view of information storage provided by OS.
 
-OS activities:
+{%note primary%}
+### OS activities:
 - File creation and deletion.
 - Directory (can be seen as a special file) creation and deletion.
 - Support of primitive for manipulating files and directories.
 - Mapping files onto secondary storage.
   - for large files, how to map them onto secondary storage?
 - File backup (备份) on stable (nonvolatile) storage media.
+{%endnote%}
 
 *Windows file management is related to storage, but Linux not. In Linux, every thing is file, having a unified form to access files.*
 
@@ -79,11 +86,13 @@ The I/O subsystem consists of:
 - disk
 - Main memory is volatile and too small to accommodate all data and programs permanently, so the computer must provide secondary storage to back up main memory.
 
-OS activities;
+{%note primary%}
+### OS activities;
 - Free space management (which parts of disk are free and how to allocate these free blocks)
 - Storage allocation
 - Disk scheduling (磁盘调度)
   - 磁头移动, 请求分布在不同柱面上, 相应时需要磁头在不同不同柱面上切换, 经过算法, 设计磁头移动的最短距离 (有计算题).
+{%endnote%}
 
 ### :cherry_blossom:Protection system
 **Protection** refers to a mechanism for controlling access by programs, processes, or users to both system and user resources.
@@ -138,10 +147,10 @@ Normally, we write C code and define the ``main`` function, this is a *system ca
 - Common in the OS
 - Some language like ``C`` language and ``C++`` are defined to replace assembly-language for system programming, which allow system call to be made directly.
 
-![system_call1](OS/system_call1.png)
+![system_call1](system_call1.png)
 
-### The implementation of system call
-Typically, a number associated with each system call.
+### :cherry_blossom:The implementation of system call
+Typically, a number (index) associated with each system call.
 - System call interface maintains a table indexed according to these numbers
 
 The system call interface invokes intended system call in OS kernel and returns status of the system call and any return values. (系统调用的接口使用OS内核中的系统调用, 并返回系统调用状态和相应参数)
@@ -155,7 +164,7 @@ The caller need to know **nothing** about how the system call in implemented.
 
 In this picture, ``open()`` function acts as an API, and ``open()`` gives a system call (in the function library) to OS (maybe in the library, ``open()`` function use other system functions to give a system call, because ``open()`` is just an <u>API</u> of system call functions). Then the OS look up this system call in its number table and then execute a specific system program (according to the index number). Finally, the OS returns the states.
 
-### Parameter passing in system call
+### :cherry_blossom:Parameter passing in system call
 Often, more information is required than simply identity of desired system call.
 
 Three types:
@@ -166,3 +175,27 @@ Three types:
 - Parameters placed, or <u>pushed</u> onto the ***stack*** by program and <u>popped</u> off the stack by the OS.
 
 <u>Block and stack don't limit the number and the length of parameters.</u>
+
+### :cherry_blossom:Types of system call
+Five main types:
+- process control
+- file management
+- device management
+- information maintenance
+- communication
+
+**process management**
+<center><b>Table 1: process management for major POSIX system</b></center>
+
+|call|description|
+|----|-----------|
+|``pid=fork()``|create a child process identical to the parent|
+|``pid=waitpid(pid, &statloc, options)``|wait for a child to terminate|
+|``s=execve(name, argv, environp)``|replace a process' core image|
+|``exit(status)``|terminate process execution and return status|
+
+**file management**
+
+
+## System structure
+### :cherry_blossom:UNIX
