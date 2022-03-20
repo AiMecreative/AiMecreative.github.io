@@ -160,7 +160,7 @@ The caller need to know **nothing** about how the system call in implemented.
 - Most details of OS interface hidden from programmer by API
   - manage run-time support library <u>(set of functions built into libraries included with compiler)</u>
 
-![system_call2](OS/system_call2.png)
+![system_call2](system_call2.png)
 
 In this picture, ``open()`` function acts as an API, and ``open()`` gives a system call (in the function library) to OS (maybe in the library, ``open()`` function use other system functions to give a system call, because ``open()`` is just an <u>API</u> of system call functions). Then the OS look up this system call in its number table and then execute a specific system program (according to the index number). Finally, the OS returns the states.
 
@@ -189,13 +189,43 @@ Five main types:
 
 |call|description|
 |----|-----------|
-|``pid=fork()``|create a child process identical to the parent|
+|``pid=fork()``|create a child process identical to the parent (child is same with parents process)|
 |``pid=waitpid(pid, &statloc, options)``|wait for a child to terminate|
-|``s=execve(name, argv, environp)``|replace a process' core image|
+|``s=execve(name, argv, environp)``|replace a process' core image, can be used with ``fork()`` to let child do another things but both from parents process|
 |``exit(status)``|terminate process execution and return status|
 
 **file management**
+<center><b>Table 2: file management for major POSIX system</b></center>
 
+|call|description|
+|----|-----------|
+|``fd=open(file, how, ...)``|open a file for reading, writing, or both, ``fd`` is 文件描述符|
+|``s=close(fd)``|close an open file|
+|``n=read(fd, buffer, nbytes)``|read data from a file into a buffer|
+|``n=write(fd, buffer, nbytes)``|write data from a buffer to file|
+|``position=lseek(fd, offset, whence)``|move the file pointer|
+|``s=stat(name, &buf)``|get a file's status information|
+|``mkdir()``|create a new directory|
+|``rmdir()``|remove an empty directory|
+|``link()``|create a new entry, name2, pointing to name2. (soft link)|
+|``unlink()``|remove the directory entry|
+|``mount()``|mount a file system|
+|``unmount()``|unmount a file system|
+
+**miscellaneous system call**
+
+|call|description|
+|----|-----------|
+|``chdir()``|change working dir|
+|``kill()``|send a <b>signal</b> to a process|
+|``chmod()``|change a file's protection bits|
+|``time()``|get the elapsed time since Jan 1, 1970|
 
 ## System structure
+单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ 微内核结构（最核心的功能放在内核中）、模块化结构（linux）
 ### :cherry_blossom:UNIX
+have no concept of **structure**, is **Single core structure.**
+
+consists of two separable parts:
+- system programs
+- the kernel
