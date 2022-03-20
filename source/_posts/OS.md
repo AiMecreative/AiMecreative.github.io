@@ -222,10 +222,34 @@ Five main types:
 |``time()``|get the elapsed time since Jan 1, 1970|
 
 ## System structure
-单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ 微内核结构（最核心的功能放在内核中）、模块化结构（linux）
-### :cherry_blossom:UNIX
+monolithic单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ 微内核结构（最核心的功能放在内核中）、模块化结构（linux）
+### :cherry_blossom: UNIX
 have no concept of **structure**, is **Single core structure.**
 
 consists of two separable parts:
 - system programs
 - the kernel
+
+### :cherry_blossom: Microkernel
+assign only a few essential functions to the kernel
+- address spaces
+- interprocess communication (IPC)
+- basic scheduling
+
+{%note info%}
+### Benefit and detriments
+- reliable
+- easy to extend
+- secure
+- communication occupies much space
+{%endnote%}
+
+### :cherry_blossom:Modules
+most modern OS implement module method:
+
+kernel is divided into different modules.
+
+层次化不明显；可以动态对内核进行装载和删除内核模块
+
+## Virtual machine
+treats hardware and the OS kernel as though they were all hardware (对物理资源抽象，即抽象层，在抽象层能实现虚拟机)
