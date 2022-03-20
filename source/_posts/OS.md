@@ -253,3 +253,37 @@ kernel is divided into different modules.
 
 ## Virtual machine
 treats hardware and the OS kernel as though they were all hardware (对物理资源抽象，即抽象层，在抽象层能实现虚拟机)
+
+**management application:**
+- type 1: built on hardware
+  - use hardware directly
+  - usually used in data center or service
+- type 2: built on the OS
+  - lower performance (性能)
+  - lower security
+  - usually used on PC
+
+# Process
+## Concept of process
+### :cherry_blossom: What is a process?
+- A program in execution
+- An instance(实例) of a program running on a computer
+  - 同样代码跑两遍，是不同的进程
+- The entity(实体) that can be assigned to(指派) and executed on a processor
+- A unit of activity characterized by the execution of a sequence of in instructions, a current state, and an associated set of system resources(一系列活动，状态，资源)
+
+### Process in memory
+different sectors:
+- text
+  - code
+- data
+  - ``global``
+  - ``static``
+- heap
+  - ``new()``
+  - ``delete()``
+- stack
+
+## User-view of process
+## Kernel view of process
+## Interprocess communication
