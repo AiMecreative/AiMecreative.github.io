@@ -270,20 +270,124 @@ treats hardware and the OS kernel as though they were all hardware (对物理资
 - An instance(实例) of a program running on a computer
   - 同样代码跑两遍，是不同的进程
 - The entity(实体) that can be assigned to(指派) and executed on a processor
-- A unit of activity characterized by the execution of a sequence of in instructions, a current state, and an associated set of system resources(一系列活动，状态，资源)
+- A unit of activity characterized by the execution of a sequence of in instructions, a current state, and an associated set of system resources(一系列指令执行，状态(如wait, execution, ready)，有资源)
 
-### Process in memory
-different sectors:
-- text
+### :cherry_blossom:Process in memory
+- **text** 代码段(``addr=0``)
   - code
-- data
-  - ``global``
-  - ``static``
-- heap
+  - codes are complied and stored here
+- **data** 数据段
+  - ``global`` data
+  - ``static`` data
+- **heap** 堆
   - ``new()``
   - ``delete()``
-- stack
+- **stack** 栈(``addr=max``)
+  - local function invoking
+  - local variables calling
+
+**example**:
+```C
+int x = 1;
+int main()
+{
+  int a;
+  static int b;
+  f1();
+  int* pointer = NULL;
+  pointer = int new();
+  return 0;
+}
+```
+``x`` and ``b`` are in ``data`` sector; ``a`` and ``f1()`` are in ``stack``; ``pointer`` points to a space of ``heap``.
+
+HINT: there is a <u>flexible space</u> between **heap** and **stack**.
+
+
+### :cherry_blossom:Process elements
+1. program code (possible shared)
+2. a set of data
+3. a number of attributes describing the state of the process
+
+### :cherry_blossom:Trace of the process
+The behavior of an individual process is shown by **listing the sequence of instructions** the are executed. (指令按序执行)
+
+This list is called a **trace**.
+
+**Dispatcher** is a small program which switches the processor from one process to another. (进程切换)
 
 ## User-view of process
-## Kernel view of process
-## Interprocess communication
+### :cherry_blossom:Process creation
+The OS builds a data structure to manage the process.
+- Traditionally, the OS create all processes
+- But it can be useful to let a running process create another
+  - This action is called **process spawning** (进程派生)
+    - Parent process is the original, creating processes
+    - Child process is the new process
+    - Parent process create child process, and child processes create other processes, **forming a tree of process**.
+
+- Execution (can be set manually)
+  - parent processes and child processes execute concurrently (同时执行).
+  - parents wait when children terminate
+
+HINT: the children just copy a status of parent
+
+|command|description|
+|-------|-----------|
+|``fork``|system call creates new <b>same</b> process|
+|``exec``|system call used after a ``fork`` to replace the process' memory space with a new program|
+
+{%note primary%}
+### The differences using ``fork()`` in parents and children processes
+fork返回给child_pid在两个进程中不一样. 在父进程中``fork()``的返回值大于零, 即子进程的编号; 在子进程中``fork()``的返回值是0. 
+
+{%endnote%}
+
+**example 1:**
+```C
+pid = fork();
+if (pid < 0)
+{
+  fprintf(stdrr, "fork failed")
+  exit(-1);
+}
+else if (pid == 0)  // child process
+{
+  execlp("/bin/ls", "ls", NULL);  // replace with a new command
+}
+else  // parent process
+{
+  wait(NULL);
+  printf("children complete");
+  exit(0);
+}
+```
+
+**example 2:**
+```C
+/*in file fork.c:*/
+int main()
+{
+  pid_t child_pid;
+  
+  printf("the main program ID is %d\n", (int)getpid());
+
+  child_pid = fork();
+  if (child != 0)
+  {
+    printf("this is the parent process, with ID is %d\n", (int)getpid());
+    printf("the child's process ID is %d\n", (int)child_pid);
+  }
+  else
+  {
+    printf("this is the child process, with ID %d\n", (int)getpid());
+  }
+
+  return 0;
+}
+```
+And the running result is:
+
+
+## Kernel view of process (PCB)
+## Inter-process communication
