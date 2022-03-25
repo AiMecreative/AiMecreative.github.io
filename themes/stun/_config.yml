@@ -148,8 +148,8 @@ header:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
+    url: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fblog.isww.cn%2Fusr%2Fuploads%2F2021%2F04%2F3305549923.jpg&refer=http%3A%2F%2Fblog.isww.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1649697395&t=8f2c6e0ad9c647912a760ac33b38fea1
     # url: https://img-blog.csdnimg.cn/9dfca27c179f4164b02cca66ab6af0c6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQW5kcmV3Lu-_vQ==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center
-    image: /images/bg1.png
   mask:
     enable: false
     # Opacity of the mask (value: 0 ~ 1)
