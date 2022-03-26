@@ -420,3 +420,20 @@ Linux: tar.gz
 
 **配置软件源 :**  
 去百度. 推荐清华镜像源和阿里镜像源 (当然如果ubuntu主服务器比较快就没必要)
+
+# 关于C语言
+## 使用GCC编译程序
+从C语言编写的源代码， 到可执行程序， 分为4步：
+- 预编译： ``gcc -E main.c -o main.i``
+  - 预编译：将注释删除， 并展开头文件
+- 编译： ``gcc -S main.i -o main.s``
+  - 生成汇编代码， 但不能执行
+- 汇编： ``gcc -c main.s -o main.o``
+  - 二进制文件
+- 链接： ``gcc main.o -o main`` 可执行程序
+  - ``./main``
+- 一步完成： ``gcc -o main main.c``
+- 多个文件编译链接： ``gcc -o main 1.c 2.c 3.c``
+
+## Makefile管理工程
+``make`` 命令。
