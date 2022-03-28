@@ -335,11 +335,17 @@ HINT: the children just copy a status of parent
 |command|description|
 |-------|-----------|
 |``fork``|system call creates new <b>same</b> process|
-|``exec``|system call used after a ``fork`` to replace the process' memory space with a new program|
+|``exec``|system call used after a ``fork`` to replace the process' memory space with a <b>new program</b>|
 
 {%note primary%}
 ### The differences using ``fork()`` in parents and children processes
-fork返回给child_pid在两个进程中不一样. 在父进程中``fork()``的返回值大于零, 即子进程的编号; 在子进程中``fork()``的返回值是0. 
+1. fork返回给child_pid在两个进程中不一样. 在父进程中``fork()``的返回值大于零, 即子进程的编号; 在子进程中``fork()``的返回值是0.
+
+2. 可以理解为父进程在``fork()``的初期产生了子进程, 此时子进程拿到的返回值是初始化的返回值 0, 在父进程即将结束``fork()``时, 父进程拿到了被赋值的返回值. 因此在子进程中不会再次执行``fork()``, 而执行其后面的内容.
+
+3. 子进程不会再次执行父进程先前的内容, 只是创建时与父进程处于相同的状态.
+
+4. 父子进程执行的先后顺序取决于 OS 的调度
 
 {%endnote%}
 
@@ -388,6 +394,111 @@ int main()
 ```
 And the running result is:
 
+### :cherry_blossom:Process termination
+Process executes last statement and asks the OS to delete it. (``exit()``)
+- Output data from child to parents (via``wait()``)
+- Process' resources are de-allocated (收回) by the OS
 
-## Kernel view of process (PCB)
+Parents may terminate the execution of children processes. (``abort()``)
+
+Some situations of this:
+- Child has executed allocated resources
+- Task assigned to child is non  longer required
+- Parent is exiting
+  - OS does not allow child to continue if its parent terminates
+  - Cascading termination (级联终止)
+  - HINT: 父进程结束不代表子进程必须结束
+
+### :cherry_blossom:Code block
+**creating process:**
+
+``int fork(void);``
+- create a new process that is exact copy of current one
+- returns process ID of new process in parent
+- return 0 is child
+
+``int waitpid(int pid, int *stat, int opt);``
+- pid: process **to wait for**, or -1 for any
+- stat: will contain exit value, or signal
+- opt: usually 0 or WNOHANG (?what's this)
+- return: process ID or -1 if error
+
+**deleting process:**
+
+``void exit(int status);``
+- current process ceases to exit
+- status shows up in waitpid(shifted)
+- by convention, status of 0 is successful, non-zero is error
+
+``int kill(int pid, int sig);``
+- sends signal ``sig`` tp to process ``pid``
+- ``sig=SIGTERM``: most common value, kills process by default
+- application can catch ti for "cleanup"
+- ``sig=SIGKILL``: stronger, kills process always
+
+**running programs:**
+
+``int execve(char *prog, char **argv, char **envp);``
+
+``int execlp(char *prog, char *arg, ...);``
+
+## Kernel view of process (using Process Control Block, PCB)
+**Main problem: How to manage such many process?**
+
+For traditional UNIX process: process is an abstraction of OS, which represents what is needed to run a program.
+- often called a "HeavyWeightProcess"
+- while a thread is called "轻量级"
+
+This **traditional** process has two parts:
+1. sequential program execution stream. (now is thread)
+   1. code executed as a sequential stream of execution (thread)
+   2. includes states of CPU registers
+2. protected resources
+   1. main memory state
+   2. IO state
+
+### :cherry_blossom:Process Elements
+- identifier
+- state
+- priority
+- program counter (in fact has many registers, not only the PC)
+- memory pointers
+- context data
+- IO status information
+- accounting information
+- and so on
+
+### :cherry_blossom:Implementing process
+内核如何实现一个进程? 管理一个进程?
+
+**keep a data structure for each process**
+- <font color=red><b>process control block (PCB)</b></font>
+- called "proc" in Unix and "task_struct" in Linux
+
+**track states of process** ----"Process State"
+- running, waiting, ready...
+
+**includes information necessary to run**
+- registers, virtual memory mapping, open files...
+
+**Various other data about the process**
+- such as user/groups...
+
+{%note info%}
+PCB is also a **snapshot** of a process, saving all status of a process.
+{%endnote%}
+
+### :cherry_blossom:Process states
+**new**: the process is being created
+
+**ready**: the process is waiting to be assigned to a processor
+
+**running**: instructions are being executed
+
+**waiting**: the process is waiting for some event to occur
+
+**terminated**: the process has finished execution
+
+
+
 ## Inter-process communication
