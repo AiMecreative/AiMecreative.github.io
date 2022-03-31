@@ -499,6 +499,46 @@ PCB is also a **snapshot** of a process, saving all status of a process.
 
 **terminated**: the process has finished execution
 
+The process switching graph is shown as following:
 
+
+![process_state](process_state.jpg)
+
+The CPU switch from process to process:
+
+![state_switch](switch_state.jpg)
+
+when to switch processes:
+- interrupt
+- trap
+  - current process running is wrong
+- system call
+
+switch steps:
+- save context of processor including program counter and other registers
+- update the PCB that is currently in the Running state
+- move the PCB to appropriate queue
+- select another process for execution
+- update the PCB of the process selected
+- update memory-management data structures
+- restore context of the selected process
+
+### :cherry_blossom:Process scheduling queues
+**Job queue**: set of all processes in the system
+
+**Ready queue**: set of all processes residing in main memory, **ready** and waiting to execute
+
+**Device queue**: set of processes **waiting** for an I/O device
+
+{%note primary%}
+Process migration between the various queue.
+{%endnote%}
+
+![queue_switch](queue_switch.jpg)
+
+### :cherry_blossom:Scheduler
+**Long-term scheduler(Job scheduler)**: select which processes should be loaded into memory for execution.
+
+**Short-term scheduler(CPU scheduler)**: selects which process should be executed next and allocates CPU
 
 ## Inter-process communication
