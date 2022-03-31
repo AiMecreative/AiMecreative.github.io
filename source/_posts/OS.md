@@ -541,4 +541,38 @@ Process migration between the various queue.
 
 **Short-term scheduler(CPU scheduler)**: selects which process should be executed next and allocates CPU
 
+Short-term scheduler is invoked very frequently (milliseconds----must be fast)
+
+Long-term scheduler is invoked very infrequently (seconds, minutes----may be slow)
+
+The long-term scheduler controls the *degree of multiprogramming*
+- IO-bound process: spends more time doing IO than computations, many shout CPU bursts
+- CPU-bound process: spends more time doing computations, few very long CPU burst
+
+We also have **Medium-term scheduler**
+
 ## Inter-process communication
+### :cherry_blossom:Cooperating process
+Independent process cannot affect or be affected by the execution of another process.
+
+Cooperation process can affect or be affected by the execution of another process.
+
+{%note primary%}
+### Advantages
+- information sharing
+- computation speed-up
+- modularity
+- convenience
+{%endnote%}
+
+### :cherry_blossom:Communication models
+**message model**
+- smaller data exchange
+- inter-computer communication (跨机的通信)
+- system call with kernel
+
+**shared memory**
+- Maximum speed/memory
+- convenience of communication
+- protection and synchronization
+- routine memory access without kernel intervention
