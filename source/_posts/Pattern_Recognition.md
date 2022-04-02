@@ -300,7 +300,9 @@ Discriminant boundary:
 </p>
 
 if $P(\omega_i)>P(\omega_j)$, then 
-\\(frac{\sigma^2}{||\mu_i-\mu_j||^2}ln\frac{P(\omega_i)}{P(\omega_j)}(\mu_i-\mu_j))>0\\)
+<p>\[
+\frac{\sigma^2}{||\mu_i-\mu_j||^2}ln\frac{P(\omega_i)}{P(\omega_j)}(\mu_i-\mu_j))>0
+\]</p>
  , it will cross a point that is closer to $\mu_j$.
 
 :blue_heart:**case 2b:** suppose $P(\omega_i)$ are not the same, while covariance are the same, but features have relationships with each other:
