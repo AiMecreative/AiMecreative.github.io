@@ -576,3 +576,78 @@ Cooperation process can affect or be affected by the execution of another proces
 - convenience of communication
 - protection and synchronization
 - routine memory access without kernel intervention
+
+**Producer-Consumer Problem**:
+Paradigm for cooperating processes, producer process produces information that is consumed by a consumer process
+
+**POSIX shared memory example**
+|Cmd|description|
+|---|-----------|
+|``shmget()``|A process creates a shared memory segment using this function|
+|``shmctl()``|the original owner of a shared memory segment cna assign ownership to another user with this function|
+|``shmat()``|Once created, a shared memory segment can be attached to a process address space using this|
+|``shmdt()``|shared segment can be detached using this|
+
+**Inter-process Communication**(IPC)
+
+Two operations:
+- **send(message)**
+- **receive(message)**
+
+if P and Q wish to communicate, they need to
+- establish a communication link between them 
+- exchange messages via send/receive
+
+**Direct Communication**
+
+- Processes must name each other explicitly:
+  - ``send(P, message)``----send a message to P
+  - ``receive(Q, message)``----receive message from Q
+
+- Properties of communication link:
+  - links are established automatically
+  - a link is associated with exactly one pair of communication processes
+  - between each pair processes, there exists exactly one link
+  - the link may be unidirectional, but is usually bidirectional
+
+**Indirect Communication**
+
+- Operations:
+  - creates a new mailbox
+  - send and receive messages through mailbox
+  - destroy a mailbox
+
+- Primitives are defined as:
+  - ``send(A, message)``----send a message to mailbox A
+  - ``receive(A, message)``----receive a message from mail box A
+
+- Problems: P1, P2 and P3 share mailbox A, P1 sends, P2 and P3 receive, who get the message?
+  - Allows a link to be associated with at most two processes
+  - Allow only one process process at a time to execute s receive operation
+  - Allow the system to select arbitrarily the receiver. Sender is notified who the receiver was.
+
+**Synchronization** Message passing may be either blocking(阻塞), or non-blocking(非阻塞)
+
+**Buffering:**
+- zero capacity
+- bounded capacity
+- unbounded capacity
+
+**Pipe** ``|`` or ``Pipe()``, there is a **read end** and a **write end**
+
+**Three communication methods**
+- shared memory
+- pipe
+- sockets
+
+
+# Threads
+## Concept
+A **thread** (lightweight process, LWP) is a basic unit of CPU execution.
+- a sequential execution stream within process
+
+A thread has a *thread ID*, a *program counter*, a *register set* and a *stack*.
+
+A thread **shares** with each other threads in the **same** process **its code section, data section, and other OS resources(e.g. files and signals)**
+
+**Multithreading**: a single program made up of a number of different concurrent activities.
