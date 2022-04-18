@@ -829,6 +829,7 @@ Five common ones:
 
 **some examples:**
 ![nonpree](nonpree.png)
+
 ![pree](pree.png)
 
 {%note primary%}
