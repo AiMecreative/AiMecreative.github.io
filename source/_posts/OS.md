@@ -797,5 +797,71 @@ Five common ones:
 - Multilevel Feedback Queue
 
 ### :cherry_blossom:FCFS
+**description**: the process that requests the CPU first is allocated the CPU first
+
+**Queue**
+
+**Non-preemptive**: once a process has the CPU, it will occupy the CPU until the process completes or voluntarily enters the wait state.
+
+**Gantt Chart**
+![gantt](gantt.png)
+
+**average waiting time**: calculate
+
+**convoy effect (护航效应)**: short processes behind long processes
+
+{%note primary%}
+### disadvantages
+- convoy effect: all the processes wait for one big process to get off the CPU. CPU utilization may be low.
+- not be fair to those short ones.
+- troublesome for time-sharing system, where each user needs to get a share of the CPU at regular intervals.
+{%endnote%}
 
 ### :cherry_blossom:SJF
+**use each process' CPU burst length----shortest the first**: when a process must be selected from the ready queue, the process with smallest next CPU burst is selected. The processes in the ready queue are sorted in CPU burst length
+
+**if non-preemptive:** once the CPU is given to the process, it cannot be preempted until completes its CPU burst
+
+**if preemptive:** if a new process arrives with less CPU burst length than **remaining** time of others, it will be selected immediately.
+- **shortest-remaining-time-first(SRTF)**
+
+**SJF is optimal**: gives minimum average waiting time for a given set of processes.
+
+**some examples:**
+![nonpree](nonpree.png)
+![pree](pree.png)
+
+{%note primary%}
+### how to know the next CPU burst?
+predict: using the length of previous CPU bursts, using **exponential averaging**
+
+<p>
+\[
+\tau_{n+1}=\alpha t_n + (1-\alpha)\tau_n
+\]
+</p>
+
+1. $t_n=$actual length of $n^{th}$ CPU burst
+2. $\tau_{n+1}=$predicted value for the next CPU burst
+3. $\alpha\in[0,1]$
+
+this is a weighted equation for history data and current data
+{%endnote%}
+
+
+{%note primary%}
+### disadvantages
+- difficult to estimate the next burst time value accurately
+- in favor of short jobs. some long time jobs have no chance to run. (starvation)
+{%endnote%}
+
+### :cherry_blossom:Priority
+**non-preemptive**
+
+**preemptive:** if the newly arrived process has higher priority, it is selected.
+
+but indefinite block (or starvation) may occur: a low priority process may never have a chance to run
+
+**method:**
+
+**Aging:** gradually increases the priority of processes that wait in the system for a long time. It is a technique to overcome the starvation problem.
