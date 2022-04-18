@@ -736,8 +736,66 @@ Both M:M and Two-level models require communication to maintain the appropriate 
 Scheduler activations provides **upcalls**, a communication mechanism from the kernel to the thread library. 上级调用用于告知用户程序特定的事件
 
 # CPU Scheduling
+**Objective: design a scheduling algorithm for CPU. (select time point, select jobs to execute)**
+
 Maximum CPU utilization obtained with multiprogramming
 
 CPU-I/O Burst cycle: Process execution consists of a cycle of CPU execution and I/O wait.
 
-**CPU Scheduler:**
+Process execution repeats the CPU burst and I/O burst cycle. When a process begins an I/O burst, another process can use the CPU for a CPU burst.
+
+{%note primary%}
+### CPU, I/O bound
+- CPU bound: a process generates I/O requests infrequently, using more of its time doing computation
+- I/O bound: a process spends more of its time to do I/O than doing computation
+{%endnote%}
+
+**CPU Scheduler:** When the CPU is idle, the OS mus select another process to run. The selected process is carried out by **the short-term scheduler(CPU scheduler)**. The CPU scheduler selects a process from the ready queue, and allocates the CPU resources to it. The ready queue does not have to be a FIFO one. There are many ways to organize the ready queue.
+
+## :cherry_blossom:Circumstances that scheduling may take place
+1. running -> wait (e.g. doing for I/O)
+2. running -> ready (e.g. interrupt occurs)
+3. wait -> ready (e.g. I/O completion)
+4. terminates
+
+![scheduler_time](scheduler_time.png)
+
+**Non-preemptive scheduling (非抢占式调度):** scheduling occurs when a process **voluntarily** enters the wait state or terminates----simple, but very inefficient
+
+**Preemptive scheduling (抢占式调度):** scheduling occurs in all possible cases.
+
+**Dispatcher:** gives control of the CPU to the process selected by the short-term scheduler, involves: *switching context, switching to user mode, jumping to the proper location in the user program to restart that program.*
+
+**Dispatcher latency:** time it takes for the dispatcher to stop one process and start another running
+
+## Scheduling Criteria (调度准则)
+Five common ones:
+- CPU utilization (max)
+  - want to keep CPU as busy as possible
+- throughput (吞吐量) (max)
+  - the number of processes completed per time unit
+  - long processes: rate is low, short processes: rate is high
+- turnaround time (周转时间) (min)
+  - the time period **between job submission to completion**
+  - including:
+    - waiting time before entering the system
+    - waiting time in the ready queue
+    - waiting time in all other events (e.g. I/O)
+    - time the process actually running on the CPU
+- waiting time (min)
+  - the sum of the periods that a process spends waiting **in the ready queue.** (because CPU scheduling algorithm do not affect the amount of time during which a process is waiting for I/O and other events, so we consider waiting time in ready queue only)
+- response time (min)
+  - the time from the submission of a request to the first response (in an interactive system).
+  - do **not** include the time that it takes to output the response
+
+## Scheduling Algorithm
+- First-Come, First-Served (FCFS)
+- Shortest-Job-First (SJF)
+- Priority
+- Round-Robin
+- Multilevel Queue
+- Multilevel Feedback Queue
+
+### :cherry_blossom:FCFS
+
+### :cherry_blossom:SJF
