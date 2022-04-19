@@ -250,13 +250,14 @@ P(\omega^j)=P_{e1}(\omega^{j})+\omega^jP_{e2}(\omega^j)
 P(\omega^{j+n/2})=P_{e1}(\omega^{j+n/2})+\omega^{j+n/2}P_{e2}(\omega^{j+n/2})
 \]
 </p>
-$j\in[0,1,\dots, n/2+1]$
+$j\in[0,1,\dots, n/2+1]$  \\
 
-**返回** $p(x)$
+**返回**$p(x)$
 
 时间复杂度为: $O(nlog_2n)$
 
 ## 一些数学
+
 {%note primary%}
 对于 n 次多项式 $p(x)=\sum_{k=0}^n c_kx^k$, 我们给定$n+1$个点: $x_0, \dots, x_n$, 从而得到关于原多项式 $n+1$ 个系数的线性方程组:
 
@@ -360,7 +361,6 @@ c_n
 并且, 该逆矩阵看起来和原矩阵 **一模一样!**
 .
 {%endnote%}
-
 
 ## 结束了?
 
