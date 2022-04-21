@@ -27,7 +27,7 @@ These contents will be detailed written in the following chapters
 **process**: A process is a <font color=blue>program</font> in <font color=red>execution</font>.
 - program has its own address space
 
-{%note primary%}
+{%note info%}
 ### OS activities:
 - Process creation and deletion
   - using **fork** system call
@@ -44,7 +44,7 @@ These contents will be detailed written in the following chapters
 
 **Main memory** or **primary storage** is a volatile storage device (掉电易失设备).
 
-{%note primary%}
+{%note info%}
 ### OS activities:
 - Keep track of which parts of memory are currently being used and by whom.
 - Decide which processes to load when memory space becomes available (Job scheduling, 任务调度).
@@ -58,7 +58,7 @@ These contents will be detailed written in the following chapters
 **file**: A file is a collection of related information defined by its creator. Commonly, files represent programs (both source and object form) and data.
 - this a uniform logical view of information storage provided by OS.
 
-{%note primary%}
+{%note info%}
 ### OS activities:
 - File creation and deletion.
 - Directory (can be seen as a special file) creation and deletion.
@@ -86,7 +86,7 @@ The I/O subsystem consists of:
 - disk
 - Main memory is volatile and too small to accommodate all data and programs permanently, so the computer must provide secondary storage to back up main memory.
 
-{%note primary%}
+{%note info%}
 ### OS activities;
 - Free space management (which parts of disk are free and how to allocate these free blocks)
 - Storage allocation
@@ -337,7 +337,7 @@ HINT: the children just copy a status of parent
 |``fork``|system call creates new <b>same</b> process|
 |``exec``|system call used after a ``fork`` to replace the process' memory space with a <b>new program</b>|
 
-{%note primary%}
+{%note info%}
 ### The differences using ``fork()`` in parents and children processes
 1. fork返回给child_pid在两个进程中不一样. 在父进程中``fork()``的返回值大于零, 即子进程的编号; 在子进程中``fork()``的返回值是0.
 
@@ -530,7 +530,7 @@ switch steps:
 
 **Device queue**: set of processes **waiting** for an I/O device
 
-{%note primary%}
+{%note info%}
 Process migration between the various queue.
 {%endnote%}
 
@@ -557,7 +557,7 @@ Independent process cannot affect or be affected by the execution of another pro
 
 Cooperation process can affect or be affected by the execution of another process.
 
-{%note primary%}
+{%note info%}
 ### Advantages
 - information sharing
 - computation speed-up
@@ -708,7 +708,7 @@ Signal is used to notify a process that a particular event has occurred. All sig
 
 A signal handler is used to process signals
 
-{%note primary%}
+{%note info%}
 ### options
 - deliver the signal to the thread to which the signal applies
 - deliver the signal to every thread in the process
@@ -719,7 +719,7 @@ A signal handler is used to process signals
 ### :cherry_blossom:Thread Pools
 Create a number of threads in a pool where they await work.
 
-{%note primary%}
+{%note info%}
 ### Advantages
 - Usually slightly faster to service a request with an exiting thread than create a new thread.
 - Allows the number of threads in the application(s) to be bound to the size of pool.
@@ -744,7 +744,7 @@ CPU-I/O Burst cycle: Process execution consists of a cycle of CPU execution and 
 
 Process execution repeats the CPU burst and I/O burst cycle. When a process begins an I/O burst, another process can use the CPU for a CPU burst.
 
-{%note primary%}
+{%note info%}
 ### CPU, I/O bound
 - CPU bound: a process generates I/O requests infrequently, using more of its time doing computation
 - I/O bound: a process spends more of its time to do I/O than doing computation
@@ -810,7 +810,7 @@ Five common ones:
 
 **convoy effect (护航效应)**: short processes behind long processes
 
-{%note primary%}
+{%note info%}
 ### disadvantages
 - convoy effect: all the processes wait for one big process to get off the CPU. CPU utilization may be low.
 - not be fair to those short ones.
@@ -832,7 +832,7 @@ Five common ones:
 
 ![pree](pree.png)
 
-{%note primary%}
+{%note info%}
 ### how to know the next CPU burst?
 predict: using the length of previous CPU bursts, using **exponential averaging**
 
@@ -850,13 +850,15 @@ this is a weighted equation for history data and current data
 {%endnote%}
 
 
-{%note primary%}
+{%note info%}
 ### disadvantages
 - difficult to estimate the next burst time value accurately
 - in favor of short jobs. some long time jobs have no chance to run. (starvation)
 {%endnote%}
 
 ### :cherry_blossom:Priority
+Priority may be determetered internally or externally. FCFS and SJF are the special cases of Priority.
+
 **non-preemptive**
 
 **preemptive:** if the newly arrived process has higher priority, it is selected.
@@ -866,3 +868,73 @@ but indefinite block (or starvation) may occur: a low priority process may never
 **method:**
 
 **Aging:** gradually increases the priority of processes that wait in the system for a long time. It is a technique to overcome the starvation problem.
+
+### :cherry_blossom:Round Robin (RR)
+Similar to FCFS, except that each process is assigned a **time quanntum**
+- All processes are in the ready queue (FIFO list). When the CPU is free and lets it run for one time quantum.
+- If a process uses CPU for more than one time quantum, it is moved to the **tial** of the list.
+
+{%note info%}
+### Some issues
+- if time quantum is too large, RR reduces(退化) to FCFS
+- if time quantum is too small, RR becomes **processor sharing**
+- context switching may affect the performance of RR, shorter time quantum means more context
+- turnaround time dependes on the size of time quantum
+- in general, 80% of the CPU burst should shorter than the time quantum
+{%endnote%}
+
+### :cherry_blossom:Multilevel Queue (多级队列)
+Ready queue is partitioned into separate queues:
+foreground (interactive), 
+background (batch)
+
+[ 有些进程希望保留在系统中(交互进程)，而有些进程则是后台进程，因此可以延迟执行。]
+
+Each process is assigned permanently to one queue based on some properties of the process
+
+Each queue has its own scheduling algorithm:
+- foreground, interactive----RR
+- bacjground, batch----FCFS
+
+#### Hint
+scheduling must be done between the queue:
+- fixed **priority** scheduling(i.e. serve all from foreground then from background); Possibility of starvation.
+- time quantum, each queue gets a certain amount of CPU time which it can amongst its processes
+
+### :cherry_blossom:Multilevel Feedback Queue (多级反馈队列)
+allows processes to move between queues. (can be implemented by aging)
+
+if a processe uses more CPU time, it is moved to a queue of lower priority.
+
+defined my the following parameters:
+- numbers of queues
+- scheduling algorithm for each queue
+- method used to determine when to upgrade a process
+- method used to determine when to demote a process
+- method used to determine which queue process will enter whne that process needs services
+
+## Multiple-Process scheduling
+*Symmetric multiprocessing*--self scheduling for each processor
+
+*Affinity*(亲和性)--cost of cache: 当进程在 CPU 间切换时, 需要对 cache 进行重构. 需要避免 cache 重构所带来的开销
+
+*Hyperthreading*--logical processors seen by CPU (i.e. by setting BIOS)
+
+## Thread scheduling
+*Local scheduling*--how the threads library decides which thread to put onto an available LWP
+
+*Global scheduling*--how the kernel decides which kernel thread to run next
+
+## Algorithm Evaluation
+no notes here.
+
+# Process Synchronization
+进程同步--抽象为临界区问题--提出三种解决方案 (软件方案, 硬件方案, 信号量方案)--经典同步问题--管程 (相对高级的同步结构)--补充例子
+## Background
+Concurrent access to shared data may result in data inconsisitency. Maintaining data consistency requires mechanisms to ensure the orderly execution of coorperating processes. S
+## the critical-section problem (临界区问题)
+## Synchronization hardware
+## Semaphores
+## Classical problems of Synchronization
+## Monitors
+## Synchronization example
