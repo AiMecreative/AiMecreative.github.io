@@ -931,10 +931,117 @@ no notes here.
 # Process Synchronization
 进程同步--抽象为临界区问题--提出三种解决方案 (软件方案, 硬件方案, 信号量方案)--经典同步问题--管程 (相对高级的同步结构)--补充例子
 ## Background
-Concurrent access to shared data may result in data inconsisitency. Maintaining data consistency requires mechanisms to ensure the orderly execution of coorperating processes. S
+Concurrent access to shared data may result in data inconsisitency. Maintaining data consistency requires mechanisms to ensure the **orderly execution** of coorperating processes. Such as *producer-consumer problem* need a mechanism to ensure the order of execution.
+
+### :cherry_blossom:Race Condition
+Race condition occurs, if:
+- 2 or more processes/threads access and manipulate the same data concurrently
+- the outcome of the execution depends on the particular order in which the access takes place.
+
+{%note info%}
+to prevent race conditions, concurrent processes must be **synchronized**
+{%endnote%}
+
 ## the critical-section problem (临界区问题)
+Each process has a **code segment**, called **critical-section**, in which the shared data is accessed.
+
+Problem: ensure that when one process is executing in its critical section, no other process is allowed to execute in its critical section. So it's necessary to design a protocol that processes can use to cooperate.
+
+A **protocol** consists of two parts: entry section and exit section. Between them is the critical section running in a mutually exclusive way.
+
+{%note info%}
+### condition must be followed
+- **Mutual exclusion (互斥)**
+  - If there is a process exexuting in critical section, the **entry protocol** should be capable of blocking processes that wish to enter. And if the process in critical exits, the entry protocol must know the fact, and allows a waiting process to enter.
+- **Progress (前进/有空让进)**
+  - If no process is executing in its critical section and some processes wish to enter critical sections, then only those processes that are waiting to enter can participate in the competition; no other process can influent the decision; this decision cannot be postponed indefinitely (不可无限推迟).
+- **Bounded waiting (有限等待)**
+  - After a process made a request to enter its critical section and before it is granted the permission to enter, there exits a *bound* on the time to wait (it means that, a process will not wait forever to enter it critical section).
+
+HINT:the solution to critical-section problem cannot depend on relative speed of processes and scheduling policy.
+{%endnote%}
+
+***We should design a solution to satisfy the three condition.***
+(临界区问题需要满足以上三种条件)
+
+**For two process condition:**
+```C
+do {
+    flag[i] = true;
+    turn = j;
+    while (flag[j] == true && turn == j);
+    // critical section
+    flag[i] = false;
+    // remainder section
+}while (1);
+```
+
 ## Synchronization hardware
-## Semaphores
+Two types: **disabling enabling interrupts** close interrupt if a process in critical section; **Special machine instructions**.
+
+### :cherry_blossom:Interrupt disabling
+Because interrupts are disabled, no context switch will occur in a critical section. Infeasible in a multiprocessor system because all CPUs must be informed. Some features that depend on interrupts (e.g. clock) may not work properly.
+
+### :cherry_blossom:Using Atomaical instructions
+Test and modify the content of a word **atomically**.
+
+{%note info%}
+<u>atomical instructions</u> mean an instruction that can't be devided or interrupted.
+{%endnote%}
+
+**Test-and-Set**
+
+```C
+// define the test and set function
+bool TestAndSet (bool *lock) {
+  bool rt = *lock;
+  *lock = true;
+  return rt;
+}
+// shared data:
+bool lock = false;
+// process P_i
+do {
+  while (TestAndSet(&lock));
+  // critical section
+  lock = false;
+  // remainder section
+}while (1);
+```
+***the TestAndSet() function realizes that it changes all processes' status to enter critical section, but <u>keeps the old value of one process</u> which is going to enter critical section. <u>This function satisfies Mutual Exception rule.</u> However, this mathod not satisfies Bounded Waiting rule.*** 
+
+Though this is a *code* form, but TestAndSet() is realized in hardware form.
+
+**Swap**
+
+```C
+void Swap(bool &a, bool &b) {
+  bool temp = a;
+  a = b;
+  b = temp;
+}
+// shared data, initializaed by false
+bool lock = false;
+// local data
+bool key;
+// for process P_i
+do {
+  key = true;
+  while (key == true)
+    Swap (key, lock);
+  // critical section
+  lock = false;
+  // remainder section
+}while (1);
+```
+
+***The Swap() function will swap the value of lock and key, if ***
+
+## Semaphores (信号量)
+Most used~  
+Programmer-frendly~  
+
+
 ## Classical problems of Synchronization
 ## Monitors
 ## Synchronization example
