@@ -111,6 +111,7 @@ deploy:
   branch: main
 
 markdown:
+  preset: "default"
   render:
     html: true
     xhtmlOut: false
@@ -124,6 +125,7 @@ markdown:
     - markdown-it-sub
     - markdown-it-abbr
     - markdown-it-emoji
+    # - hexo-renderer-mathjax
   anchors:
     level: 2
     collisionSuffix: 'v'
