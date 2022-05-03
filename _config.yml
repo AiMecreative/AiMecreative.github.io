@@ -103,6 +103,16 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: fluid
 
+plugins:
+  - hexo-renderer-mathjax
+  - hexo-renderer-markdown-it
+  - markdown-it-footnote
+  - markdown-it-sup
+  - markdown-it-sub
+  - markdown-it-abbr
+  - markdown-it-emoji
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
@@ -111,7 +121,6 @@ deploy:
   branch: main
 
 markdown:
-  preset: "default"
   render:
     html: true
     xhtmlOut: false
@@ -119,16 +128,13 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
-  plugins:
-    - markdown-it-footnote
-    - markdown-it-sup
-    - markdown-it-sub
-    - markdown-it-abbr
-    - markdown-it-emoji
-    # - hexo-renderer-mathjax
+    # plugins:
   anchors:
     level: 2
     collisionSuffix: 'v'
     permalink: false
     permalinkClass: header-anchor
     permalinkSymbol: ¶
+
+pandoc:
+  pandoc_path: E:/Documents/Repositories/Andrew-Rey.github.io/node_modules/pandoc.exe

@@ -150,6 +150,7 @@ $
 
 用点表示法相乘
 {%endnote%}
+
 那我们当然是按部就班地进行乘法啦~
 - 由于结果是 5 次多项式, 因此对$p(x)$取 5 个点, 对$q(x)$取 5 个点.
 
@@ -217,38 +218,28 @@ $$
 
 **分解:**
 
-$$
- 
-p(x)=\sum_{k=0}^nc_kx^k=P_{e1}(x^2)+xP_{e2}(x^2):=[ \omega^0, \omega^1, \dots, \omega^n]
- 
+$$ 
+p(x)=\sum_{k=0}^nc_kx^k=P_{e1}(x^2)+xP_{e2}(x^2):=[ \omega^0, \omega^1, \dots, \omega^n] 
 $$
 
 **递归:**
 
-$$
- 
-P_{e1}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}]
- 
+$$ 
+P_{e1}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
 $$
 
-$$
- 
-P_{e2}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}]
- 
+$$ 
+P_{e2}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
 $$
 
 **加和:**
 
-$$
- 
-P(\omega^j)=P_{e1}(\omega^{j})+\omega^jP_{e2}(\omega^j)
- 
+$$ 
+P(\omega^j)=P_{e1}(\omega^{j})+\omega^jP_{e2}(\omega^j) 
 $$
 
-$$
- 
-P(\omega^{j+n/2})=P_{e1}(\omega^{j+n/2})+\omega^{j+n/2}P_{e2}(\omega^{j+n/2})
- 
+$$ 
+P(\omega^{j+n/2})=P_{e1}(\omega^{j+n/2})+\omega^{j+n/2}P_{e2}(\omega^{j+n/2}) 
 $$
 $j\in[0,1,\dots, n/2+1]$  \\
 
@@ -261,8 +252,7 @@ $j\in[0,1,\dots, n/2+1]$  \\
 {%note primary%}
 对于 n 次多项式 $p(x)=\sum_{k=0}^n c_kx^k$, 我们给定$n+1$个点: $x_0, \dots, x_n$, 从而得到关于原多项式 $n+1$ 个系数的线性方程组:
 
-$$
- 
+$$ 
 \left[
 \begin{aligned}
 p_0 \\
@@ -285,8 +275,7 @@ c_0 \\
 c_1 \\
 \vdots \\
 c_n
-\end{aligned}\right]
- 
+\end{aligned}\right] 
 $$
 
 我们在复数域上考虑, 令
@@ -297,8 +286,7 @@ $$
 
 则线性方程组可以化为:
 
-$$
- 
+$$ 
 \left[
 \begin{aligned}
 p_0 \\
@@ -328,7 +316,6 @@ $$
 其中
 
 $$
-
  \left[
 \begin{aligned}[c]
 1\quad      & 1\quad        & 1\quad                 & \dots\quad & 1 \\
@@ -337,10 +324,8 @@ $$
 \vdots\quad & \vdots\quad   & \vdots\quad       &            & \vdots \\
 1\quad      & \omega^n\quad & \omega^{2n}\quad  & \dots\quad & \omega^{n\times n}
 \end{aligned}
-\right]   
- 
+\right] 
 $$
-
 称为**离散傅里叶变换矩阵(DFT)**显然该矩阵是 **对称的** 且 **可逆**, 其逆矩阵为:
 $$
 \frac{1}{n}
@@ -366,7 +351,6 @@ $$
 这就是FFT**对称**的魅力了. 由点求系数, 不过是矩阵求逆的过程:
 
 $$
-
 \left[
 \begin{aligned}
 c_0 \\
@@ -407,8 +391,7 @@ p_0 \\
 p_1 \\
 \vdots \\
 p_n
-\end{aligned}\right]
- 
+\end{aligned}\right] 
 $$
 
 显然, 由于DFT和DFT逆矩阵具有相似的形式, 我们完全可以用**同一个函数**完成快速傅里叶的正反变换!

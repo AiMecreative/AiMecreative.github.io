@@ -23,7 +23,7 @@ Framework of this chapter:
 These contents will be detailed written in the following chapters
 
 ## Operating system components
-### :cherry_blossom:Process management
+### Process management
 **process**: A process is a <font color=blue>program</font> in <font color=red>execution</font>.
 - program has its own address space
 
@@ -39,7 +39,7 @@ These contents will be detailed written in the following chapters
   - deadlock handling (死锁处理)
 {%endnote%}
 
-### :cherry_blossom:Main memory management
+### Main memory management
 **memory**: Memory is a large array of words or bytes, each with its own address. It is a repository of quickly accessible data shared by the CPU and I/O devices.
 
 **Main memory** or **primary storage** is a volatile storage device (掉电易失设备).
@@ -54,7 +54,7 @@ These contents will be detailed written in the following chapters
 **Virtual memory**: Virtual memory allows programs to address memory from a logical point of view. This technique allows applications **regard** that they have a continuous address space rather than fragmented spaces from main memory to disk memory.
 - without regard to the limits of physical memory.
 
-### :cherry_blossom:File management
+### File management
 **file**: A file is a collection of related information defined by its creator. Commonly, files represent programs (both source and object form) and data.
 - this a uniform logical view of information storage provided by OS.
 
@@ -72,7 +72,7 @@ These contents will be detailed written in the following chapters
 
 **Mount (挂载)**: create a mounting point, and this file is can be accessed using mounting point.
 
-### :cherry_blossom:I/O system management
+### I/O system management
 The I/O subsystem consists of:
 - a buffer-caching system
 - a general device-driver interface (a driver is a part of OS, specific for devices)
@@ -81,7 +81,7 @@ The I/O subsystem consists of:
   - DMA
 - drivers for specific hardware devices
 
-### :cherry_blossom:Secondary-storage (disk) management
+### Secondary-storage (disk) management
 **Secondary storage** is the principle on-line storage medium (线性存储介质) for both programs and data.
 - disk
 - Main memory is volatile and too small to accommodate all data and programs permanently, so the computer must provide secondary storage to back up main memory.
@@ -94,7 +94,7 @@ The I/O subsystem consists of:
   - 磁头移动, 请求分布在不同柱面上, 相应时需要磁头在不同不同柱面上切换, 经过算法, 设计磁头移动的最短距离 (有计算题).
 {%endnote%}
 
-### :cherry_blossom:Protection system
+### Protection system
 **Protection** refers to a mechanism for controlling access by programs, processes, or users to both system and user resources.
 - distinguish between authorized and unauthorized usage.
 - specify the controls to be imposed and means for enforcement.
@@ -102,14 +102,14 @@ The I/O subsystem consists of:
 Example:
 In Linux, file access control: **rwx**, **owner**, **user(u)**, **group(g)**, **other(o)**
 
-### :cherry_blossom:Command-interpreter system
+### Command-interpreter system
 **Command-interpreter system**(命令行解释系统): Interact with users, users can send instructions to OS.
 - Shell
 - its functions is to get and execute the next command statement.
 
 
 ## Operating system services
-### :cherry_blossom:Core operating system services
+### Core operating system services
 From the view of an user:
 
 **Program execution**
@@ -128,7 +128,7 @@ From the view of an user:
 **Error detection**
 - ensure correct computing in CPU, memory hardware, I/O devices, user programs
 
-### :cherry_blossom:Additional operating system functions
+### Additional operating system functions
 From a view of system:
 
 This part is user for **efficient system operations**, not for helping users.
@@ -149,7 +149,7 @@ Normally, we write C code and define the ``main`` function, this is a *system ca
 
 ![system_call1](system_call1.png)
 
-### :cherry_blossom:The implementation of system call
+### The implementation of system call
 Typically, a number (index) associated with each system call.
 - System call interface maintains a table indexed according to these numbers
 
@@ -164,7 +164,7 @@ The caller need to know **nothing** about how the system call in implemented.
 
 In this picture, ``open()`` function acts as an API, and ``open()`` gives a system call (in the function library) to OS (maybe in the library, ``open()`` function use other system functions to give a system call, because ``open()`` is just an <u>API</u> of system call functions). Then the OS look up this system call in its number table and then execute a specific system program (according to the index number). Finally, the OS returns the states.
 
-### :cherry_blossom:Parameter passing in system call
+### Parameter passing in system call
 Often, more information is required than simply identity of desired system call.
 
 Three types:
@@ -176,7 +176,7 @@ Three types:
 
 <u>Block and stack don't limit the number and the length of parameters.</u>
 
-### :cherry_blossom:Types of system call
+### Types of system call
 Five main types:
 - process control
 - file management
@@ -223,14 +223,14 @@ Five main types:
 
 ## System structure
 monolithic单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ 微内核结构（最核心的功能放在内核中）、模块化结构（linux）
-### :cherry_blossom: UNIX
+###  UNIX
 have no concept of **structure**, is **Single core structure.**
 
 consists of two separable parts:
 - system programs
 - the kernel
 
-### :cherry_blossom: Microkernel
+###  Microkernel
 assign only a few essential functions to the kernel
 - address spaces
 - interprocess communication (IPC)
@@ -244,7 +244,7 @@ assign only a few essential functions to the kernel
 - communication occupies much space
 {%endnote%}
 
-### :cherry_blossom:Modules
+### Modules
 most modern OS implement module method:
 
 kernel is divided into different modules.
@@ -265,14 +265,14 @@ treats hardware and the OS kernel as though they were all hardware (对物理资
 
 # Process
 ## Concept of process
-### :cherry_blossom: What is a process?
+###  What is a process?
 - A program in execution
 - An instance(实例) of a program running on a computer
   - 同样代码跑两遍，是不同的进程
 - The entity(实体) that can be assigned to(指派) and executed on a processor
 - A unit of activity characterized by the execution of a sequence of in instructions, a current state, and an associated set of system resources(一系列指令执行，状态(如wait, execution, ready)，有资源)
 
-### :cherry_blossom:Process in memory
+### Process in memory
 - **text** 代码段(``addr=0``)
   - code
   - codes are complied and stored here
@@ -304,12 +304,12 @@ int main()
 HINT: there is a <u>flexible space</u> between **heap** and **stack**.
 
 
-### :cherry_blossom:Process elements
+### Process elements
 1. program code (possible shared)
 2. a set of data
 3. a number of attributes describing the state of the process
 
-### :cherry_blossom:Trace of the process
+### Trace of the process
 The behavior of an individual process is shown by **listing the sequence of instructions** the are executed. (指令按序执行)
 
 This list is called a **trace**.
@@ -317,7 +317,7 @@ This list is called a **trace**.
 **Dispatcher** is a small program which switches the processor from one process to another. (进程切换)
 
 ## User-view of process
-### :cherry_blossom:Process creation
+### Process creation
 The OS builds a data structure to manage the process.
 - Traditionally, the OS create all processes
 - But it can be useful to let a running process create another
@@ -394,7 +394,7 @@ int main()
 ```
 And the running result is:
 
-### :cherry_blossom:Process termination
+### Process termination
 Process executes last statement and asks the OS to delete it. (``exit()``)
 - Output data from child to parents (via``wait()``)
 - Process' resources are de-allocated (收回) by the OS
@@ -409,7 +409,7 @@ Some situations of this:
   - Cascading termination (级联终止)
   - HINT: 父进程结束不代表子进程必须结束
 
-### :cherry_blossom:Code block
+### Code block
 **creating process:**
 
 ``int fork(void);``
@@ -457,7 +457,7 @@ This **traditional** process has two parts:
    1. main memory state
    2. IO state
 
-### :cherry_blossom:Process Elements
+### Process Elements
 - identifier
 - state
 - priority
@@ -468,7 +468,7 @@ This **traditional** process has two parts:
 - accounting information
 - and so on
 
-### :cherry_blossom:Implementing process
+### Implementing process
 内核如何实现一个进程? 管理一个进程?
 
 **keep a data structure for each process**
@@ -488,7 +488,7 @@ This **traditional** process has two parts:
 PCB is also a **snapshot** of a process, saving all status of a process.
 {%endnote%}
 
-### :cherry_blossom:Process states
+### Process states
 **new**: the process is being created
 
 **ready**: the process is waiting to be assigned to a processor
@@ -523,7 +523,7 @@ switch steps:
 - update memory-management data structures
 - restore context of the selected process
 
-### :cherry_blossom:Process scheduling queues
+### Process scheduling queues
 **Job queue**: set of all processes in the system
 
 **Ready queue**: set of all processes residing in main memory, **ready** and waiting to execute
@@ -536,7 +536,7 @@ Process migration between the various queue.
 
 ![queue_switch](queue_switch.jpg)
 
-### :cherry_blossom:Scheduler
+### Scheduler
 **Long-term scheduler(Job scheduler)**: select which processes should be loaded into memory for execution.
 
 **Short-term scheduler(CPU scheduler)**: selects which process should be executed next and allocates CPU
@@ -552,7 +552,7 @@ The long-term scheduler controls the *degree of multiprogramming*
 We also have **Medium-term scheduler**
 
 ## Inter-process communication
-### :cherry_blossom:Cooperating process
+### Cooperating process
 Independent process cannot affect or be affected by the execution of another process.
 
 Cooperation process can affect or be affected by the execution of another process.
@@ -565,7 +565,7 @@ Cooperation process can affect or be affected by the execution of another proces
 - convenience
 {%endnote%}
 
-### :cherry_blossom:Communication models
+### Communication models
 **message model**
 - smaller data exchange
 - inter-computer communication (跨机的通信)
@@ -678,29 +678,29 @@ Kernel threads are directly supported by the kernel. THe kernel dose thread crea
 The kernel has a **thread table** that keeps track of all the threads in the system. All calls that might block a thread are implemented as system calls. When a thread blocks, the kernel can run either another thread from the same process or a thread from a different process.
 
 ## Multi-threading Models
-### :cherry_blossom:Many-to-one
+### Many-to-one
 Many user-level threads mapped to single kernel thread. Used on system that do not support  kernel thread.
 
-### :cherry_blossom:One-to-one
+### One-to-one
 Each user-level thread maps to kernel thread.
 
-### :cherry_blossom:Many-to-Many
+### Many-to-Many
 Allow many user threads to be mapped to many kernel threads.
 
 Allows the OS to create a sufficient number of kernel threads.
 
 ## Threading Issues
-### :cherry_blossom:Semantics of ``fork()`` and ``exec()``
+### Semantics of ``fork()`` and ``exec()``
 Does ``fork()`` duplicate only the calling thread or all threads? (应该复制所有线程还是指定线程)
 - if invoke ``exec()`` just after ``fork()``, no need to duplicate all threads, since it is no meaning to duplicate all threads now that they will be replaced right after ``fork()``
 - if invoke ``exec()`` after ``fork()`` for a long time, it will duplicates all threads
 
-### :cherry_blossom:Thread Cancellation
+### Thread Cancellation
 Terminating a thread before it has finished, two general approaches:
 - Asynchronous cancellation (terminate thread **immediately**)
 - Deferred cancellation (thread check itself if it should be cancelled periodically)
 
-### :cherry_blossom:Signal handling
+### Signal handling
 Signal is used to notify a process that a particular event has occurred. All signal has same patterns:
 - generated by particular event
 - delivered to a process
@@ -716,7 +716,7 @@ A signal handler is used to process signals
 - Assign a specific thread receive all signals for the process
 {%endnote%}
 
-### :cherry_blossom:Thread Pools
+### Thread Pools
 Create a number of threads in a pool where they await work.
 
 {%note info%}
@@ -725,10 +725,10 @@ Create a number of threads in a pool where they await work.
 - Allows the number of threads in the application(s) to be bound to the size of pool.
 {%endnote%}
 
-### :cherry_blossom:Thread Specific Data
+### Thread Specific Data
 Allows each thread to have its own **copy** of data 
 
-### :cherry_blossom:Scheduler Activations
+### Scheduler Activations
 Both M:M and Two-level models require communication to maintain the appropriate number of kernel threads allocated to the application
 
 一种解决解决用户线程库和内核间通信的方法被称为 **调度器激活**.
@@ -752,7 +752,7 @@ Process execution repeats the CPU burst and I/O burst cycle. When a process begi
 
 **CPU Scheduler:** When the CPU is idle, the OS mus select another process to run. The selected process is carried out by **the short-term scheduler(CPU scheduler)**. The CPU scheduler selects a process from the ready queue, and allocates the CPU resources to it. The ready queue does not have to be a FIFO one. There are many ways to organize the ready queue.
 
-## :cherry_blossom:Circumstances that scheduling may take place
+## Circumstances that scheduling may take place
 1. running -> wait (e.g. doing for I/O)
 2. running -> ready (e.g. interrupt occurs)
 3. wait -> ready (e.g. I/O completion)
@@ -796,7 +796,7 @@ Five common ones:
 - Multilevel Queue
 - Multilevel Feedback Queue
 
-### :cherry_blossom:FCFS
+### FCFS
 **description**: the process that requests the CPU first is allocated the CPU first
 
 **Queue**
@@ -817,7 +817,7 @@ Five common ones:
 - troublesome for time-sharing system, where each user needs to get a share of the CPU at regular intervals.
 {%endnote%}
 
-### :cherry_blossom:SJF
+### SJF
 **use each process' CPU burst length----shortest the first**: when a process must be selected from the ready queue, the process with smallest next CPU burst is selected. The processes in the ready queue are sorted in CPU burst length
 
 **if non-preemptive:** once the CPU is given to the process, it cannot be preempted until completes its CPU burst
@@ -856,7 +856,7 @@ this is a weighted equation for history data and current data
 - in favor of short jobs. some long time jobs have no chance to run. (starvation)
 {%endnote%}
 
-### :cherry_blossom:Priority
+### Priority
 Priority may be determetered internally or externally. FCFS and SJF are the special cases of Priority.
 
 **non-preemptive**
@@ -869,7 +869,7 @@ but indefinite block (or starvation) may occur: a low priority process may never
 
 **Aging:** gradually increases the priority of processes that wait in the system for a long time. It is a technique to overcome the starvation problem.
 
-### :cherry_blossom:Round Robin (RR)
+### Round Robin (RR)
 Similar to FCFS, except that each process is assigned a **time quanntum**
 - All processes are in the ready queue (FIFO list). When the CPU is free and lets it run for one time quantum.
 - If a process uses CPU for more than one time quantum, it is moved to the **tial** of the list.
@@ -883,7 +883,7 @@ Similar to FCFS, except that each process is assigned a **time quanntum**
 - in general, 80% of the CPU burst should shorter than the time quantum
 {%endnote%}
 
-### :cherry_blossom:Multilevel Queue (多级队列)
+### Multilevel Queue (多级队列)
 Ready queue is partitioned into separate queues:
 foreground (interactive), 
 background (batch)
@@ -901,7 +901,7 @@ scheduling must be done between the queue:
 - fixed **priority** scheduling(i.e. serve all from foreground then from background); Possibility of starvation.
 - time quantum, each queue gets a certain amount of CPU time which it can amongst its processes
 
-### :cherry_blossom:Multilevel Feedback Queue (多级反馈队列)
+### Multilevel Feedback Queue (多级反馈队列)
 allows processes to move between queues. (can be implemented by aging)
 
 if a processe uses more CPU time, it is moved to a queue of lower priority.
@@ -933,7 +933,7 @@ no notes here.
 ## Background
 Concurrent access to shared data may result in data inconsisitency. Maintaining data consistency requires mechanisms to ensure the **orderly execution** of coorperating processes. Such as *producer-consumer problem* need a mechanism to ensure the order of execution.
 
-### :cherry_blossom:Race Condition
+### Race Condition
 Race condition occurs, if:
 - 2 or more processes/threads access and manipulate the same data concurrently
 - the outcome of the execution depends on the particular order in which the access takes place.
@@ -979,10 +979,10 @@ do {
 ## Synchronization hardware
 Two types: **disabling enabling interrupts** close interrupt if a process in critical section; **Special machine instructions**.
 
-### :cherry_blossom:Interrupt disabling
+### Interrupt disabling
 Because interrupts are disabled, no context switch will occur in a critical section. Infeasible in a multiprocessor system because all CPUs must be informed. Some features that depend on interrupts (e.g. clock) may not work properly.
 
-### :cherry_blossom:Using Atomaical instructions
+### Using Atomaical instructions
 Test and modify the content of a word **atomically**.
 
 {%note info%}
