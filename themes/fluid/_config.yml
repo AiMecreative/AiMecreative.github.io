@@ -1077,3 +1077,6 @@ static_prefix:
   twikoo: https://lib.baomitu.com/twikoo/1.4.17/
 
   hint: https://lib.baomitu.com/hint.css/2.7.0/
+
+pandoc:
+  pandoc_path: E:/Documents/Repositories/pandoc-2.18-windows-x86_64/pandoc-2.18/pandoc.exe

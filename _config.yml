@@ -105,7 +105,7 @@ theme: fluid
 
 plugins:
   - hexo-renderer-pandoc
-  - hexo-renderer-mathjax
+  # - hexo-renderer-mathjax
   # - hexo-renderer-markdown-it
   # - markdown-it-footnote
   # - markdown-it-sup
@@ -136,6 +136,3 @@ markdown:
     permalink: false
     permalinkClass: header-anchor
     permalinkSymbol: ¶
-
-pandoc:
-  pandoc_path: E:/Documents/Repositories/pandoc-2.18-windows-x86_64/pandoc-2.18/pandoc.exe
