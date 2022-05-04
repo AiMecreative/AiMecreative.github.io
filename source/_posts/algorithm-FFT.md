@@ -34,15 +34,13 @@ $q(x)=x^2+4x+5$
 例如上面那个例子:
 {%note primary%}
 ### solution 1
-$$
- 
+<p>\[
     \begin{aligned}
         r(x) &= (2x^3+x+1)(x^2+4x+5) \\
         &= 2x^5+8x^4+10x^3+x^3+4x^2+5x+x^2+4x+5 \\
         &= 2x^5+8x^4+11x^3+5x^2+5x+5
     \end{aligned}
- 
-$$
+\]</p>
 {%endnote%}
 
 (**???是什么动力让我深夜在这里口算多项式乘法???**)
@@ -64,18 +62,20 @@ $$
 构成了该空间的一组基, 将函数展开成 Taylor 级数便用了这组基作为基底, 基前面的系数也就是**坐标**.
 
 其次, 对于一个 n 次多项式而言, 只要我们确定了它的坐标, 就能唯一确定这个多项式. **现在的问题是不知道坐标, 如何确定多项式.** 这里的巧妙之处就在于, 多项式函数是一个映射, 对于一个特定的 x, 总是能给出唯一一个值与之对应, 这不就是一个方程吗?
-- 我给你一个 x, 你输出一个值, 同时由于多项式系数全部未知, 这就是一个关于 $n+1$个系数的方程
 
-显然, 我需要$n+1$个不同的点来唯一确定我的系数. 这就是所谓的点表示法. 这样一来, 我们将这$n+1$个方程写成矩阵形式:
+我给你一个 x, 你输出一个值, 同时由于多项式系数全部未知, 这就是一个关于 $n+1$ 个系数的方程
 
-$$
- \left[
+显然, 我需要 $n+1$ 个不同的点来唯一确定我的系数. 这就是所谓的点表示法. 这样一来, 我们将这 $n+1$ 个方程写成矩阵形式:
+
+<p>\[
+\left[
 \begin{aligned}
 p_0 \\
 p_1 \\
 \vdots \\
 p_n
-\end{aligned}\right]
+\end{aligned}
+\right]
 =
 \left[
 \begin{aligned}
@@ -92,13 +92,11 @@ c_1 \\
 \vdots \\
 c_n
 \end{aligned}\right]
- 
-$$
+\]</p>
 
 看到这里我终于理解了为什么在学高等代数时要突然讲一个**范德蒙德(Vandermonde)行列式**, 也就是这里的
 
-$$
- 
+<p>\[
 \left[
 \begin{aligned}
 1\quad & x_0\quad & \dots\quad & x_0^n \\
@@ -107,8 +105,7 @@ $$
 1\quad & x_n\quad & \dots\quad & x_n^n
 \end{aligned}
 \right]
- 
-$$
+\]</p>
 
 将上述矩阵定义为我们最喜欢的字母$A$. 
 
@@ -224,24 +221,25 @@ $$
 
 **递归:**
 
-$$ 
-P_{e1}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
+$$
+P\_{e1}(x^2) = P^{\prime}\_{e1}(x^4)+xP^{\prime}\_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
 $$
 
-$$ 
-P_{e2}(x^2) = P^{\prime}_{e1}(x^4)+xP^{\prime}_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
+
+$$
+P\_{e2}(x^2) = P^{\prime}\_{e1}(x^4)+xP^{\prime}\_{e2}(x^4):=[\omega^0, \omega^1, \dots, \omega^{n-1}] 
 $$
 
 **加和:**
-
 $$ 
-P(\omega^j)=P_{e1}(\omega^{j})+\omega^jP_{e2}(\omega^j) 
+P(\omega^j)=P\_{e1}(\omega^{j})+\omega^jP\_{e2}(\omega^j) 
 $$
 
 $$ 
-P(\omega^{j+n/2})=P_{e1}(\omega^{j+n/2})+\omega^{j+n/2}P_{e2}(\omega^{j+n/2}) 
+P(\omega^{j+n/2})=P\_{e1}(\omega^{j+n/2})+\omega^{j+n/2}P\_{e2}(\omega^{j+n/2}) 
 $$
-$j\in[0,1,\dots, n/2+1]$  \\
+
+$j\in[0,1,\dots, n/2+1]$
 
 **返回**$p(x)$
 
@@ -252,7 +250,7 @@ $j\in[0,1,\dots, n/2+1]$  \\
 {%note primary%}
 对于 n 次多项式 $p(x)=\sum_{k=0}^n c_kx^k$, 我们给定$n+1$个点: $x_0, \dots, x_n$, 从而得到关于原多项式 $n+1$ 个系数的线性方程组:
 
-$$ 
+<p>\[
 \left[
 \begin{aligned}
 p_0 \\
@@ -276,7 +274,7 @@ c_1 \\
 \vdots \\
 c_n
 \end{aligned}\right] 
-$$
+\]</p>
 
 我们在复数域上考虑, 令
 $$
@@ -286,7 +284,7 @@ $$
 
 则线性方程组可以化为:
 
-$$ 
+<p>\[
 \left[
 \begin{aligned}
 p_0 \\
@@ -311,11 +309,11 @@ c_1 \\
 \vdots \\
 c_n
 \end{aligned}\right] 
-$$
+\]</p>
 
 其中
 
-$$
+<p>\[
  \left[
 \begin{aligned}[c]
 1\quad      & 1\quad        & 1\quad                 & \dots\quad & 1 \\
@@ -325,9 +323,9 @@ $$
 1\quad      & \omega^n\quad & \omega^{2n}\quad  & \dots\quad & \omega^{n\times n}
 \end{aligned}
 \right] 
-$$
+\]</p>
 称为**离散傅里叶变换矩阵(DFT)**显然该矩阵是 **对称的** 且 **可逆**, 其逆矩阵为:
-$$
+<p>\[
 \frac{1}{n}
  \left[
 \begin{aligned}[c]
@@ -338,7 +336,7 @@ $$
 1\quad      & \omega^{-n}\quad & \omega^{-2n}\quad  & \dots\quad & \omega^{-n\times n}
 \end{aligned}
 \right]   
-$$
+\]</p>
 
 并且, 该逆矩阵看起来和原矩阵 **一模一样!**
 .
@@ -350,7 +348,7 @@ $$
 
 这就是FFT**对称**的魅力了. 由点求系数, 不过是矩阵求逆的过程:
 
-$$
+<p>\[
 \left[
 \begin{aligned}
 c_0 \\
@@ -392,7 +390,7 @@ p_1 \\
 \vdots \\
 p_n
 \end{aligned}\right] 
-$$
+\]</p>
 
 显然, 由于DFT和DFT逆矩阵具有相似的形式, 我们完全可以用**同一个函数**完成快速傅里叶的正反变换!
 
