@@ -104,13 +104,14 @@ ignore:
 theme: fluid
 
 plugins:
+  - hexo-renderer-pandoc
   - hexo-renderer-mathjax
-  - hexo-renderer-markdown-it
-  - markdown-it-footnote
-  - markdown-it-sup
-  - markdown-it-sub
-  - markdown-it-abbr
-  - markdown-it-emoji
+  # - hexo-renderer-markdown-it
+  # - markdown-it-footnote
+  # - markdown-it-sup
+  # - markdown-it-sub
+  # - markdown-it-abbr
+  # - markdown-it-emoji
 
 
 # Deployment
@@ -137,4 +138,4 @@ markdown:
     permalinkSymbol: ¶
 
 pandoc:
-  pandoc_path: E:/Documents/Repositories/Andrew-Rey.github.io/node_modules/pandoc.exe
+  pandoc_path: E:/Documents/Repositories/pandoc-2.18-windows-x86_64/pandoc-2.18/pandoc.exe
