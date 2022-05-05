@@ -287,7 +287,7 @@ treats hardware and the OS kernel as though they were all hardware (对物理资
   - local variables calling
 
 **example**:
-```C
+```C++
 int x = 1;
 int main()
 {
@@ -350,7 +350,7 @@ HINT: the children just copy a status of parent
 {%endnote%}
 
 **example 1:**
-```C
+```C++
 pid = fork();
 if (pid < 0)
 {
@@ -370,7 +370,7 @@ else  // parent process
 ```
 
 **example 2:**
-```C
+```C++
 /*in file fork.c:*/
 int main()
 {
@@ -735,7 +735,7 @@ Both M:M and Two-level models require communication to maintain the appropriate 
 
 Scheduler activations provides **upcalls**, a communication mechanism from the kernel to the thread library. 上级调用用于告知用户程序特定的事件
 
-# CPU Scheduling
+# CPU Scheduling (Important!)
 **Objective: design a scheduling algorithm for CPU. (select time point, select jobs to execute)**
 
 Maximum CPU utilization obtained with multiprogramming
@@ -836,11 +836,9 @@ Five common ones:
 ### how to know the next CPU burst?
 predict: using the length of previous CPU bursts, using **exponential averaging**
 
-<p>
-\[
+$$
 \tau_{n+1}=\alpha t_n + (1-\alpha)\tau_n
-\]
-</p>
+$$
 
 1. $t_n=$actual length of $n^{th}$ CPU burst
 2. $\tau_{n+1}=$predicted value for the next CPU burst
@@ -964,8 +962,8 @@ HINT:the solution to critical-section problem cannot depend on relative speed of
 ***We should design a solution to satisfy the three condition.***
 (临界区问题需要满足以上三种条件)
 
-**For two process condition:**
-```C
+**For two process condition:** (Peterson algorithm, Important!)
+```C++
 do {
     flag[i] = true;
     turn = j;
@@ -975,6 +973,8 @@ do {
     // remainder section
 }while (1);
 ```
+
+***ref:[peterson algorithm](https://zhuanlan.zhihu.com/p/374287625)***
 
 ## Synchronization hardware
 Two types: **disabling enabling interrupts** close interrupt if a process in critical section; **Special machine instructions**.
@@ -991,7 +991,7 @@ Test and modify the content of a word **atomically**.
 
 **Test-and-Set**
 
-```C
+```C++
 // define the test and set function
 bool TestAndSet (bool *lock) {
   bool rt = *lock;
@@ -1010,11 +1010,34 @@ do {
 ```
 ***the TestAndSet() function realizes that it changes all processes' status to enter critical section, but <u>keeps the old value of one process</u> which is going to enter critical section. <u>This function satisfies Mutual Exception rule.</u> However, this mathod not satisfies Bounded Waiting rule.*** 
 
+Change TestAndSet to satisfy Bounded Waiting:
+```C++
+// enter critical section
+waiting[i] = true;
+key = true;
+while (waiting[i] && key) {
+  key = TestAndSet(lock);
+}
+waiting[i] = false;
+
+// leave critical section
+j = (i + 1) % n;
+while ((j != 1) && !waiting[j]) {
+  j = (j + 1) % n;
+}
+if (j == i) {
+  lock = false;
+}
+else {
+  waiting[j] = false;
+}
+```
+
 Though this is a *code* form, but TestAndSet() is realized in hardware form.
 
 **Swap**
 
-```C
+```C++
 void Swap(bool &a, bool &b) {
   bool temp = a;
   a = b;
@@ -1037,11 +1060,116 @@ do {
 
 ***The Swap() function will swap the value of lock and key, if ***
 
-## Semaphores (信号量)
+## Semaphores (信号量, Important!)
 Most used~  
 Programmer-frendly~  
 
+```C++
+// atomic operator
+void wait(S) {
+  while (S <= 0);
+  S--;
+}
+void signal(S) {
+  S++;
+}
+
+// algorithm
+// shared data
+semaphore mutex = 1;
+// for process p_i
+do {
+  wait(mutex);
+  // critical section
+  signal(mutex);
+  // remainder section
+} while(1);
+```
+***semaphore algorithm satisfies three rules. semaphore is like a lock. wait() lock, and signal() delock.***
+
+the disadvantage is semaphore makes other processes *busy waiting*, which do nothing while waiting. for single CPU, it waste CPU resource. this is **spinlock**. spinlock is usually used in multi-core system, one process can enter another CPU's critical section while one process is in now critical section.
+
+***the difference waiting state:***
+![waiting_state](waiting_stat.png)
+
+***ref:[WaitingState](https://blog.csdn.net/liuchuo/article/details/51986201)***
+
+Optimization: no busy-waiting
+
+Makes one process not to busy-wait but to **block itself** or **mounted**.
+
+```C++
+// define a new semaphore
+typedef struct {
+  int value;
+  struct process *L;  // waiting process queue
+} semaphore;
+
+// edit wait() and signal()
+void wait(S) {
+  S.value--;
+  if (S.value < 0) {
+    // add this process to S.L
+    block;
+  }
+}
+void signal(S) {
+  S.value++;
+  if (S.value <= 0) {
+    // remove a process P from S.L
+    wakeup(P);
+  }
+}
+```
+
+{%note info%}
+### Deadlock
+two or more processes are waiting indefinitely for an event that can be caused by only one of the waiting processes.
+### Starvation
+indefinite blocking. A process may never be removed from the semaphore queue in which it is suspended.
+{%endnote%}
 
 ## Classical problems of Synchronization
+- bounded-buffer problem
+- reader and writer problem
+- dining philosophers problem
+
+### Bounded buffer problem
+```C++
+// initialization shared data
+semaphore full, empty, mutex;  // full and empty relize the synchronization between consumer and producer, and also represent the resource.
+full = 0;  // 
+empty = n;  // initial space
+mutex = 1;
+
+// producer process:
+do {
+  // code
+  produce an item in nextp
+  // code
+  wait(empty);  // judge if be full
+  wait(mutex);
+  // code
+  add nextp to buffer
+  // code
+  signal(mutex);
+  signal(full);  // inform
+} while(1);
+
+// consumer process
+do {
+  wait(full);
+  wait(mutex);
+  // code
+  remove an item from buffer to nextc
+  // code
+  signal(mutex);
+  signal(empty);
+  // code
+  consume the item in nextc
+  // code
+} while(1);
+```
+
 ## Monitors
 ## Synchronization example
