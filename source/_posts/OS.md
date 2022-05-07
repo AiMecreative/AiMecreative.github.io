@@ -927,6 +927,8 @@ defined my the following parameters:
 no notes here.
 
 # Process Synchronization
+进程合作时, 几个进程之间会相互影响. 合作的进程要么会直接共享逻辑地址空间 (即代码和数据), 要么通过共享内存或信息传递的方式进行通信. 但是并发的进程对数据操作可能会导致数据的不一致, 因此需要进程间进行同步.
+
 进程同步--抽象为临界区问题--提出三种解决方案 (软件方案, 硬件方案, 信号量方案)--经典同步问题--管程 (相对高级的同步结构)--补充例子
 ## Background
 Concurrent access to shared data may result in data inconsisitency. Maintaining data consistency requires mechanisms to ensure the **orderly execution** of coorperating processes. Such as *producer-consumer problem* need a mechanism to ensure the order of execution.
