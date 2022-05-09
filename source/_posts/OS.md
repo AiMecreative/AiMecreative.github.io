@@ -2,6 +2,7 @@
 title: Operating System
 date: today
 mathjax: true
+tag: 操作系统
 category: Computer Science
 ---
 
@@ -1065,6 +1066,7 @@ do {
 ## Semaphores (信号量, Important!)
 Most used~  
 Programmer-frendly~  
+信号量可以看作是对资源数量的衡量, 用于临界区问题时, 由于临界区只有一个, 因此信号量设置为1.
 
 ```C++
 // atomic operator
@@ -1127,6 +1129,7 @@ void signal(S) {
 {%note info%}
 ### Deadlock
 two or more processes are waiting indefinitely for an event that can be caused by only one of the waiting processes.
+
 ### Starvation
 indefinite blocking. A process may never be removed from the semaphore queue in which it is suspended.
 {%endnote%}
@@ -1137,12 +1140,13 @@ indefinite blocking. A process may never be removed from the semaphore queue in 
 - dining philosophers problem
 
 ### Bounded buffer problem
+生产者消费者问题: 存在若干生产者, 若干消费者以及一个缓冲区. 
 ```C++
 // initialization shared data
 semaphore full, empty, mutex;  // full and empty relize the synchronization between consumer and producer, and also represent the resource.
 full = 0;  // 
 empty = n;  // initial space
-mutex = 1;
+mutex = 1;  // 当前临界区没有进程, 当缓冲区大小为 1 时, 可以不用此变量.
 
 // producer process:
 do {
@@ -1150,11 +1154,14 @@ do {
   produce an item in nextp
   // code
   wait(empty);  // judge if be full
-  wait(mutex);
+  wait(mutex);  // buffer = 1 时, 可删
   // code
   add nextp to buffer
+  // detail operation:
+  buffer[in] = nextp;
+  in = (in + 1) % bufferSize;  // buffer = 1 时, 可删
   // code
-  signal(mutex);
+  signal(mutex);  // buffer = 1 时, 可删
   signal(full);  // inform
 } while(1);
 
@@ -1164,6 +1171,9 @@ do {
   wait(mutex);
   // code
   remove an item from buffer to nextc
+  // detail operation
+  a = buffer[out];
+  out = (out + 1) % bufferSize;
   // code
   signal(mutex);
   signal(empty);
@@ -1172,6 +1182,72 @@ do {
   // code
 } while(1);
 ```
+
+### Reader-Writer Problem
+以数据库为背景, 同时有若干的写者和读者对数据库进行操作. 写时不可读, 读时不可写. 如何权衡进程通信?
+
+**第一读者问题:** 读者可以一直读, 除非有写者正在写. 说白了就是读者优先级高于写者.
+
+**第二读者问题:** 读者优先级低于写者.
+
+```C++
+// shared data
+semaphore mutex, wrt;
+int readcount;
+// initailization
+mutex = 1;
+wrt = 1;  // 表示是否可以写, 或者是写的资源
+readcount = 0;
+
+// writer
+wait(wrt);
+// writer is writing
+signal(wrt);
+
+// reader
+wait(mutex);  // 存在并发的读者程序
+readcount += 1;
+if (readcount == 1) {
+  wait(wrt);  // 第一个读者与写者进行权限的争抢
+  // 若抢到权限, 则后续读者无需再次判断, 登记读者数目后, 直接进行读的操作.
+}
+signal(mutex);
+// reader(s) are reading
+wait(mutex);
+readcount -= 1;
+if (readcount == 0) {
+  signal(wrt);  // 最后一个读者释放对数据库操作的权限
+}
+signal(mutex);
+```
+
+### Dining-Philosophers Problem
+问题描述: 有多个哲学家在一个圆桌上用餐. 相邻两人间放着 **一支** 筷子, 哲学家只能拿与自己相邻的筷子, 若拿到了两根筷子, 则可以用餐, 用完后放回. 但若只拿到一支筷子, 则等待另一支筷子, 直到有两双筷子. 若一支也没有拿到, 则进行等待. 设计进程同步, 并防止 **死锁**.
+
+假设有 5 个哲学家和 5 支筷子.
+
+**Method 1(exit deadlock)**:
+```C++
+// shared data
+semaphore chopsticks[5] = {1, 1, 1, 1, 1};
+// for every philosopher i:
+do {
+  wait(chopstick[i]);
+  wait(chopstick[(i + 1) % 5]);
+  eat();
+  signal(chopstick[i]);
+  signal(chopstick[(i + 1) % 5]);
+} while(1);
+```
+显然, 当每个哲学家都拿左边的筷子时, 会发生死锁现象.
+
+**Solution 1**: 设置一个"房间"作为信号量, 房间只能一次性供四个人使用
+
+**Solution 2**: 将拿起左筷子和右边筷子 (拿一双筷子) 作为一个原子操作, 将其放入临界区.
+
+**Solution 3**: 规定奇数和偶数序号的哲学家遵守不同的拿筷子的顺序: 奇数先左后右, 偶数先右后左.
+
+***具体伪代码见操作系统习题***
 
 ## Monitors
 ## Synchronization example
