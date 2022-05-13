@@ -14,6 +14,7 @@ category: Computer Science
 
 # Concept
 Framework of this chapter:
+
 - basic concepts
 - OS components
 - OS services (Using components)
@@ -26,10 +27,12 @@ These contents will be detailed written in the following chapters
 ## Operating system components
 ### Process management
 **process**: A process is a <font color=blue>program</font> in <font color=red>execution</font>.
+
 - program has its own address space
 
 {%note info%}
 ### OS activities:
+
 - Process creation and deletion
   - using **fork** system call
 - Process suspension and resumption (挂起或恢复)
@@ -47,20 +50,24 @@ These contents will be detailed written in the following chapters
 
 {%note info%}
 ### OS activities:
+
 - Keep track of which parts of memory are currently being used and by whom.
 - Decide which processes to load when memory space becomes available (Job scheduling, 任务调度).
 - Allocate and deallocate memory space as needed.
 {%endnote%}
 
 **Virtual memory**: Virtual memory allows programs to address memory from a logical point of view. This technique allows applications **regard** that they have a continuous address space rather than fragmented spaces from main memory to disk memory.
+
 - without regard to the limits of physical memory.
 
 ### File management
 **file**: A file is a collection of related information defined by its creator. Commonly, files represent programs (both source and object form) and data.
+
 - this a uniform logical view of information storage provided by OS.
 
 {%note info%}
 ### OS activities:
+
 - File creation and deletion.
 - Directory (can be seen as a special file) creation and deletion.
 - Support of primitive for manipulating files and directories.
@@ -75,6 +82,7 @@ These contents will be detailed written in the following chapters
 
 ### I/O system management
 The I/O subsystem consists of:
+
 - a buffer-caching system
 - a general device-driver interface (a driver is a part of OS, specific for devices)
   - programmed I/O
@@ -84,11 +92,13 @@ The I/O subsystem consists of:
 
 ### Secondary-storage (disk) management
 **Secondary storage** is the principle on-line storage medium (线性存储介质) for both programs and data.
+
 - disk
 - Main memory is volatile and too small to accommodate all data and programs permanently, so the computer must provide secondary storage to back up main memory.
 
 {%note info%}
 ### OS activities;
+
 - Free space management (which parts of disk are free and how to allocate these free blocks)
 - Storage allocation
 - Disk scheduling (磁盘调度)
@@ -97,6 +107,7 @@ The I/O subsystem consists of:
 
 ### Protection system
 **Protection** refers to a mechanism for controlling access by programs, processes, or users to both system and user resources.
+
 - distinguish between authorized and unauthorized usage.
 - specify the controls to be imposed and means for enforcement.
 
@@ -105,6 +116,7 @@ In Linux, file access control: **rwx**, **owner**, **user(u)**, **group(g)**, **
 
 ### Command-interpreter system
 **Command-interpreter system**(命令行解释系统): Interact with users, users can send instructions to OS.
+
 - Shell
 - its functions is to get and execute the next command statement.
 
@@ -114,25 +126,31 @@ In Linux, file access control: **rwx**, **owner**, **user(u)**, **group(g)**, **
 From the view of an user:
 
 **Program execution**
+
 - load a program into memory and to run it
   - process management, memory management, disk management and so on.
 
 **I/O operations**
+
 - user programs cannot execute I/O operations directly, the OS must provide some means to perform I/O.
 
 **File-system manipulation**
+
 - programs capability to read, write, create and delete files
 
 **Communication**
+
 - exchange information between processes
 
 **Error detection**
+
 - ensure correct computing in CPU, memory hardware, I/O devices, user programs
 
 ### Additional operating system functions
 From a view of system:
 
 This part is user for **efficient system operations**, not for helping users.
+
 - Resource allocation
 - Accounting
 - Protection
@@ -143,6 +161,7 @@ An user how to use system services:
 Normally, we write C code and define the ``main`` function, this is a *system call*, but has been packaged to a convenient-to-use API.
 
 **System call** is an **interface** between a running program and the OS.
+
 - generally available as assembly-language instructions. (汇编语言形式呈现)
 - user programs (in **user mode**, ``mode bit=1``) send a ``system call`` to the OS (in **kernel mode**, ``mode bit=0``), and the OS execute the system call, then the OS returns (and change the mode bit to 1), finally the user programs continue to execute.
 - Common in the OS
@@ -152,11 +171,13 @@ Normally, we write C code and define the ``main`` function, this is a *system ca
 
 ### The implementation of system call
 Typically, a number (index) associated with each system call.
+
 - System call interface maintains a table indexed according to these numbers
 
 The system call interface invokes intended system call in OS kernel and returns status of the system call and any return values. (系统调用的接口使用OS内核中的系统调用, 并返回系统调用状态和相应参数)
 
 The caller need to know **nothing** about how the system call in implemented.
+
 - just need to **obey API** and understand what OS will do as a result call.
 - Most details of OS interface hidden from programmer by API
   - manage run-time support library <u>(set of functions built into libraries included with compiler)</u>
@@ -169,6 +190,7 @@ In this picture, ``open()`` function acts as an API, and ``open()`` gives a syst
 Often, more information is required than simply identity of desired system call.
 
 Three types:
+
 - simplest: pass the parameters in ***registers***
   - maybe more parameters than registers
 - Parameters stored in a ***block***, or *table*, in memory. and pass the block address to registers.
@@ -179,6 +201,7 @@ Three types:
 
 ### Types of system call
 Five main types:
+
 - process control
 - file management
 - device management
@@ -188,39 +211,39 @@ Five main types:
 **process management**
 <center><b>Table 1: process management for major POSIX system</b></center>
 
-|call|description|
-|----|-----------|
-|``pid=fork()``|create a child process identical to the parent (child is same with parents process)|
-|``pid=waitpid(pid, &statloc, options)``|wait for a child to terminate|
-|``s=execve(name, argv, environp)``|replace a process' core image, can be used with ``fork()`` to let child do another things but both from parents process|
-|``exit(status)``|terminate process execution and return status|
+| call                                    | description                                                                                                             |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| ``pid=fork()``                          | create a child process identical to the parent (child is same with parents process)                                     |
+| ``pid=waitpid(pid, &statloc, options)`` | wait for a child to terminate                                                                                           |
+| ``s=execve(name, argv, environp)``      | replace a process' core image, can be used with ``fork()`` to let child do another things but both from parents process |
+| ``exit(status)``                        | terminate process execution and return status                                                                           |
 
 **file management**
 <center><b>Table 2: file management for major POSIX system</b></center>
 
-|call|description|
-|----|-----------|
-|``fd=open(file, how, ...)``|open a file for reading, writing, or both, ``fd`` is 文件描述符|
-|``s=close(fd)``|close an open file|
-|``n=read(fd, buffer, nbytes)``|read data from a file into a buffer|
-|``n=write(fd, buffer, nbytes)``|write data from a buffer to file|
-|``position=lseek(fd, offset, whence)``|move the file pointer|
-|``s=stat(name, &buf)``|get a file's status information|
-|``mkdir()``|create a new directory|
-|``rmdir()``|remove an empty directory|
-|``link()``|create a new entry, name2, pointing to name2. (soft link)|
-|``unlink()``|remove the directory entry|
-|``mount()``|mount a file system|
-|``unmount()``|unmount a file system|
+| call                                   | description                                                     |
+| -------------------------------------- | --------------------------------------------------------------- |
+| ``fd=open(file, how, ...)``            | open a file for reading, writing, or both, ``fd`` is 文件描述符 |
+| ``s=close(fd)``                        | close an open file                                              |
+| ``n=read(fd, buffer, nbytes)``         | read data from a file into a buffer                             |
+| ``n=write(fd, buffer, nbytes)``        | write data from a buffer to file                                |
+| ``position=lseek(fd, offset, whence)`` | move the file pointer                                           |
+| ``s=stat(name, &buf)``                 | get a file's status information                                 |
+| ``mkdir()``                            | create a new directory                                          |
+| ``rmdir()``                            | remove an empty directory                                       |
+| ``link()``                             | create a new entry, name2, pointing to name2. (soft link)       |
+| ``unlink()``                           | remove the directory entry                                      |
+| ``mount()``                            | mount a file system                                             |
+| ``unmount()``                          | unmount a file system                                           |
 
 **miscellaneous system call**
 
-|call|description|
-|----|-----------|
-|``chdir()``|change working dir|
-|``kill()``|send a <b>signal</b> to a process|
-|``chmod()``|change a file's protection bits|
-|``time()``|get the elapsed time since Jan 1, 1970|
+| call        | description                            |
+| ----------- | -------------------------------------- |
+| ``chdir()`` | change working dir                     |
+| ``kill()``  | send a <b>signal</b> to a process      |
+| ``chmod()`` | change a file's protection bits        |
+| ``time()``  | get the elapsed time since Jan 1, 1970 |
 
 ## System structure
 monolithic单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ 微内核结构（最核心的功能放在内核中）、模块化结构（linux）
@@ -228,17 +251,20 @@ monolithic单体结构（一个进程）$\rightarrow$ 分层式 $\rightarrow$ �
 have no concept of **structure**, is **Single core structure.**
 
 consists of two separable parts:
+
 - system programs
 - the kernel
 
 ###  Microkernel
 assign only a few essential functions to the kernel
+
 - address spaces
 - interprocess communication (IPC)
 - basic scheduling
 
 {%note info%}
 ### Benefit and detriments
+
 - reliable
 - easy to extend
 - secure
@@ -256,6 +282,7 @@ kernel is divided into different modules.
 treats hardware and the OS kernel as though they were all hardware (对物理资源抽象，即抽象层，在抽象层能实现虚拟机)
 
 **management application:**
+
 - type 1: built on hardware
   - use hardware directly
   - usually used in data center or service
@@ -267,6 +294,7 @@ treats hardware and the OS kernel as though they were all hardware (对物理资
 # Process
 ## Concept of process
 ###  What is a process?
+
 - A program in execution
 - An instance(实例) of a program running on a computer
   - 同样代码跑两遍，是不同的进程
@@ -274,6 +302,7 @@ treats hardware and the OS kernel as though they were all hardware (对物理资
 - A unit of activity characterized by the execution of a sequence of in instructions, a current state, and an associated set of system resources(一系列指令执行，状态(如wait, execution, ready)，有资源)
 
 ### Process in memory
+
 - **text** 代码段(``addr=0``)
   - code
   - codes are complied and stored here
@@ -306,6 +335,7 @@ HINT: there is a <u>flexible space</u> between **heap** and **stack**.
 
 
 ### Process elements
+
 1. program code (possible shared)
 2. a set of data
 3. a number of attributes describing the state of the process
@@ -319,7 +349,9 @@ This list is called a **trace**.
 
 ## User-view of process
 ### Process creation
+
 The OS builds a data structure to manage the process.
+
 - Traditionally, the OS create all processes
 - But it can be useful to let a running process create another
   - This action is called **process spawning** (进程派生)
@@ -333,13 +365,14 @@ The OS builds a data structure to manage the process.
 
 HINT: the children just copy a status of parent
 
-|command|description|
-|-------|-----------|
-|``fork``|system call creates new <b>same</b> process|
-|``exec``|system call used after a ``fork`` to replace the process' memory space with a <b>new program</b>|
+| command  | description                                                                                      |
+| -------- | ------------------------------------------------------------------------------------------------ |
+| ``fork`` | system call creates new <b>same</b> process                                                      |
+| ``exec`` | system call used after a ``fork`` to replace the process' memory space with a <b>new program</b> |
 
 {%note info%}
 ### The differences using ``fork()`` in parents and children processes
+
 1. fork返回给child_pid在两个进程中不一样. 在父进程中``fork()``的返回值大于零, 即子进程的编号; 在子进程中``fork()``的返回值是0.
 
 2. 可以理解为父进程在``fork()``的初期产生了子进程, 此时子进程拿到的返回值是初始化的返回值 0, 在父进程即将结束``fork()``时, 父进程拿到了被赋值的返回值. 因此在子进程中不会再次执行``fork()``, 而执行其后面的内容.
@@ -397,12 +430,14 @@ And the running result is:
 
 ### Process termination
 Process executes last statement and asks the OS to delete it. (``exit()``)
+
 - Output data from child to parents (via``wait()``)
 - Process' resources are de-allocated (收回) by the OS
 
 Parents may terminate the execution of children processes. (``abort()``)
 
 Some situations of this:
+
 - Child has executed allocated resources
 - Task assigned to child is non  longer required
 - Parent is exiting
@@ -414,11 +449,13 @@ Some situations of this:
 **creating process:**
 
 ``int fork(void);``
+
 - create a new process that is exact copy of current one
 - returns process ID of new process in parent
 - return 0 is child
 
 ``int waitpid(int pid, int *stat, int opt);``
+
 - pid: process **to wait for**, or -1 for any
 - stat: will contain exit value, or signal
 - opt: usually 0 or WNOHANG (?what's this)
@@ -427,11 +464,13 @@ Some situations of this:
 **deleting process:**
 
 ``void exit(int status);``
+
 - current process ceases to exit
 - status shows up in waitpid(shifted)
 - by convention, status of 0 is successful, non-zero is error
 
 ``int kill(int pid, int sig);``
+
 - sends signal ``sig`` tp to process ``pid``
 - ``sig=SIGTERM``: most common value, kills process by default
 - application can catch ti for "cleanup"
@@ -447,10 +486,12 @@ Some situations of this:
 **Main problem: How to manage such many process?**
 
 For traditional UNIX process: process is an abstraction of OS, which represents what is needed to run a program.
+
 - often called a "HeavyWeightProcess"
 - while a thread is called "轻量级"
 
 This **traditional** process has two parts:
+
 1. sequential program execution stream. (now is thread)
    1. code executed as a sequential stream of execution (thread)
    2. includes states of CPU registers
@@ -459,6 +500,7 @@ This **traditional** process has two parts:
    2. IO state
 
 ### Process Elements
+
 - identifier
 - state
 - priority
@@ -473,16 +515,20 @@ This **traditional** process has two parts:
 内核如何实现一个进程? 管理一个进程?
 
 **keep a data structure for each process**
+
 - <font color=red><b>process control block (PCB)</b></font>
 - called "proc" in Unix and "task_struct" in Linux
 
 **track states of process** ----"Process State"
+
 - running, waiting, ready...
 
 **includes information necessary to run**
+
 - registers, virtual memory mapping, open files...
 
 **Various other data about the process**
+
 - such as user/groups...
 
 {%note info%}
@@ -510,12 +556,14 @@ The CPU switch from process to process:
 ![state_switch](switch_state.jpg)
 
 when to switch processes:
+
 - interrupt
 - trap
   - current process running is wrong
 - system call
 
 switch steps:
+
 - save context of processor including program counter and other registers
 - update the PCB that is currently in the Running state
 - move the PCB to appropriate queue
@@ -525,6 +573,7 @@ switch steps:
 - restore context of the selected process
 
 ### Process scheduling queues
+
 **Job queue**: set of all processes in the system
 
 **Ready queue**: set of all processes residing in main memory, **ready** and waiting to execute
@@ -547,6 +596,7 @@ Short-term scheduler is invoked very frequently (milliseconds----must be fast)
 Long-term scheduler is invoked very infrequently (seconds, minutes----may be slow)
 
 The long-term scheduler controls the *degree of multiprogramming*
+
 - IO-bound process: spends more time doing IO than computations, many shout CPU bursts
 - CPU-bound process: spends more time doing computations, few very long CPU burst
 
@@ -560,6 +610,7 @@ Cooperation process can affect or be affected by the execution of another proces
 
 {%note info%}
 ### Advantages
+
 - information sharing
 - computation speed-up
 - modularity
@@ -567,12 +618,15 @@ Cooperation process can affect or be affected by the execution of another proces
 {%endnote%}
 
 ### Communication models
+
 **message model**
+
 - smaller data exchange
 - inter-computer communication (跨机的通信)
 - system call with kernel
 
 **shared memory**
+
 - Maximum speed/memory
 - convenience of communication
 - protection and synchronization
@@ -582,20 +636,23 @@ Cooperation process can affect or be affected by the execution of another proces
 Paradigm for cooperating processes, producer process produces information that is consumed by a consumer process
 
 **POSIX shared memory example**
-|Cmd|description|
-|---|-----------|
-|``shmget()``|A process creates a shared memory segment using this function|
-|``shmctl()``|the original owner of a shared memory segment cna assign ownership to another user with this function|
-|``shmat()``|Once created, a shared memory segment can be attached to a process address space using this|
-|``shmdt()``|shared segment can be detached using this|
+
+| Cmd          | description                                                                                           |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| ``shmget()`` | A process creates a shared memory segment using this function                                         |
+| ``shmctl()`` | the original owner of a shared memory segment cna assign ownership to another user with this function |
+| ``shmat()``  | Once created, a shared memory segment can be attached to a process address space using this           |
+| ``shmdt()``  | shared segment can be detached using this                                                             |
 
 **Inter-process Communication**(IPC)
 
 Two operations:
+
 - **send(message)**
 - **receive(message)**
 
 if P and Q wish to communicate, they need to
+
 - establish a communication link between them 
 - exchange messages via send/receive
 
@@ -630,6 +687,7 @@ if P and Q wish to communicate, they need to
 **Synchronization** Message passing may be either blocking(阻塞), or non-blocking(非阻塞)
 
 **Buffering:**
+
 - zero capacity
 - bounded capacity
 - unbounded capacity
@@ -637,6 +695,7 @@ if P and Q wish to communicate, they need to
 **Pipe** ``|`` or ``Pipe()``, there is a **read end** and a **write end**
 
 **Three communication methods**
+
 - shared memory
 - pipe
 - sockets
@@ -645,6 +704,7 @@ if P and Q wish to communicate, they need to
 # Threads
 ## Concept
 A **thread** (lightweight process, LWP) is a basic unit of CPU execution.
+
 - a sequential execution stream within process
 
 A thread has a *thread ID*, a *program counter*, a *register set* and a *stack*.
@@ -654,12 +714,13 @@ A thread **shares** with each other threads in the **same** process **its code s
 **Multithreading**: a single program made up of a number of different concurrent activities.
 
 ## Actual thread operations
-|cmd|description|
-|---|-----------|
-|``thread_fork(func, args)``|create a new thread to run func(args)|
-|``thread_yield()``|relinquish processor voluntarily|
-|``thread_join(thread)``|in parent, wait for forked thread to exit, then return|
-|``thread_exit()``|quit thread and clean up, wake up joiner if any|
+
+| cmd                         | description                                            |
+| --------------------------- | ------------------------------------------------------ |
+| ``thread_fork(func, args)`` | create a new thread to run func(args)                  |
+| ``thread_yield()``          | relinquish processor voluntarily                       |
+| ``thread_join(thread)``     | in parent, wait for forked thread to exit, then return |
+| ``thread_exit()``           | quit thread and clean up, wake up joiner if any        |
 
 **pThreads: POSIX standard for thread programming**
 
@@ -693,16 +754,19 @@ Allows the OS to create a sufficient number of kernel threads.
 ## Threading Issues
 ### Semantics of ``fork()`` and ``exec()``
 Does ``fork()`` duplicate only the calling thread or all threads? (应该复制所有线程还是指定线程)
+
 - if invoke ``exec()`` just after ``fork()``, no need to duplicate all threads, since it is no meaning to duplicate all threads now that they will be replaced right after ``fork()``
 - if invoke ``exec()`` after ``fork()`` for a long time, it will duplicates all threads
 
 ### Thread Cancellation
 Terminating a thread before it has finished, two general approaches:
+
 - Asynchronous cancellation (terminate thread **immediately**)
 - Deferred cancellation (thread check itself if it should be cancelled periodically)
 
 ### Signal handling
 Signal is used to notify a process that a particular event has occurred. All signal has same patterns:
+
 - generated by particular event
 - delivered to a process
 - signal is handled
@@ -711,6 +775,7 @@ A signal handler is used to process signals
 
 {%note info%}
 ### options
+
 - deliver the signal to the thread to which the signal applies
 - deliver the signal to every thread in the process
 - ~ to certain threads
@@ -722,6 +787,7 @@ Create a number of threads in a pool where they await work.
 
 {%note info%}
 ### Advantages
+
 - Usually slightly faster to service a request with an exiting thread than create a new thread.
 - Allows the number of threads in the application(s) to be bound to the size of pool.
 {%endnote%}
@@ -747,6 +813,7 @@ Process execution repeats the CPU burst and I/O burst cycle. When a process begi
 
 {%note info%}
 ### CPU, I/O bound
+
 - CPU bound: a process generates I/O requests infrequently, using more of its time doing computation
 - I/O bound: a process spends more of its time to do I/O than doing computation
 {%endnote%}
@@ -754,6 +821,7 @@ Process execution repeats the CPU burst and I/O burst cycle. When a process begi
 **CPU Scheduler:** When the CPU is idle, the OS mus select another process to run. The selected process is carried out by **the short-term scheduler(CPU scheduler)**. The CPU scheduler selects a process from the ready queue, and allocates the CPU resources to it. The ready queue does not have to be a FIFO one. There are many ways to organize the ready queue.
 
 ## Circumstances that scheduling may take place
+
 1. running -> wait (e.g. doing for I/O)
 2. running -> ready (e.g. interrupt occurs)
 3. wait -> ready (e.g. I/O completion)
@@ -771,6 +839,7 @@ Process execution repeats the CPU burst and I/O burst cycle. When a process begi
 
 ## Scheduling Criteria (调度准则)
 Five common ones:
+
 - CPU utilization (max)
   - want to keep CPU as busy as possible
 - throughput (吞吐量) (max)
@@ -790,6 +859,7 @@ Five common ones:
   - do **not** include the time that it takes to output the response
 
 ## Scheduling Algorithm
+
 - First-Come, First-Served (FCFS)
 - Shortest-Job-First (SJF)
 - Priority
@@ -813,6 +883,7 @@ Five common ones:
 
 {%note info%}
 ### disadvantages
+
 - convoy effect: all the processes wait for one big process to get off the CPU. CPU utilization may be low.
 - not be fair to those short ones.
 - troublesome for time-sharing system, where each user needs to get a share of the CPU at regular intervals.
@@ -824,6 +895,7 @@ Five common ones:
 **if non-preemptive:** once the CPU is given to the process, it cannot be preempted until completes its CPU burst
 
 **if preemptive:** if a new process arrives with less CPU burst length than **remaining** time of others, it will be selected immediately.
+
 - **shortest-remaining-time-first(SRTF)**
 
 **SJF is optimal**: gives minimum average waiting time for a given set of processes.
@@ -851,6 +923,7 @@ this is a weighted equation for history data and current data
 
 {%note info%}
 ### disadvantages
+
 - difficult to estimate the next burst time value accurately
 - in favor of short jobs. some long time jobs have no chance to run. (starvation)
 {%endnote%}
@@ -870,11 +943,13 @@ but indefinite block (or starvation) may occur: a low priority process may never
 
 ### Round Robin (RR)
 Similar to FCFS, except that each process is assigned a **time quanntum**
+
 - All processes are in the ready queue (FIFO list). When the CPU is free and lets it run for one time quantum.
 - If a process uses CPU for more than one time quantum, it is moved to the **tial** of the list.
 
 {%note info%}
 ### Some issues
+
 - if time quantum is too large, RR reduces(退化) to FCFS
 - if time quantum is too small, RR becomes **processor sharing**
 - context switching may affect the performance of RR, shorter time quantum means more context
@@ -892,11 +967,13 @@ background (batch)
 Each process is assigned permanently to one queue based on some properties of the process
 
 Each queue has its own scheduling algorithm:
+
 - foreground, interactive----RR
 - bacjground, batch----FCFS
 
 #### Hint
 scheduling must be done between the queue:
+
 - fixed **priority** scheduling(i.e. serve all from foreground then from background); Possibility of starvation.
 - time quantum, each queue gets a certain amount of CPU time which it can amongst its processes
 
@@ -906,6 +983,7 @@ allows processes to move between queues. (can be implemented by aging)
 if a processe uses more CPU time, it is moved to a queue of lower priority.
 
 defined my the following parameters:
+
 - numbers of queues
 - scheduling algorithm for each queue
 - method used to determine when to upgrade a process
@@ -936,6 +1014,7 @@ Concurrent access to shared data may result in data inconsisitency. Maintaining 
 
 ### Race Condition
 Race condition occurs, if:
+
 - 2 or more processes/threads access and manipulate the same data concurrently
 - the outcome of the execution depends on the particular order in which the access takes place.
 
@@ -952,6 +1031,7 @@ A **protocol** consists of two parts: entry section and exit section. Between th
 
 {%note info%}
 ### condition must be followed
+
 - **Mutual exclusion (互斥)**
   - If there is a process exexuting in critical section, the **entry protocol** should be capable of blocking processes that wish to enter. And if the process in critical exits, the entry protocol must know the fact, and allows a waiting process to enter.
 - **Progress (前进/有空让进)**
