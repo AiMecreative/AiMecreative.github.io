@@ -1331,3 +1331,7 @@ do {
 
 ## Monitors
 ## Synchronization example
+
+后面半本书没有写博客
+
+结果是最后操作系统大寄
