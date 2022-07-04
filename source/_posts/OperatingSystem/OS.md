@@ -2,8 +2,7 @@
 title: Operating System
 date: today
 mathjax: true
-tag: 操作系统
-category: Computer Science
+category: OperatingSystem
 ---
 
 "This is the basic class for CS."

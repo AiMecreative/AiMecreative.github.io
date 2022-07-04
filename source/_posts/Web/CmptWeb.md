@@ -1,10 +1,9 @@
 ---
 title: 计算机网络
 date: 2022-01-26
-tags: 网络
 mathjax: true
 category:
-- SEU_Study
+- Web
 ---
 
 "十天能学完吗, 呜呜呜."

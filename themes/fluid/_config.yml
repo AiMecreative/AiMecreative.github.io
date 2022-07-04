@@ -910,7 +910,7 @@ category:
 # Tag Page
 #---------------------------
 tag:
-  enable: true
+  enable: false
   banner_img: /img/bg5.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3

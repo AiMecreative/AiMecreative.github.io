@@ -1,7 +1,6 @@
 ---
 title: BabyBlog
 date: 2022-01-11 09:09:04
-tags: 随笔
 category:
 - Life
 ---

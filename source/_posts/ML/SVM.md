@@ -1,8 +1,7 @@
 ---
 title: SVM
 date: 2022-05-03 21:26:05
-tags: AI
-category: Artificial Intelligence
+category: ML
 mathjax: true
 ---
 

@@ -2,7 +2,7 @@
 title: Pattern Recognition
 date: 2022-2-28
 mathjax: true
-category: Artificial Intelligence
+category: ML
 ---
 
 "This is really a great lesson."

@@ -1,8 +1,7 @@
 ---
 title: 操作系统练习
 date: 2022-05-09 16:35:18
-tags: 操作系统
-category: Computer Science
+category: OperatingSystem
 mathjax: true
 ---
 
