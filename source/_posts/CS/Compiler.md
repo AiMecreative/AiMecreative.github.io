@@ -71,4 +71,35 @@ The **code generator** maps the intermediate representations of the source progr
 
 ![gen1](gen1.png)
 
+### Symbol Table
 
+The **symbol tabel** is a data structure containing a record for each variable name, with fields for attributes of the name.
+
+- allows compiler to find, store and retrieve record name quickly.
+
+### Some Other Definition
+**pass**: Activities from several phases may be grouped together into a **pass** that reads an input file and writes an output file.
+
+### Classification of Languages
+**Imperative & declaarative (强迫式和声明式)**
+
+Imperative: specifies *how* a computation is to be done, there is a notion of program state and statements that change the state.
+
+- C, C++, C#, Java
+
+Decarative: specifies *what* a computation is to be done
+
+- Functional language: ML, Haskell
+- Constraint logic language: Prolog
+
+Von Neumann: computational model is based on von Neumann computer architechure.
+
+- FORTRAN, C
+
+object-oriented: consists a collection of objects that interact with each other.
+
+- C++, C#, Java
+
+Scripting: interpreted language with high-level operators designed for "gluing together" computations. Often shorter than equivalent programs written in language like C.
+
+- Python, Ruby, Purl, JavaScript
