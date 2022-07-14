@@ -1,7 +1,7 @@
 ---
 title: GAMES101
 date: 2022-07-09 10:35:39
-catagory: CS
+category: CS
 mathjax: true
 ---
 
@@ -459,7 +459,51 @@ Aliasing 的来源: 相同采样频率采样不同函数, 得到的采样点相�
 - frame buffer stores color value
 - z-buffer stores depth (e.i. $|z|$)
 
+![z-buffer](zbuf1.png)
+
+时间复杂度为 $O(n)$, 但浮点数判断相等比较复杂
+
+### Summarize
+
+![sum](sum1.png)
+
 # Shading
+
+**Def:** darkening or coloring of an illustration or diagram with parallel lines or a block of color. 
+
+- The process of **applying a material** to an object, considering the interaction with light.
+- 目前只考虑shading, 不考虑Shadow
+
+**Other terminologies:**
+
+- **specular light 高光**
+- **diffuse reflection 漫反射**
+- **ambient light 间接光照**: 简化为常量
+
+## Blin-Phong Reflection Model
+
+简单**漫反射**模型: 设物体表面法向量 $\vec{n}$ 与光照的 **反方向** $\vec{l}$ 夹角为 $\theta$ 且为单位向量, 则
+
+$$
+cos \theta = \vec{l} \cdot \vec{n}
+$$
+
+物体表面接收的光强与 $cos \theta$ 成正比.
+
+设光源为点光源, 传播过程不损失能量, 球面波传播. 则由能量守恒, 距离点光源 $r$ 的球面上一点的强度为 $I/r^2$, 其中 $I$ 表示单位球壳上的能量.
+
+因此物体的不同点的光照强度可以表示为
+
+$$
+I_p = k_d\frac{I}{r^2}max\{0,\vec{l} \cdot \vec{n}\}
+$$
+
+其中取最大是考虑: 当光线逆向射过来后**不考虑折射**.
+
+其中 $k_d$ 表示整体的颜色影响, 当 $k_d=0$ 时表示强度为 $0$, 此时全黑. 此外, 若是RGB, $k_d$ 分别取值.
+
+![kd](kd.png)
+
 
 # Geometry
 
