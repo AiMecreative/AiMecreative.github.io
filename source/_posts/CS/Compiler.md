@@ -81,7 +81,6 @@ The **symbol tabel** is a data structure containing a record for each variable n
 **pass**: Activities from several phases may be grouped together into a **pass** that reads an input file and writes an output file.
 
 ### Classification of Languages
-**Imperative & declaarative (强迫式和声明式)**
 
 Imperative: specifies *how* a computation is to be done, there is a notion of program state and statements that change the state.
 
@@ -103,3 +102,5 @@ object-oriented: consists a collection of objects that interact with each other.
 Scripting: interpreted language with high-level operators designed for "gluing together" computations. Often shorter than equivalent programs written in language like C.
 
 - Python, Ruby, Purl, JavaScript
+
+
