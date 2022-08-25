@@ -11,25 +11,25 @@ mathjax: true
 
 # Abstract
 
-In this project, we realized an basic UNet model and UNet++ model, then we put them on image semantic segmentation. Here we will show our basic theory of UNet and an improvement of it, and we provide part but main code of this program, finily, we give the result of segmentation images, loss-curve and accuracy-curve on both train and validation set.
+In this project, we realize an basic UNet model and UNet++ model, then we apply them on image semantic segmentation. We show our basic theory of UNet and an improvement of it, and we provide main code of this program. Finally, we give the result of segmentation images, loss-curve and accuracy-curve on both training and validation set.
 
-The copyright of this program is owned by our team mentioned on the end.
+The copyright of this program is owned by our team mentioned on the end of this blog.
 
 # UNet Structure
 
-The [paper](https://arxiv.org/abs/1505.04597) published in 2015 proposed a noval network structure, whose shape is similar with captal "U". The idea comes from FCNN. U-Net is one of the class of "Encoder-Decoder" structure.
+The [paper](https://arxiv.org/abs/1505.04597) published in 2015 propose a noval network structure, whose shape is similar with the captal "U". The idea comes from FCNN. U-Net is one of the classes of "Encoder-Decoder" structure.
 
 ![U-Net Structure](unet-structure.png)
 
-The piror half of the network is "encoder". The input image passes covolution kernel, and then passes the pooling layer (or other dimension-decreasing layer). The opposite of that is the post part of UNet, the "decoder". The input of decoder is a sequence of feature maps that with highly contracted pixels. The output of the decoder (or the whole network) is an image with the same shape of input image, where each pixel has its own class.
+The front half of the network is "encoder". The input image passes covolutional kernel, and then passes the pooling layer (or other dimension-decreasing layer). The opposite of that is the back part of UNet, the "decoder". The input of decoder is a sequence of feature maps with highly contracted pixels. The output of the decoder (or the whole network) is an image with the same shape of input image, where each pixel has its own class.
 
-In this project, we decreased the convolutional layers, making there are only two convolutional layer in each convolutional kernel as the dataset includes images with shape $128\times 256$.
+In this project, we decrease the number of convolutional layers so that there are only two convolutional layers in each convolutional kernel as the dataset includes images with shape $128\times 256$.
 
 ## Operator Definitions
 
 **Convolutional Kernel:**
 
-We defined the basic convolutional kernel as following:
+We define the basic convolutional kernel as follow:
 
 ```python
 self.layer = nn.Sequential(
@@ -46,11 +46,11 @@ self.layer = nn.Sequential(
     nn.LeakyReLU(),
 ```
 
-It including two convolution operations.
+It includes two convolution operations.
 
 **Down Sampling Kernel:**
 
-As for downsampling kernel, we replaced conditional pooling layer to convolutional layer with stride equaling to 2, which means the shape will be shrunk to $\frac{1}{2}$ while remaining the same channels.
+As for downsampling kernel, we replace conditional pooling layer to convolutional layer with stride equaling to 2, which means the shape will be shrunk to $\frac{1}{2}$ while remaining the same channels.
 
 ```python
 self.Down = nn.Sequential(
@@ -61,7 +61,7 @@ self.Down = nn.Sequential(
 
 **Up Sampling Kernel:**
 
-The basic structure of up-sampling contains only one convolutional layer with $1\times 1$ convolutional kernel size and half out-channel. The feature map should passes an interpolation layer before get in the convolutional layer.
+The basic structure of up-sampling contains only one convolutional layer with $1\times 1$ convolutional kernel size and half out-channel. The feature map should pass an interpolation layer before getting into the convolutional layer.
 
 ```python
 def __init__(self, C):
@@ -136,15 +136,15 @@ def forward(self, x):
         return self.Th(self.pred(self.C10(O4)))
 ```
 
-As you can see, the difference between U-Net and other networks before U-Net is that, U-Net conbines the former infomation from encoder and current infomation from decoder.
+As you can see, the difference between U-Net and other networks before U-Net is that U-Net conbines the former information from encoder and current information from decoder.
 
 # Code
 
-During the training process, we want to keep some infomation of loss values and accuracy values on training set and validation set, so that we can analyze the variance.
+During the training process, we want to keep some information of loss values and accuracy values on training set and validation set so that we can analyze the variance.
 
-In the function named `train()`, we take `optimizer` and `loss` as two parameters used in training process. The outputs of this function are loss and accuracy on both training set and validation set. If we get the data about training set and validation set, we can draw the curves. If both training and validation loss values decrease during training process, we can conclude that our model convergences and do not overfit on training set.
+In the function named `train()`, we take `optimizer` and `loss` as two parameters used in training process. The outputs of this function are loss and accuracy on both training set and validation set. If we get the data about training set and validation set, we can draw the curves. If both training and validation loss values decrease during training process, we can conclude that our model converges and does not overfit on training set.
 
-The train step code is show as following:
+The training code is shown as follow:
 
 ```python
 self.model.train()
@@ -160,7 +160,7 @@ for batch in self.train_loader:
     optimizer.step()
 ```
 
-The data collecting code can be written as following:
+The data collecting code can be written as follow:
 
 **Statistic data of training set**
 
@@ -202,7 +202,7 @@ valid_epoch_loss.append(valid_loss / valid_batch_num)
 valid_epoch_acc.append(epoch_acc)
 ```
 
-The point you should pay attention to is that you should use `with torch.no_grad()` before you do some work that have no relations with training process, otherwise your GPU memory will be full or even overflow.
+The point you should pay attention to is that you should use `with torch.no_grad()` before you do some work that have no relation with training process, otherwise your GPU memory will be full or even overflow.
 
 # Result
 
@@ -210,7 +210,7 @@ After a long time training, we get the satisfying result with U-Net model.
 
 ## Former Model
 
-The "former model" infers the U-Net model, and you will see we used other upgraded model named "UNet++", which will be introduced later.
+The "former model" infers the U-Net model, and you will see we use other upgraded model named "UNet++" which will be introduced later.
 
 We output the segmentation results and their uncertainties.
 
@@ -218,13 +218,13 @@ We output the segmentation results and their uncertainties.
 
 ## Model Upgrade
 
-For some reason, we tried other U-Net-like model, Nested UNet, namely UNet++. It has a nested convolutional blocks like a pyramid and there is a chain passing connectivity between each convolutional block every layer.
+For some reasons, we try another U-Net-like model, Nested UNet, namely UNet++. It has a nested convolutional blocks like a pyramid and there is a chain passing connectivity between each convolutional block every layer.
 
 ![Neseted UNet](nested.png)
 
 The black nodes are the same with U-Net model. The green nodes are what Nested UNet newly added. Both green and blue lines are skip pathways that pass connectivities from encoder to decoder.
 
-The use of Nested UNet gave us a little improvement on final results.
+The use of Nested UNet gives us a little improvement on final results.
 
 ![pictrue 1 result-Nested UNet](pic1-nested.png)
 
@@ -232,7 +232,7 @@ The use of Nested UNet gave us a little improvement on final results.
 
 ## U-Net
 
-We analyzed the loss value and accuracy on both training and validation set:
+We analyze the loss value and accuracy on both training and validation set:
 
 ![unet loss](unet_loss.png)
 
@@ -240,15 +240,15 @@ We find that after 100 epochs, the model has not convergenced yet, but the loss 
 
 ![unet accuracy](unet_acc.png)
 
-From the accuracy curves, we find that both training set and validation set have increasing accuracy, which mean our model does not overfit.
+From the accuracy curves, we find that both training set and validation set have increasing accuracy, which means our model does not overfit.
 
 ## Nested UNet
 
-Meanwhile, we analyzed the loss and accuracy of Nested UNet model on both training and validation set.
+Meanwhile, we analyze the loss and accuracy of Nested UNet model on both training and validation set.
 
 ![nested loss](nested_loss.png)
 
-We find that Nested UNet has a faster convergency speed than UNet. It uses only about 60 epochs. But to our superrise, we find that Neseted UNet comes to be overfitting after about only 20 epochs because the validation loss does not decrease anymore.
+We find that Nested UNet has a faster convergency speed than UNet. It uses only about 60 epochs. But to our surprise, we find that Neseted UNet overfit after about only 20 epochs because the validation loss does not decrease anymore.
 
 ![nested accuracy](nested_acc.png)
 
