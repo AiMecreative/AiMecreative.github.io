@@ -4,9 +4,9 @@ date: 2022-08-10 12:56:16
 category: CS
 ---
 
-<!--more-->
-
 CMake version: 3.x
+
+<!--more-->
 
 # Command Line
 
