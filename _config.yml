@@ -104,7 +104,7 @@ ignore:
 theme: fluid
 
 plugins:
-  - hexo-renderer-pandoc
+  # - hexo-renderer-pandoc
   # - hexo-renderer-mathjax
   # - hexo-renderer-markdown-it
   # - markdown-it-footnote
