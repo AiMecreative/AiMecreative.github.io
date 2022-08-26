@@ -15,7 +15,7 @@ force_https: true
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://Andrew-Rey.github.io
+url: https://Andrew-Rey.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
