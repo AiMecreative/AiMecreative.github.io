@@ -1055,8 +1055,8 @@ static_prefix:
 
   nprogress: https://lib.baomitu.com/nprogress/0.2.0/
 
-  mathjax: https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-  # https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  # https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
   # https://lib.baomitu.com/mathjax/3.2.0/
   # https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js
   
@@ -1081,5 +1081,5 @@ static_prefix:
 
   hint: https://lib.baomitu.com/hint.css/2.7.0/
 
-# pandoc:
-#   pandoc_path: D:/pandoc/pandoc-2.18/pandoc.exe
+pandoc:
+  pandoc_path: C:/Users/XUxiansen/AppData/Local/Pandoc/pandoc.exe
