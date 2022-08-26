@@ -136,3 +136,12 @@ markdown:
     permalink: false
     permalinkClass: header-anchor
     permalinkSymbol: ¶
+
+
+  math:
+    engine: 'mathjax'
+    mathjax:
+        src: "//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+        config:
+            tex2jax:
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ]
