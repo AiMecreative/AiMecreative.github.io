@@ -11,6 +11,19 @@ mathjax: true
 
 <!--more-->
 
+# Android Studio
+
+一开始用的是Intelij IDEA, 后来觉得Android Studio挺香的. 当然前提是有JDK, Studio的话, 下载很快, 然后安装路径自选, 但是 **注意在提示没有安装SDK的时候, 选择CANCEL**, 安装完成后直接启动它.
+
+这时候会提示你没有安装SDK, 并且会告诉你安装哪些东西, 只要选择安装路径即可, 等待片刻.
+
+在`create device`里面, 可以新建`device`, 然后我新建了一个和我手机屏幕一样大的安卓虚拟机, 内存之类的看情况选, 没什么感觉.
+
+# 组件
+## Activity
+
+用于显示用户界面, 用户通过Activity交互完成相关操作, 一个APP可以有多个Activity
+
 # 布局
 ## Linear Layout
 
