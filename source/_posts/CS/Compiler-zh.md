@@ -230,7 +230,7 @@ $P$中产生式$\alpha\rightarrow\beta$, 除可能有$S\rightarrow \epsilon$外�
 
 {%note info%}
 对非终结符进行替换时, 必须考虑上下文, 并且一般不允许替换为$\epsilon$, 除非是开始符号产生$\epsilon$.
-{%note info%}
+{%endnote%}
 
 **2型文法**
 
@@ -246,7 +246,7 @@ $P$中产生式具有形式$A\rightarrow \alpha B, A\rightarrow \alpha$或者$A 
 
 {%note info%}
 词法分析和语法分析中对产生式的限制: 1)不产生$P\rightarrow P$, 2)产生式中出现的任何非终结符必须有用, 能经过若干步推导出终结符
-{%note info%}
+{%endnote%}
 
 
 
