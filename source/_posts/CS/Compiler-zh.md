@@ -211,7 +211,7 @@ $$
 - **语言**: 语言是由开始符号$S$通过1步或1步以上推导所得的句子的集合, 记为$L(G)=\{\alpha|S\rightarrow^+\alpha,\alpha\in V_T^*\}$
 - **文法规则的递归定义**: 非终结符的定义中包含了非终结符自身
 
-### 文法与语言的形式定义
+## 文法与语言的形式定义
 Chomsky对文法的定义: 文法G是一个四元组$(V_N, V_T, P, S)$, 其中$P$是文法规则的集合, $S$是开始符号
 
 **0型文法**
@@ -224,7 +224,7 @@ Chomsky对文法的定义: 文法G是一个四元组$(V_N, V_T, P, S)$, 其中$P
 
 **1型文法**
 
-$P$中产生式$\alpha\rightarrow\beta$, 除可能有$S\rightarrow \epsilon$外均有$|\beta|\rightarrow|\alpha|$, 若有$S\rightarrow\epsilon$, 规定$S$不能出现在产生式的右部.
+$P$中产生式$\alpha\rightarrow\beta$, 除可能有$S\rightarrow \epsilon$外均有$|\beta|\geq|\alpha|$, 若有$S\rightarrow\epsilon$, 规定$S$不能出现在产生式的右部.
 
 等价定义: $P$中产生式$\alpha\rightarrow\beta$除了可能有$S\rightarrow\epsilon$外均有$\alpha S \beta \rightarrow \alpha \gamma \beta, \alpha, \beta \in V^\star, A\in V^n, \gamma\in V^+$.
 
@@ -248,7 +248,81 @@ $P$中产生式具有形式$A\rightarrow \alpha B, A\rightarrow \alpha$或者$A 
 词法分析和语法分析中对产生式的限制: 1)不产生$P\rightarrow P$, 2)产生式中出现的任何非终结符必须有用, 能经过若干步推导出终结符
 {%endnote%}
 
+**一些例子**
 
+**例1** 语言$L=\{\omega|\omega\in(a,b)^\star$且$\omega$中含有个数相同的$a,b\}$, 构造生成该语言的文法:
 
+$$
+\begin{align*}
+  S&\rightarrow\epsilon \\
+  S&\rightarrow aA\\
+  S&\rightarrow bB\\
+  A&\rightarrow aAA | bS\\
+  B&\rightarrow aS | bBB
+\end{align*}
+$$
 
+解释: 要么以$a$开头, 要么以$b$开头, 后面跟着符号串. 对于符号串$A$, 如果以$b$开头, 则后面跟着$ab$个数相等的符号串, 如果仍然以$a$开头, 此时后面必须还要至少出现两次$b$.
 
+或者
+
+$$
+\begin{align*}
+  S&\rightarrow\epsilon\\
+  S&\rightarrow aSbS\\
+  S&\rightarrow bSaS
+\end{align*}
+$$
+
+解释: 若以$a$开头, 则在字符串的某个位置必然出现一个$b$, 而这两个$a,b$中间是$ab$个数相等的的字符串, b后面也是$ab$个数相等的符号串.
+
+**例2** 设$L=\{\omega | \omega\in(0,1)^\star$且$1$的个数为偶数个$\}$, 构造生成该语言的文法:
+
+可以先列出看一下:
+
+$$
+\omega\in\{\epsilon, 0, 11, 011, 101, 110,\cdots\}
+$$
+
+然后:
+
+$$
+\begin{align*}
+  S&\rightarrow\epsilon\\
+  S&\rightarrow 0S\\
+  S&\rightarrow 1A\\
+  A&\rightarrow 1S | 0A
+\end{align*}
+$$
+
+## 文法的构造与简化
+
+### 简化
+
+同一语言可以产生不同的文法, 选择产生式最少, 最符合语言特征的文法来描述; 有些产生式对推导不起作用, 包括: **推导中永远用不到, 永远导不出终结符的, 形如$P\rightarrow P$的...**
+
+**一些例子**
+
+**例1** 简化文法:
+
+$$
+\begin{align*}
+  S&\rightarrow Be\\
+  S&\rightarrow Ee\\
+  A&\rightarrow Ae\\
+  A&\rightarrow e\\
+  A&\rightarrow A\\
+  B&\rightarrow Ce\\
+  B&\rightarrow Af\\
+  C&\rightarrow Cf\\
+  D&\rightarrow f
+\end{align*}
+$$
+
+显然应该保留0236.
+
+### 构造
+
+**构造无$\epsilon$产生式的上下文无关文法**
+
+满足: $P$中要么不含有$\epsilon$产生式, 要么只有$S\rightarrow\epsilon$, 且若$S\rightarrow\epsilon$, 则$S$不出现在任何产生式右部.
