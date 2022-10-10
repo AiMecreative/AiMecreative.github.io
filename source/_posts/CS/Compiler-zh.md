@@ -1,6 +1,6 @@
 ---
 title: Compiler-zh
-banner_img: /img/banner.png
+index_img: /compiler-zh/index.png
 date: 2022-09-05 16:23:27
 category: CS
 ---
