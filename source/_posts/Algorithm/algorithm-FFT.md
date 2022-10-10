@@ -14,31 +14,37 @@ mathjax: true
 首先来思考这样的一个问题:
 
 {%note primary%}
+
 ### Question 1
+
 你有两个多项式函数:
 
-$p(x)=2x^3+x+1$
+$$p(x)=2x^3+x+1$$
 
-$q(x)=x^2+4x+5$
+$$q(x)=x^2+4x+5$$
 
 应该如何计算它们的乘积?
+
 {%endnote%}
+
 当然, 我不是说要用笔算的方式, 而是用**计算机**. 显然这个问题我们在[小学二年级](https://space.bilibili.com/254463269/?spm_id_from=333.999.0.0)就写过的, 当初正在学习"数据结构"这门课, 如果没记错, 应该是用链表实现的.
 
 但是, 就算是用链表实现, 那不也是和手算一样的原理吗?
+
 - 将二者相乘
 - 分配律
 - 合并同类项
 
 例如上面那个例子:
+
 {%note primary%}
 ### solution 1
 $$
-    \begin{aligned}
-        r(x) &= (2x^3+x+1)(x^2+4x+5) \\
-        &= 2x^5+8x^4+10x^3+x^3+4x^2+5x+x^2+4x+5 \\
-        &= 2x^5+8x^4+11x^3+5x^2+5x+5
-    \end{aligned}
+\begin{align*}
+    r(x) &= (2x^3+x+1)(x^2+4x+5) \\
+    &= 2x^5+8x^4+10x^3+x^3+4x^2+5x+x^2+4x+5 \\
+    &= 2x^5+8x^4+11x^3+5x^2+5x+5
+\end{align*}
 $$
 {%endnote%}
 
@@ -49,15 +55,19 @@ $$
 咋办?
 
 # 点表示法
+
 ## 开始
+
 有谁规定, 我多项式一定是用系数表示的?
 
 好家伙, 你这样说我就摸不着头脑了, 难道除了系数表示还有其他表示方法吗?
 
 首先, 多项式集合其实是构成了一个**线性空间**, 也就是说, 任意两个多项式进行线性运算 (加法和数乘) 后, 结果仍然是多项式. 事实上
+
 $$
 {1, x, x^2, \dots, x^n, \dots}
 $$
+
 构成了该空间的一组基, 将函数展开成 Taylor 级数便用了这组基作为基底, 基前面的系数也就是**坐标**.
 
 其次, 对于一个 n 次多项式而言, 只要我们确定了它的坐标, 就能唯一确定这个多项式. **现在的问题是不知道坐标, 如何确定多项式.** 这里的巧妙之处就在于, 多项式函数是一个映射, 对于一个特定的 x, 总是能给出唯一一个值与之对应, 这不就是一个方程吗?
@@ -68,29 +78,30 @@ $$
 
 $$
 \left[
-\begin{aligned}
+\begin{align*}
 p_0 \\
 p_1 \\
 \vdots \\
 p_n
-\end{aligned}
+\end{align*}
 \right]
 =
 \left[
-\begin{aligned}
+\begin{align*}
 1\quad & x_0\quad & \dots\quad & x_0^n \\
 1\quad & x_1\quad & \dots\quad & x_1^n \\
 \vdots\quad & \vdots\quad & \quad & \vdots \\
 1\quad & x_n\quad & \dots\quad & x_n^n
-\end{aligned}
+\end{align*}
 \right]
 \left[
-\begin{aligned}
+\begin{align*}
 c_0 \\
 c_1 \\
 \vdots \\
 c_n
-\end{aligned}\right]
+\end{align*}
+\right]
 $$
 
 看到这里我终于理解了为什么在学高等代数时要突然讲一个**范德蒙德(Vandermonde)行列式**, 也就是这里的
