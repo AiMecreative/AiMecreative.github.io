@@ -1,5 +1,6 @@
 ---
 title: 'algorithm:FFT'
+index_img: /index_imgs/fft.jpg
 date: 2022-04-06 16:08:39
 category: Algorithm
 mathjax: true

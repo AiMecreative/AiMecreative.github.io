@@ -1,5 +1,6 @@
 ---
 title: 操作系统练习
+index_img: /index_imgs/os2.jpg
 date: 2022-05-09 16:35:18
 category: CS
 mathjax: true

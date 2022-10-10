@@ -1,6 +1,7 @@
 ---
 title: GAMES101
 date: 2022-07-09 10:35:39
+index_img: /index_imgs/games.jpg
 category: CS
 mathjax: true
 ---

@@ -1,5 +1,6 @@
 ---
 title: Pattern Recognition
+index_img: /index_imgs/pr.jpg
 date: 2022-2-28
 mathjax: true
 category: ML

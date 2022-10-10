@@ -1,5 +1,6 @@
 ---
 title: SVM
+index_img: /index_imgs/svm.jpg
 date: 2022-05-03 21:26:05
 category: ML
 mathjax: true

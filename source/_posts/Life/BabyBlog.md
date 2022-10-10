@@ -1,5 +1,6 @@
 ---
 title: BabyBlog
+index_img: /index_imgs/d0.jpg
 date: 2022-01-11 09:09:04
 category: Life
 ---

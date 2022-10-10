@@ -1,5 +1,6 @@
 ---
 title: Operating System
+index_img: /index_imgs/os1.jpg
 date: today
 mathjax: true
 category: CS

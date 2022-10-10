@@ -1,5 +1,6 @@
 ---
 title: AndroidBasic
+index_img: /index_imgs/android.png
 date: 2022-09-01 15:59:05
 category: Android
 mathjax: true

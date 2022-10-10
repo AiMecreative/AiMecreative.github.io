@@ -1,6 +1,6 @@
 ---
 title: Compiler-zh
-index_img: /compiler-zh/index.png
+index_img: /index_imgs/compiler-zh.png
 date: 2022-09-05 16:23:27
 category: CS
 ---
