@@ -11,6 +11,7 @@ mathjax: true
 "说的好像你见过很多算法似的."
 
 <!--more-->
+
 # 多项式乘积问题
 首先来思考这样的一个问题:
 
@@ -78,31 +79,25 @@ $$
 显然, 我需要 $n+1$ 个不同的点来唯一确定我的系数. 这就是所谓的点表示法. 这样一来, 我们将这 $n+1$ 个方程写成矩阵形式:
 
 $$
-\left[
-\begin{align*}
+\begin{bmatrix}
 p_0 \\
 p_1 \\
 \vdots \\
 p_n
-\end{align*}
-\right]
+\end{bmatrix}
 =
-\left[
-\begin{align*}
+\begin{bmatrix}
 1\quad & x_0\quad & \dots\quad & x_0^n \\
 1\quad & x_1\quad & \dots\quad & x_1^n \\
 \vdots\quad & \vdots\quad & \quad & \vdots \\
 1\quad & x_n\quad & \dots\quad & x_n^n
-\end{align*}
-\right]
-\left[
-\begin{align*}
+\end{bmatrix}
+\begin{bmatrix}
 c_0 \\
 c_1 \\
 \vdots \\
 c_n
-\end{align*}
-\right]
+\end{bmatrix}
 $$
 
 看到这里我终于理解了为什么在学高等代数时要突然讲一个**范德蒙德(Vandermonde)行列式**, 也就是这里的
