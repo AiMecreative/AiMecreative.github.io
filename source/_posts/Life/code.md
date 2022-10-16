@@ -14,12 +14,42 @@ sticky: 100
 
 # 2022年秋
 
+## Disk上的矩阵乘法
+
+{%note info%}
+10/16
+
+discription: 由于矩阵太大, 不能一次性load进内存, 希望研究缓存大小, 对矩阵乘法效率的影响.
+
+lang: Cpp
+
+project: 暂未完成
+
+{%endnote%}
+
+本来以为挺简单的一个作业, 没想到这么复杂, 10%的时间在写矩阵乘法, 自以为是地写了个指定嵌套顺序的for循环, 然后发现难点在于文件的读取和写入.
+
+**问题 1: 写入时覆盖**
+
+由于缓存大小有限, 并且对于特定的for循环顺序, 矩阵可能需要以列的方式写入, 这时候如何定位指针的顺序?
+
+**问题 2: 读取时返回**
+
+意思是我需要的矩阵的绝对坐标小于此坐标在缓存上的相对坐标(即相对坐标小于0), 这时候需要返回去读取, 但是如果从头开始读取, miss hit 的数目会陡然增加, 如果从当前位置读取, 需要知道上一次指针的位置, 然而上一次的指针已经被更新了, 并且更新的时间不在同一个生命周期.
+
+**问题 3: 以上两种情况有可能在读取和写入时都出现**
+
+**问题 4: 写入时返回需要先读取再写入, 直到下标符合条件**
+
+
 ## 外部快排
 
 {%note info%}
 10/9
 
 discription: use interval heap to realize the priority double ended queue (PDEQ); use PDEQ to do external sort.
+
+lang: Cpp
 
 project: [ExternalQuickSort](https://github.com/Andrew-Rey/Self-Study-For-Cpp/tree/Final-task/DataStructure/ExternalQuickSort)
 {%endnote%}
