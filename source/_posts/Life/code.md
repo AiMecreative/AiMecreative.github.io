@@ -1,6 +1,6 @@
 ---
 title: 今天又是码代码的一天呢
-index_img: /index_imgs/code.png
+index_img: /index_imgs/code.jpg
 date: 2022-10-12 10:33:32
 categories: Life
 sticky: 100

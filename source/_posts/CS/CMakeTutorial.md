@@ -1,5 +1,5 @@
 ---
-title: cmake-tutorial
+title: CMakeTutorial
 index_img: /index_imgs/cmake-tutorial.jpg
 date: 2022-08-10 12:56:16
 category: CS
