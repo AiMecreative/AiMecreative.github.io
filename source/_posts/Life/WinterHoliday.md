@@ -1,8 +1,11 @@
 ---
 title: WinterHoliday
 date: 2022-12-26 10:38:46
-index_img: /index_imgs/winter.jpg
+author: Andrew-Rey
 categories: Life
+tags:
+  - Life
+  - Schedual
 ---
 
 "计划是什么"

@@ -1,8 +1,9 @@
 ---
-title: CMakeTutorial
-index_img: /index_imgs/cmake-tutorial.jpg
+title: CMake Tutorial
 date: 2022-08-10 12:56:16
+author: Andrew-Rey
 category: CS
+tags: 
 ---
 
 CMake version: 3.x

@@ -1,8 +1,12 @@
 ---
-title: AndroidBasic
-index_img: /index_imgs/android.png
+title: Android Basic
 date: 2022-09-01 15:59:05
+author: Andrew-Rey
 category: Android
+tags:
+  - OS
+  - Android
+  - Software
 mathjax: true
 ---
 

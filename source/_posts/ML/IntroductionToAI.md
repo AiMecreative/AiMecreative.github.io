@@ -174,5 +174,5 @@ catecories: ML
 
 ## 在不确定性环境下结合信度和愿望
 
-![expectation-1](expectation.png)
+![expectation-1](expectation-1.png)
 

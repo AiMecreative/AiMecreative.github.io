@@ -1,8 +1,10 @@
 ---
 title: 今天又是码代码的一天呢
-index_img: /index_imgs/code.jpg
 date: 2022-10-12 10:33:32
+author: Andrew-Rey
 categories: Life
+tags:
+  - Life
 sticky: 100
 ---
 
@@ -16,7 +18,8 @@ sticky: 100
 
 ## Disk上的矩阵乘法
 
-{%note info%}
+---
+
 10/16
 
 discription: 由于矩阵太大, 不能一次性load进内存, 希望研究缓存大小, 对矩阵乘法效率的影响.
@@ -25,7 +28,7 @@ lang: Cpp
 
 project: 暂未完成
 
-{%endnote%}
+---
 
 本来以为挺简单的一个作业, 没想到这么复杂, 10%的时间在写矩阵乘法, 自以为是地写了个指定嵌套顺序的for循环, 然后发现难点在于文件的读取和写入.
 
@@ -44,7 +47,8 @@ project: 暂未完成
 
 ## 外部快排
 
-{%note info%}
+---
+
 10/9
 
 discription: use interval heap to realize the priority double ended queue (PDEQ); use PDEQ to do external sort.
@@ -52,7 +56,8 @@ discription: use interval heap to realize the priority double ended queue (PDEQ)
 lang: Cpp
 
 project: [ExternalQuickSort](https://github.com/Andrew-Rey/Self-Study-For-Cpp/tree/Final-task/DataStructure/ExternalQuickSort)
-{%endnote%}
+
+---
 
 说实话还是第一次写一个六百多行的代码. 虽然不知道用六百行实现一个简单的外部快速排序是否比较能令人接受, 但我还是从中学到了很多东西.
 

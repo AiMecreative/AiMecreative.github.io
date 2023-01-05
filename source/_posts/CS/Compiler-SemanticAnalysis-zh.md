@@ -1,9 +1,12 @@
 ---
 title: 语义分析
 date: 2023-01-03 17:42:03
+author: Andrew-Rey
 categories: CS
+tags:
+  - CS
+  - Compiler
 mathjax: true
-idx_img: /index_imgs/compiler-zh.png
 ---
 
 "书接上文"
@@ -75,9 +78,11 @@ idx_img: /index_imgs/compiler-zh.png
 
 ![继承属性例子](继承属性2.png)
 
-{%note info%}
+---
+
 终结符只有综合属性, 原因是其综合属性指向的是符号表序号(或者说是词法分析器提供的词法值), 不论其父结点怎么变, 终结符的属性都不会变, 因此不能存在继承属性. $SDD$中也没有计算终结符属性值的语义规则.
-{%endnote%}
+
+---
 
 ### 注释分析树(Annotated parse tree)
 
@@ -115,10 +120,11 @@ idx_img: /index_imgs/compiler-zh.png
   - 产生式中$X_i$左边的符号的属性 (包括综合属性和继承属性)
   - $X_i$本身的属性, 但$X_i$的全部属性不能在依赖图中形成环路
 
-{%note info%}
-每个$S$-属性定义都是$L$-属性定义
-{%endnote%}
+---
 
+每个$S$-属性定义都是$L$-属性定义
+
+---
 
 ## 语法制导翻译方案SDT
 

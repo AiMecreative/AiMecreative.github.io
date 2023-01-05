@@ -1,9 +1,12 @@
 ---
 title: Compiler-zh
-index_img: /index_imgs/compiler-zh.png
 date: 2022-09-05 16:23:27
+author: Andrew-Rey
 mathjax: true
 category: CS
+tags:
+  - CS
+  - Compiler
 ---
 
 "编译原理网课"
@@ -230,9 +233,11 @@ $P$中产生式$\alpha\rightarrow\beta$, 除可能有$S\rightarrow \epsilon$外�
 
 等价定义: $P$中产生式$\alpha\rightarrow\beta$除了可能有$S\rightarrow\epsilon$外均有$\alpha S \beta \rightarrow \alpha \gamma \beta, \alpha, \beta \in V^\star, A\in V^n, \gamma\in V^+$.
 
-{%note info%}
+---
+
 对非终结符进行替换时, 必须考虑上下文, 并且一般不允许替换为$\epsilon$, 除非是开始符号产生$\epsilon$.
-{%endnote%}
+
+---
 
 **2型文法**
 
@@ -246,9 +251,11 @@ $P$中产生式具有形式$A\rightarrow\beta, A\in V_N, \beta\in V^\star$. 要�
 
 $P$中产生式具有形式$A\rightarrow \alpha B, A\rightarrow \alpha$或者$A \rightarrow B\alpha, A\rightarrow \alpha, A,B\in V_N, \alpha\in V_T^\star$. 也称为正规文法, (左|右)线性文法, 识别3型文法的自动机称为有限自动机.
 
-{%note info%}
+---
+
 词法分析和语法分析中对产生式的限制: 1)不产生$P\rightarrow P$, 2)产生式中出现的任何非终结符必须有用, 能经过若干步推导出终结符
-{%endnote%}
+
+---
 
 **一些例子**
 

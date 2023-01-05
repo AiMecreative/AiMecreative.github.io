@@ -10,6 +10,7 @@ keywords:
 author: 
 language: en
 timezone: ''
+favicon: img/android-chrome-192x192.png
 
 force_https: true
 
@@ -103,7 +104,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: fluid
+theme: even
 
 plugins:
   - hexo-filter-mathjax

@@ -1,8 +1,10 @@
 ---
 title: Image Semantic Segmentation based on UNet
 date: 2022-08-21 10:50:30
-index_img: /index_imgs/unet.png
 category: ML
+tags:
+  - CS
+  - Deep Learning
 mathjax: true
 ---
 
