@@ -2,6 +2,7 @@
 title: Compiler-zh
 index_img: /index_imgs/compiler-zh.png
 date: 2022-09-05 16:23:27
+mathjax: true
 category: CS
 ---
 
