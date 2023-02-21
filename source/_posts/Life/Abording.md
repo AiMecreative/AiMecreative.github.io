@@ -1,11 +1,12 @@
 ---
-title: Abording Information
+title: 【讲座纪要】Abording Information
 date: 2023-01-05 19:12:07
 author: Andrew-Rey
 categories: Life
 tags:
   - Life
   - Abording
+  - Lecture
 ---
 
 "讲座记录"

@@ -1,9 +1,11 @@
 ---
-title: CMake Tutorial
+title: 【C++】CMake Tutorial
 date: 2022-08-10 12:56:16
 author: Andrew-Rey
 category: CS
 tags: 
+  - C++
+  - Programming
 ---
 
 CMake version: 3.x

@@ -1,11 +1,10 @@
 ---
-title: GAMES101
+title: 【图形学入门】GAMES101
 date: 2022-07-09 10:35:39
 category: CS
 tags:
   - CS
   - CG
-  - Lesson
 mathjax: true
 ---
 

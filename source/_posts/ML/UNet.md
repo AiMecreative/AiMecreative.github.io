@@ -1,5 +1,5 @@
 ---
-title: Image Semantic Segmentation based on UNet
+title: 【深度学习】Image Semantic Segmentation based on UNet
 date: 2022-08-21 10:50:30
 category: ML
 tags:

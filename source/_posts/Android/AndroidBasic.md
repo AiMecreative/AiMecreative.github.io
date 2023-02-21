@@ -8,11 +8,10 @@ tags:
   - Android
   - Software
 mathjax: true
+published: false
 ---
 
-"我只是想学kotlin而已"
-
-"我不理解"
+"关于上半学期开学有点无聊的那些事"
 
 <!--more-->
 

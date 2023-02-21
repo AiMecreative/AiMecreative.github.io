@@ -1,16 +1,15 @@
 ---
-title: 今天又是码代码的一天呢
+title: 【日常】今天又是码代码的一天呢
 date: 2022-10-12 10:33:32
 author: Andrew-Rey
 categories: Life
 tags:
   - Life
+  - Dairy
 sticky: 100
 ---
 
-"正如标题所言, 今天又是写代码的一天呢"
-
-"哈哈"
+"正如标题所言"
 
 <!--more-->
 

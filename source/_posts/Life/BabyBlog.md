@@ -1,9 +1,11 @@
 ---
-title: Baby Blog
+title: 【第一篇博客】Baby Blog
 date: 2022-01-11 09:09:04
 author: Andrew-Rey
 category: Life
-tags: Life
+tags: 
+    - Blog
+    - Life
 ---
 ## Finished! My First Blog!
 After a long time deploying my blog webpage and a lot of other borthering settings, I finally finished it! I mean, FINALLY!!! :laughing: :laughing: :laughing:
