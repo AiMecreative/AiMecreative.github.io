@@ -271,6 +271,8 @@ AI的任务是设计Agent程序, 实现感知信息映射到动作的Agent函数
 
 ![agent-type-5](agent-type-5.png)
 
+> 例子: 西洋跳棋, 强化学习
+
 
 # 逻辑Agent
 
@@ -458,7 +460,7 @@ ComplexSentence -> $neg$ Sentence
 
 > **反证法**
 >
-> $\alpha \models \beta \Leftrightarrow (\alpha \wedge \neg \beta)$
+> $\alpha \models \beta \Leftrightarrow (\alpha \wedge \neg \beta)$是不可满足的
 
 > **推理模式**
 >
@@ -472,7 +474,7 @@ ComplexSentence -> $neg$ Sentence
 >
 > $\frac{\alpha \wedge \beta}{\alpha}$
 
-> 所有逻辑等价都可以作为推理规则
+> 所有**逻辑等价**都可以作为推理规则
 
 ![](logic-example-1.png)
 
@@ -632,16 +634,42 @@ ComplexSentence -> $neg$ Sentence
 
 ## 贝叶斯网络的定义和语义
 
+> **贝叶斯网络的定义**
+>
+> - 有向无环图
+> - 每个节点都标注了定量概率信息
+> - 包含随机变量集组成的网络节点
+> - 包含连接节点的有向边集合
+> - 每个节点都有一个条件概率分布 $P(X_i | Parent(X_i))$
+
 独立性, 条件独立性, 不确定域中的知识表示
 
+> **贝叶斯网络的语义**
+>
+> - 将贝叶斯网络视为对联合概率分布的表示。用于构造网络
+> - 将其视为对条件依赖性语句集合的编码。用于设计推理过程. (条件独立)
+
+$$
+P(x_1, \cdots, x_n) = \prod_{i=1}^n P(x_i | parents(X_i))
+$$
+
+> **例子** 计算报警器响了，但没有盗贼闯入，也没有发生地震，同时John和Marry都给你打电话的概率。
+>
+> ![一个典型的贝叶斯网络，显示了其拓扑结构和条件概率表（CPT）。在CPT中，字母B、E、A、J、M分别表示Burglary（盗贼）、Earthquake（地震）、Alarm（警报）、JohnCalls（John打电话）、MarryCalls（Marry打电话](bayes.jpg)
+>
+> $$
+> \begin{align}
+> p(a,\neg b, \neg e, j ,m) &= p(a | \neg b, \neg e)p(\neg b)p(\neg e)p(j | a)p(m | a) \\
+> &= 0.001 \times 0.999 \times 0.998 \times 0.9 \times 0.7
+> \end{align}
+> $$
+
+> **条件独立关系**
+>
+> - 给定父节点，一个节点与它的非后代节点是条件独立的
+> - 给定一个节点的父节点、子节点、以及子节点的父节点。也就是说，给定它的马尔可夫覆盖（Markov blanket），则这个节点和其它所有节点都是条件独立的
+
 - 减少了所需定义的概率数目
-
-有向图, 结点代表概率信息
-
-- 随机变量组成的网络结点
-- 有向边集合
-- 每个结点有条件概率 $P(X_i | Parents(X_i))$
-- 无环
 
 # 指定简单决策
 
