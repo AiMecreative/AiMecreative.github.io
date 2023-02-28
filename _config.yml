@@ -104,7 +104,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: even
+theme: keep
 
 plugins:
   - hexo-filter-mathjax
@@ -157,3 +157,9 @@ mathjax:
   normal_width: 0.6 # 相对正常（等宽）宽度
   append_css: true # 将 CSS 添加到每个页面
   every_page: false # 如果为 true，那么无论每篇文章的前题中的 `mathjax` 设置如何，每页都将由 mathjax 呈现
+
+search:
+  path: search.json
+  field: post
+  content: true
+  format: striptags
