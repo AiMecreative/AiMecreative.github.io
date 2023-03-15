@@ -64,6 +64,8 @@ $$
 
 ![rotate-1](rotate-1.png)
 
+> 默认逆时针旋转为正
+
 > **旋转矩阵**
 
 $$
@@ -103,10 +105,10 @@ $$
     x \\
     y
 \end{bmatrix}+
-\begin{bmatrix*}
+\begin{bmatrix}
     t_x \\
     t_y
-\end{bmatrix*}
+\end{bmatrix}
 $$
 
 > 增加维度$\rightarrow$**齐次坐标**:
@@ -132,11 +134,11 @@ $$
     y \\
     1
 \end{bmatrix}=
-\begin{bmatrix*}
+\begin{bmatrix}
     x+t_x \\
     y+t_y \\
     1
-\end{bmatrix*}
+\end{bmatrix}
 $$
 
 > **注意表示点的时候第三维是1**
@@ -168,5 +170,31 @@ $$
 > **左乘**变换矩阵表示在上一次变换的结果上进行变换
 
 ### 逆 inverse
+
+变换的逆即矩阵的逆
+
+> **旋转的逆**
+
+旋转$\theta$角度
+
+$$
+R_{\theta}=
+\begin{bmatrix}
+    cos(\theta) & -sin(\theta) \\
+    sin(\theta) & cos(\theta)
+\end{bmatrix}
+$$
+
+旋转$-\theta$角度
+
+$$
+R_{-\theta}=
+\begin{bmatrix}
+    cos(\theta) & sin(\theta) \\
+    -sin(\theta) & cos(\theta)
+\end{bmatrix}
+$$
+
+可以发现 $R_{-\theta}=R_{\theta}^T$, 满足 **正交性**
 
 
