@@ -37,7 +37,7 @@ $$
 
 ### 切变 shear
 
-![shear-1](shear.png)
+![shear-1](shear-1.png)
 
 > 原点水平方向移动为 $0$
 > 左上角水平方向移动为 $a$

@@ -229,7 +229,7 @@ The black nodes are the same with U-Net model. The green nodes are what Nested U
 
 The use of Nested UNet gives us a little improvement on final results.
 
-![pictrue 1 result-Nested UNet](pic1-nested.png)
+<!-- ![pictrue 1 result-Nested UNet](pic1-nested.png) -->
 
 # Analysis
 
