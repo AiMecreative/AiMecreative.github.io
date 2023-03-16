@@ -42,14 +42,18 @@ external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
   exclude: ''
+
 filename_case: 0
 render_drafts: false
+
 post_asset_folder: true
 # marked:
-#   prependRoot: true
-#   postAsset: true
+  # prependRoot: true
+  # postAsset: true
+
 relative_link: false
 future: true
+
 highlight:
   enable: true
   line_number: true
@@ -57,6 +61,7 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+
 prismjs:
   enable: false
   preprocess: true
