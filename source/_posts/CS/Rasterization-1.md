@@ -6,6 +6,7 @@ tags:
 - CG
 - GAMES101
 categories: CS
+mathjax: true
 author: Andrew-Rey
 ---
 
@@ -39,7 +40,7 @@ author: Andrew-Rey
 
 > **视口变换**
 >
-> - 将 $[-1,1]^3$ 变换到屏幕 $[0,width]\times[0,height]$ 上
+> - 将$[-1,1]^3$变换到屏幕$[0,width]\times[0,height]$上
 > - 先考虑$xy$两个维度, 不考虑$z$的深度, 变换矩阵为
 > 
 > $$
@@ -54,9 +55,49 @@ author: Andrew-Rey
 
 ### 光栅化 Rasiterization
 
-> **三角形**
+> **三角形 Triangle**
 >
 > - 最基本的多边形, 所有多边形可以拆分成三角形
 > - 唯一确定一个平面
 > - 能定义三角形的内外
 > - 能比较好地在顶点间进行插值
+> - 因此可以使用三角形组合去表示任意物体
+
+> **采样 Sampling**
+>
+> - 采样是将函数离散化的过程
+
+```c++
+for (auto x {0}; x < x_max; ++x) {
+    output[x] = f(x);
+}
+```
+
+> - 在图形学中, 用像素中心对屏幕进行采样
+> - 可以定义如下函数输出像素点与某个三角形的内外关系
+
+```c++
+int inside(const &Triangle t, const &Point (x, y)) {
+    return ((x,y) in t)? 1 : 0;
+}
+for (auto x {0}; x < x_max; ++x) {
+    for (auto y {0}; y < y_max; ++y) {
+        image[x][y] = inside(triangle, (x + 0.5, y + 0.5));
+    }
+}
+```
+
+> `inside()`函数的具体实现: 向量叉积
+>
+> - $\bigtriangleup ABC$ 与平面内的点 $P$ 的关系:
+> - 若 $\vec{AB}, \vec{BC}, \vec{CA}$ 与 $P$ 的叉积结果 **同向** 则 $P$ 在三角形内部, 反之在外部
+
+> **考虑遍历像素的效率问题**
+>
+> - 没必要对一个三角形遍历每一个像素
+> - 寻找三角形的包围盒 Bounding Box (轴向, 简称 AABB)
+> - 确定`x_min`, `x_max`, `y_min`和`y_max`为三角形对应的最小, 最大坐标值
+>
+> 另一种方法:
+>
+> - 对每一行取最值为遍历的范围
