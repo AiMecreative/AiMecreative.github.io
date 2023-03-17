@@ -52,7 +52,7 @@ author: Andrew-Rey
 >
 > **透视投影 Perspective Projection**
 
-![projection-1](projection-1.png)
+![projection-1](Transformation-2/projection-1.png)
 
 > 透视投影假设相机为一个点, 在空间中形成一个四棱锥, 相机可以将四棱锥的两个深度间 (frustum) 的物体显示到近处的平面上
 > 正交投影假设相机处于无穷远, 此时前后两个平面显示在近处平面时, 大小保持
@@ -65,20 +65,81 @@ author: Andrew-Rey
 
 > **正交投影标准定义**
 >
-> - 将三维空间中的立方体 cube $[l,r]\times[b,t]\times[f,n]$, 映射到标准 canonical 立方体$[-1,1]^3$中
+> - 将三维空间中的立方体 cube $[l,r]\times[b,t]\times[f,n]$, 映射到标准 canonical 立方体 $[-1,1]^3$ 中
 > 
-> ![orthograph-1](orthograph-1.png)
+> ![orthograph-1](Transformation-2/orthograph-1.png)
 >
-> 这里会导致物体发生拉伸等形变, 以后还会进行视口变换(port transformation)
+> 这里会导致物体发生拉伸等形变, 以后还会进行视口变换(Viewport transformation)
+>
+> 物体正交投影的变换矩阵为
+>
+> $$
+> M=
+> \begin{bmatrix}
+>     \frac{2}{l+r} & 0 & 0 & 0 \\
+>     0 & \frac{2}{b+t} & 0 & 0 \\
+>     0 & 0 & \frac{2}{n+f} & 0 \\
+>     0 & 0 & 0 & 1
+> \end{bmatrix}
+> \begin{bmatrix}
+>     1 & 0 & 0 & -\frac{l+r}{2} \\
+>     0 & 1 & 0 & -\frac{b+t}{2} \\
+>     0 & 0 & 1 & -\frac{n+f}{2} \\
+>     0 & 0 & 0 & 1
+> \end{bmatrix}
+> $$
 
 > **透视投影的坐标基础**
 >
-> - 在齐次坐标中, 每一维同乘$z(z\neq 0)$得到$(xz,yz,z^2,z)^T$表示的仍然是三维点$(x,y,z)$
+> - 在齐次坐标中, 每一维同乘 $z(z\neq 0)$ 得到 $(xz,yz,z^2,z)^T$ 表示的仍然是三维点 $(x,y,z)$
 
 > **透视投影的方法**
 >
-> ![perspective](perspective-1.png)
+> ![perspective](Transformation-2/perspective-1.png)
 > 
 > - 将 frustum 映射为 cuboid
+> - 保持 **远近平面** 上$z$坐标不变
+> - 保持远处平面的中点映射为自己
+> - 近平面上所有点都映射为本身
+
+> **透视投影的变换矩阵**
 >
-> ![perspective](Transformation-2/perspective-1.png)
+> 计算可以得到 frustum 中的任意点映射后的 $x,y$ 坐标分别为 $x^{\prime}=\frac{n}{z}x, y^{\prime}=\frac{n}{z}y$
+>
+> 因此对于$x,y$坐标而言, $(x,y,z,1)^T \rightarrow (\frac{nx}{z}, \frac{yn}{z}, unknown, 1)^T \rightarrow (nx, ny, unknown, z)^T$
+>
+> 可以得到映射矩阵:
+>
+> $$
+> M=
+> \begin{bmatrix}
+>     n & 0 & 0 & 0 \\
+>     0 & n & 0 & 0 \\
+>     ? & ? & ? & ? \\
+>     0 & 0 & 1 & 0
+> \end{bmatrix}
+> $$
+>
+> 下面求矩阵 $M$ 的第三行: 由远近平面上的 $z$ 坐标不变 (其中近平面的点映射为自己) 和中点不变两个性质, 对于近平面的点 $(x,y,n,1)^T$ , 根据齐次坐标, 映射后应该为 $(nx,ny,n^2,n)^T$, 得到方程
+> $$
+> An + B = n^2
+> $$
+>
+> 同理对于远处平面的中点 $(x,y,f,1)^T$ 映射为 $(nx,ny,f^2,f)^T$, 得到方程
+> $$
+> Af + B = f^2
+> $$
+>
+> 解得 $A=n+f, B=-nf$
+>
+> 因此 **由透视投影转换为正交投影的** 矩阵为
+> 
+> $$
+> M=
+> \begin{bmatrix}
+>     n & 0 & 0 & 0 \\
+>     0 & n & 0 & 0 \\
+>     0 & 0 & n+f & -nf \\
+>     0 & 0 & 1 & 0
+> \end{bmatrix}
+> $$
