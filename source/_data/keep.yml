@@ -23,7 +23,8 @@ base_info:
 style:
   # Theme primary color
   # primary_color: "#0066cc"
-  primary_color: "#f8a5c2"
+  primary_color: "#a0c49d"
+  # "#f8a5c2"
 
   # Your blog website logo image
   # You can use local image, image external link or don't fill
@@ -59,14 +60,16 @@ style:
 
     # First screen background image (You can use local image or image external link)
     background_img: https://yuanxiapi.cn/api/bing/
+    # https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
+    
 
     # First screen description
     # You can use the "||" to begin a newline, maximum is two lines.
-    description: 
+    description: 在世间，本就是各人下雪，各人有各人的隐晦与皎洁
 
     # If you want to customize the first screen font color, you can fill in here (e.g. "#0066CC")
     # Otherwise use the theme default font color
-    font_color: 
+    font_color: "#faf0e4"
 
     # If enable hitokoto, first screen description is different every time when you enter the site
     hitokoto: false  # Option values: true | false
