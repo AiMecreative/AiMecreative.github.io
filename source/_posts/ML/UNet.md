@@ -7,7 +7,6 @@ tags:
   - Deep Learning
 mathjax: true
 ---
-
 "Semantic segmentation of images, use UNet model."
 
 <!--more-->
@@ -239,7 +238,7 @@ We analyze the loss value and accuracy on both training and validation set:
 
 ![unet loss](unet_loss.png)
 
-We find that after 100 epochs, the model has not convergenced yet, but the loss on validation decreases to the bottom. 
+We find that after 100 epochs, the model has not convergenced yet, but the loss on validation decreases to the bottom.
 
 ![unet accuracy](unet_acc.png)
 
