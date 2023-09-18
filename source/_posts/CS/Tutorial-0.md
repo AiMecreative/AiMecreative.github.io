@@ -144,7 +144,7 @@ int hhh(std::vector<int> &a, int left, int right) {
     while(i < j && a[i] <= key) i++;
     std::swap(a[i], a[j]);
   }
-  std::swap(a[left], a[i]);                                
+  std::swap(a[left], a[i]);                              
   return i;
 }
 
@@ -178,4 +178,6 @@ int main() {
 
 ![1695061391905](1695061391905.png)
 
-可以看见原本凌乱的数组被从小到大排好了序
+可以看见原本凌乱的数组被从小到大排好了序。
+
+> 感兴趣的话可以查看[这个博客](https://www.cnblogs.com/MAKISE004/p/16909610.html)
