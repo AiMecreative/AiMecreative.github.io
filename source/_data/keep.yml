@@ -65,7 +65,7 @@ style:
 
     # First screen description
     # You can use the "||" to begin a newline, maximum is two lines.
-    description: 在世间，本就是各人下雪，各人有各人的隐晦与皎洁
+    description: 醒时相交欢，醉后各分散
 
     # If you want to customize the first screen font color, you can fill in here (e.g. "#0066CC")
     # Otherwise use the theme default font color

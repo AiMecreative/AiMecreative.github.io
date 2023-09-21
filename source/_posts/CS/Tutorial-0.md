@@ -3,10 +3,10 @@ title: 【从零开始的C++】IDE安装和配置
 date: 2023-09-19 00:54:18
 tags: 
 - CS
-- 助教
+- Assistant
 - C++
 Author: AndrewRey
-category: CS
+category: Assistant
 ---
 "第0节课"
 
