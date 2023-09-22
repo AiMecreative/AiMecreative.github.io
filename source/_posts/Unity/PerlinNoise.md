@@ -53,9 +53,10 @@ var perlinValue = PerlinNoise(float x, float y);
 
 ![1695262810353](1695262810353.png)
 
-- assign each gird point a random constant vector. (note: gridVector[4])
-- get the vectors pointing from the grid point to the input point(target pixel). (note: inputVector[4])
-- for each of the 4 corners of the square where the target pixel lies, calculate the dot products: for i in range(4): calculate dot(gridVector[i], inputVector[i])
+- assign each gird point a random constant vector. (note: `gridVector[4]`)
+- get the vectors pointing from the grid point to the input point(target pixel). (note: `inputVector[4]`)
+- for each of the 4 corners of the square where the target pixel lies, calculate the dot products: `for i in range(4): calculate dot(gridVector[i], inputVector[i])`
+  - the dot product means the effects corners value to target pixels
 
 ![1695264135606](1695264135606.png)
 
@@ -67,11 +68,10 @@ var perlinValue = PerlinNoise(float x, float y);
 #### Discussion
 
 > **gradient constant vectors**
-> 
-> - **why we need permutation table(noted as `P`) & gradient table(noted as `G`)**: P is used to *select* a random gradient from G. P provides randomness and repeatability(???)4
 >
+> - **why we need permutation table(noted as `P`) & gradient table(noted as `G`)**: P is used to *select* a random gradient from G. P provides randomness and repeatability(???)4
 > - **how to generate a permutation table**: the core is *double* and *shuffle*. we have known that permutation table is used to select a gradient from gradient table and one gradient is defined by (x,y) (which is the grid point position). so one tuple (x,y) defines one permutation value. so the size of permutation table is $len(X)\times len(Y)$ (*double*). to guarantee the randomness, we can do shuffle for $0-255$. the code to generate permutation table is (where $len(X) = len(Y)$):
-> 
+>
 > ```csharp
 > var permutationTable = new int[2 * len(X)];
 > for (var i = 0; i < len(X); i += 1) permutationTable[i] = i;
@@ -96,3 +96,44 @@ var perlinValue = PerlinNoise(float x, float y);
 >     default: throw undefined error;
 > }
 > ```
+
+> **interpolation**
+>
+> - **how to interpotate between such 4 values**: 4 values (a1,a2,b1,b2), firstly interpolate between a1 and a2 which produces v1, secondly interpolate between b1 and b2 which produces v2, finally interpolate v1 and v2 which produces v, the interpolated value.
+> - **which interpolation function should be used**: if we use linear interplation to get our $t$ in $v_p = a_1 + t (a_2 - a_1)$, there will be a "hard transition" between 3 points (x=0,1,2, while y=2,0,1.5)
+>
+> ![1695314437553](1695314437553.png)
+>
+> but if we use an unlinear method, it will be smoothed
+>
+> ![1695314441924](1695314441924.png)
+>
+> the normally used interpolation function is $6t^5 - 15t^4 + 10t^3$, the image is:
+>
+> ![1695314653794](1695314653794.png)
+
+> **frequency**
+>
+> - **what dose frequency means in Perlin noise**: consider this situation: what is the interpolate value when our target pixel happens to be the bottom left grid point? ZERO. because the inputVector is zero and thus all dot products are zero. to solve ths issue, we generallt multiply the inputs target pixel by *a small value called frequency*.
+
+> **amplitude**
+>
+> - **what dose amplitude means in Perlin noise**: this will be used in following section. amplitude is the multiplier before one item.
+
+> **octave**
+>
+> - **what dose octave means in Perlin noise**: this will also be used in following section. when one layer has a frequency that is double the frequency of the previous layer, this layer is called an octave.
+
+#### More?
+
+> **FBM: Fractal brownian motion**
+>
+> ![1695315613281](1695315613281.png)
+>
+> obviously, the left is better.
+>
+> - the left image uses FBM to simulate the terrains in real world. but...how?
+>
+> ![1695317070446](1695317070446.png)
+>
+> - so the high frequencies and low amplitudes generate more details than just one single layer, we can keep changing the frequencies and amplitudes in a for-loop, and add them together.
