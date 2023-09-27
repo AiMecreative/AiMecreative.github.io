@@ -7,7 +7,6 @@ tags:
 Author: AndrewRey
 category: VR
 ---
-
 “练手项目（内心惊恐”
 
 <!--more-->
@@ -34,6 +33,14 @@ category: VR
 - 场景生成模块
   - **不会真要为每一首诗单独创建一个场景吧！**
   - 目前的方案是把场景分为主要场景和次要场景，主要场景根据诗词里面的特色单独人工搭建，次要场景随机生成
+
+## 第四周
+
+> **重构了地形生成的代码**
+>
+> - 之前的地形生成HeightMap和Terrain的大小必须一致（HeightMap的每一个像素强制对应Terrain的每一个整数坐标）
+> - 修改后二者可以不相等
+> - 当HeightMap的length大于terrain的length时，可以实现更好的平滑
 
 ## 第三周
 
