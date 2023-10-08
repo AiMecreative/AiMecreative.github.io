@@ -36,11 +36,17 @@ category: VR
 
 ## 第四周
 
-> **重构了地形生成的代码**
+> **重写了地形生成的代码**
 >
 > - 之前的地形生成HeightMap和Terrain的大小必须一致（HeightMap的每一个像素强制对应Terrain的每一个整数坐标）
 > - 修改后二者可以不相等
 > - 当HeightMap的length大于terrain的length时，可以实现更好的平滑
+
+> **完成了树、草、花的随机生成**
+>
+> - 多种类型的decoration
+
+![1695816544892](1695816544892.gif)
 
 ## 第三周
 
