@@ -1,5 +1,5 @@
 ---
-title: 【Unity3D】Movements with CharacterController
+title: Unity3D | Movements with CharacterController
 date: 2023-08-06 19:38:48
 tags: 
     - CS

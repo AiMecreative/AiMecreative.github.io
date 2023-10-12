@@ -1,5 +1,5 @@
 ---
-title: 【算法】快速傅里叶变换$FFT$
+title: 算法 | 快速傅里叶变换FFT
 date: 2022-04-06 16:08:39
 author: Andrew-Rey
 category: Algorithm

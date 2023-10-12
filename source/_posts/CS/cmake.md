@@ -1,5 +1,5 @@
 ---
-title: 【C++】CMake Tutorial
+title: C++编程 | CMake Tutorial
 date: 2022-08-10 12:56:16
 author: Andrew-Rey
 category: CS

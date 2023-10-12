@@ -1,5 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
+category: {{ category }}
+tag: {{ tag }}
+author: Andrew-Rey
 ---

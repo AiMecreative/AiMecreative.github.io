@@ -31,8 +31,22 @@ category: VR
   - 数据集的构建（第一周实践后发现有部分古诗词原文有注释，和录音不能很好匹配，需要手动调整）
   - 关键词如何匹配（语音识别后如何快速将识别结果和关键词进行匹配，由于中文一个读音有多种对应的汉字，如何进行匹配）
 - 场景生成模块
-  - **不会真要为每一首诗单独创建一个场景吧！**
+  - 不会真要为每一首诗单独创建一个场景吧
   - 目前的方案是把场景分为主要场景和次要场景，主要场景根据诗词里面的特色单独人工搭建，次要场景随机生成
+
+## 第五/六周
+
+> **主要还是重构代码的工作**：发现了一些更利于扩展的项目结构
+> **问题**
+>
+> - 由近及远生成内容
+> - 作用于全局的内容、作用于局部的内容生成方式不同
+> - 地形的功能划分（山地、丘陵、平原、湖泊）
+
+> **论文**
+>
+> - IEEE VR：[Towards Virtual Reality Infinite Walking: Dynamic Saccadic Redirection](https://dl.acm.org/doi/10.1145/3197517.3201294)(ACM Transactions on Graphics, 2018), [An Open Framework for Infinite Walking With Saccadic Redirection](https://dl.acm.org/doi/10.1145/3385956.3422091)(ARST)
+
 
 ## 第四周
 

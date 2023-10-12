@@ -1,5 +1,5 @@
 ---
-title: 【第一篇博客】Hello World
+title: 第一篇博客 | Hello World
 date: 2022-01-11 09:09:04
 author: Andrew-Rey
 category: Life

@@ -1,5 +1,5 @@
 ---
-title: 【数学杂记】空间
+title: 数学杂记 | 空间
 date: 2022-03-20 01:20:10
 category: Math
 tags:

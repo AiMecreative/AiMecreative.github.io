@@ -1,5 +1,5 @@
 ---
-title: 【项目开发】CSW-Microservice
+title: 项目开发 | CSW-Microservice
 date: 2023-10-05 19:56:53
 tags:
 - Project
