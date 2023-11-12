@@ -1,5 +1,5 @@
 ---
-title: C++编程 | 类模板
+title: C++ Programming | class template
 date: 2023-02-28 20:21:43
 tags:
 - CS

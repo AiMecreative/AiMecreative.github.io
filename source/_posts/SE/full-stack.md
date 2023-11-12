@@ -472,3 +472,116 @@ public class UserController {
 ```
 
   - where `@Autowired` is an injection method, which helps to instanciate UserMapper
+
+## Axios
+
+> a frame of front-end requesting
+> - front-end needs data, browser sends HTTP requests to server to fetch data, Vue bonds data
+> - based on `Ajax`, `promise`
+> - use `XMLHttpRequests` to send web requests, convert `json` data automatically
+`npm install axios`
+
+[帮助文档](https://axios-http.com/docs/intro)
+
+### send web requests
+
+**send `GET` requests**
+
+```JavaScript
+axios.get('/user?ID=12345')
+  .then(function(response) {
+    // handle successful situations
+    console.log(response);
+  })
+  .catch(function(error) {
+    // handle failures
+    console.log(error);
+  })
+  .then(function() {
+    // always execute
+  });
+
+// the same with:
+
+axios.get('/user', {
+    params: {
+      ID: 12345
+    }
+  })
+  .then(function(response) {
+    // handle successful situations
+    console.log(response);
+  })
+  .catch(function(error) {
+    // handle failures
+    console.log(error);
+  })
+  .then(function() {
+    // always execute
+  });
+```
+
+**send `POST` requests**
+
+```JavaScript
+// request body is the second parameter
+axios.post('/user', {
+    firstName: 'xxx',
+    lastName: 'xxx'
+  })
+  .then(function(response) {
+    // handle successful situations
+    console.log(response);
+  })
+  .catch(function(error) {
+    // handle failures
+    console.log(error);
+  })
+  .then(function() {
+    // always execute
+  });
+```
+
+### when to send requests
+
+`created:function(){}`: invoked when creating the components
+
+`mounted:function(){}`: invoked when mounting the components
+
+**cross-domain**
+
+- usually appears in front-back end separation projects
+- **same-origin-policy**: the basic and core security function of browsers
+  - same-origin, i.e. same-domain, where two page have the same protocol, host and port
+- **cross-domain**: request url appears when any of protocol, host and port is different from current page url
+  - can't read cross-domain cookies
+  - can't send `Ajax` requests to cross-domain addresses
+- **authorization** to solve cross-domain questions
+  - CORS(cross-origin resource sharing): designed by W3C
+  - simple requests/complex requests
+  - back-end server realize CORS interfaces
+
+for single controller: `@CrossOrigin`
+
+for global controler: add configuration class 
+
+- send requests when the component is created:
+
+```JavaScript
+// use arrow function: "this" points to parents' "this", able to visit parameters of parents "tableData"
+created:function(){
+  axios.get("http://localhost:8088/user/findAll").then((response)=>{
+    this.tableData = response.data
+  })
+},
+data() {
+  return {
+    tableData: []
+  }
+}
+```
+
+**set base url**
+
+- `axios.defualts.baseURL = 'http://api.com'`
+- `app.config.globalProperties.$http = axios`

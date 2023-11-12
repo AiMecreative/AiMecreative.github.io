@@ -1,5 +1,5 @@
 ---
-title: 逆向分析 | 需求分析
+title: Inverse Analysis | Requirements Analysis
 date: 2023-10-05 15:03:25
 tags:
 - SE

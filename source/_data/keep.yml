@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------------------------
 base_info:
   # Your blog website title
-  title: 云边有个小卖部
+  title: 
 
   # Your blog website author name
   author: Andrew-Rey
@@ -65,7 +65,7 @@ style:
 
     # First screen description
     # You can use the "||" to begin a newline, maximum is two lines.
-    description: 醒时相交欢，醉后各分散
+    description: 
 
     # If you want to customize the first screen font color, you can fill in here (e.g. "#0066CC")
     # Otherwise use the theme default font color
@@ -172,7 +172,7 @@ code_block:
   tools:
     enable: true            # Option values: true | false
     style: default              # Option values: default | mac
-  highlight_theme: default   # Option values: default | obsidian
+  highlight_theme: obsidian   # Option values: default | obsidian
 
 # ---------------------------------------------------------------------------------------
 # Table of Contents in the Sidebar
