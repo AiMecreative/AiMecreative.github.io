@@ -921,7 +921,7 @@ figure.highlight {
 }
 
 .article-content p {
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'CaskaydiaCove Nerd Font';
     line-height: 2em;
     margin-bottom: 20px;
@@ -1373,7 +1373,7 @@ html.dark .content-home .nav .item a:hover {
 }
 
 .content.content-post .article-header .post-title {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: normal;
     font-family: 'CaskaydiaCove Nerd Font';
     margin: 0 0 12px;
@@ -1877,13 +1877,13 @@ table th {
 }
 
 .item-post .post-date {
-    font-size: 20px;
+    font-size: 18px;
     display: inline-block;
     color: #888
 }
 
 .item-post .post-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
     position: relative;
     display: inline-block;
