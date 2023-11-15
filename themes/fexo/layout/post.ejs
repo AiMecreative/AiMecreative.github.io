@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
+<link rel="stylesheet" href="/css/prism.css">
+
+<div class="post-header<%= theme.toolbox.isShow && theme.post.header_align ? ' ' + theme.post.header_align : '' %>">
+   <%- partial('_partial/component/toolbox') %>
+</div>
+
+<%- partial('_partial/component/toc') %>
+
+<div class="content content-post<%= theme.post.header_align ? ' ' + theme.post.header_align : '' %>">
+   <%- partial('_partial/article', {post: page, index: false}) %>
+
+   <% if(page.original) { %>
+       <%- partial('_partial/component/original.ejs') %>
+   <% } %>
+
+   <%- partial('_partial/component/donation') %>
+   <%- partial('_partial/component/prev-net') %>
+</div>
+
+<%- partial('_partial/component/back-top', {showBacktop: theme.backtop.post}) %>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<script>
+    $(".article-content img").wrap(function() {
+        return '<a data-fancybox href="' + $(this).attr("src") + '"/>';
+    });
+</script>

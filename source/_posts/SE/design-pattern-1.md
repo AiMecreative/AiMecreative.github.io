@@ -1,5 +1,5 @@
 ---
-title: Design Pattern | 面向对象设计原则
+title: Design Pattern | OOD
 author: Andrew-Rey
 date: 2023-10-14 22:51:29
 category: SE

@@ -1,5 +1,5 @@
 ---
-title: Design Pattern | 创建型
+title: Design Pattern | Creational
 author: Andrew-Rey
 date: 2023-10-15 10:14:10
 category: SE
