@@ -6,6 +6,7 @@ tags:
 - PCG
 - Terrain
 category: Math
+mathjax: true
 Author: AndrewRey
 ---
 

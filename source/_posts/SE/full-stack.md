@@ -585,3 +585,50 @@ data() {
 
 - `axios.defualts.baseURL = 'http://api.com'`
 - `app.config.globalProperties.$http = axios`
+
+
+## JWT
+
+> authentication: get resources from server after authentication
+
+- session authentication
+  - user sends `username` and `password` to server
+  - server check the user information
+  - if the login info is right
+  - generate cookies, return a session id to user
+  - the session id will be sent to server again through cookie when user sends other requests
+  - server receives the session id and find out the saved data to know the user's role (or related data)
+  - **drawbacks**: difficult to expand especially for server-clusters. (other server has no session id of user as the user send session id to another server) 
+- token authentication
+  - a way to solve the drawbacks of session authentiocation
+  - string-like
+  - store token in client (such as cookie or localStorage)
+  - everytime user request for server should send token to server at the same time
+  - defend the user to modify the token contents
+
+### Json web token
+
+> a method to realize the token
+
+- generate a JsonObj after the authentication and send it to user
+- user communicates with server should send the JsonObj to server, and the server only realies on the JsonObj to distinguish the authority of user
+- in order to avoid user modifying the token, server add signature to token when generating it
+
+**3 parts**: divided by `.`
+
+- header: meta info, will be *encode(not encrypt)*
+- payload: data that need to be pass by, will be *encode*
+- signature: appoint a secret-key which **only** know by server, use the signature algrithm defined in `header` and generate signature by the formula:
+
+```
+HMACSHA256(
+  base64UrlEncode(header) + "." + 
+  base64UrlEncode(payload),
+  secret
+)
+```
+
+the token is just a string divided by `.`: `header.payload.signature`
+
+![1700222447717](1700222447717.png)
+
