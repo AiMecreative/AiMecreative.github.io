@@ -1,8 +1,8 @@
 ---
-title: Deep Learning | Schedual
+title: DeepLearning | Schedual
 author: Andrew-Rey
 date: 2023-11-23 12:04:03
-category: Deep learning
+category: Dl
 tag: 
 - deep learning
 - schedual
