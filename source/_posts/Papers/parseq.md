@@ -3,6 +3,7 @@ title: Papers | PARSeq
 author: Andrew-Rey
 date: 2023-12-11 13:58:48
 category: Paper
+mathjax: true
 tag:
 - Paper
 - STR
@@ -125,12 +126,54 @@ $$
 \mathbf{y} = \mathbf{Decoder}(\mathbf{z},\mathbf{p},\mathbf{c},\mathbf{m}) \in \mathbb{R}^{(T+1)\times S+1}
 $$
 
-图片特征为
+图片特征为 $\mathbf{z}$，作为第二个 MHA 的 query
 
 $$
 \mathbf{z} = \mathbf{Encoder}(\mathbf{x}) \in \mathbb{R}^{\frac{WH}{p_w p_h}\times d_{model}}
 $$
 
+$\mathbf{p}$ 是位置编码，作为第一个 MHA 的 query，$\mathbf{c}$ 是 *embedded* 后并进行位置编码的文本向量，$\mathbf{m}$ 是掩码。
+
+所有的 MHA 采用的都是 *缩放点积*。
+
+## Results and Analysis
+
+数据预处理
+
+- Label preprocessing：最大的标签长度是 25（不包括开始和结束token），字符集包括大小写和不同发音标记，一共 94 个
+- Image preprocessing：
+  - Augmentation：consist primarily of *RandAugment* operations excluding Sharpness and Invert. Use GaussianBlur and PoissonNoise.
+  - Resizing：$128\times 32$
+  - Normalization：$[-1,1]$
+
+在推理时的数据集设置
+
+![推理charset](1703257365103.png)
+
+$K$ 值（排列数）的选择
+
+![K值选择](1703257445892.png)
+
+在 Synthetic 数据集和 Real 数据上与 SOTA 对比结果
+
+![不同数据集上的对比结果](1703257694420.png)
+
+在更有难度的数据集上的对比结果
+
+![更多对比](1703257793973.png)
+
+在模型大小上的对比
+
+![模型大小的对比](1703257911445.png)
+
 ## Appendix
 
+### Permuted Language Model
+
+[乱序语言模型 PERT](https://zhuanlan.zhihu.com/p/509647368)
+
+这种训练方式的提出是基于一个有趣的现象：***一句话中打乱某几个词语的顺序，并不会影响我们对这句话的理解***，因此 PERT 模型的作者在 BERT 的基础上修改了输入方式提出了 *乱序* 的预训练任务。本文也借鉴于此。
+
 ### ViT 编码输入编码方式
+
+[参考](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/ViT.html)

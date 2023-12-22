@@ -3,12 +3,12 @@ title: DeepLearning | Quick Start I
 author: Andrew-Rey
 date: 2023-11-24 10:54:38
 category: DL
+
 tag:
 - deep learning
 - tutorial
 - lhy-ML
 ---
-
 The first lecture that all ai-beginner should to take.
 
 [video](https://www.bilibili.com/video/BV1Wv411h7kN/?p=3&spm_id_from=pageDriver&vd_source=698de1256a0048d0fd59d2f1bc3e109b)
@@ -27,7 +27,7 @@ The general step to do machine learning:
 
 - **write down the function model** *with unknown parameters*
   - need *domain knowledge*
-- **define *loss* from training data**, *loss* is a function of <u>parameters</u> in your model
+- **define *loss* from training data**, *loss* is a function of `<u>`parameters`</u>` in your model
   - how good a set of parameters are
   - calculate from training data
   - visuaization: error surface
@@ -45,7 +45,7 @@ The above three steps is **train**.
 
 How to construct a reasonable model or how to fit the model functions are the main problems in ML/DL. The most common idea is to use the combination of *function units* to fit the model. Such as the *sigmoid* function.
 
-> **piecewise linear**: $constant + \sum c_i sigmoid(b_i + w_i x)$. This can simulate lots of functions (including <u>piecewise linear constructed with lots of small line segements</u> and <u>curve functions</u> which can be divided into many piecewise linear)
+> **piecewise linear**: $constant + \sum c_i sigmoid(b_i + w_i x)$. This can simulate lots of functions (including `<u>`piecewise linear constructed with lots of small line segements`</u>` and `<u>`curve functions`</u>` which can be divided into many piecewise linear)
 
 $$
 c \cdot Sigmoid(b+ w x) = c\frac{1}{1 + e^{-(b + w x)}}

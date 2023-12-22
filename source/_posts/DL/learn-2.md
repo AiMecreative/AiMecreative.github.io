@@ -3,12 +3,12 @@ title: DeepLearning | Quick Start II
 author: Andrew-Rey
 date: 2023-11-24 14:16:26
 category: DL
+mathjax: true
 tag:
 - Deep learning
 - tutorial
 - lhy-ML
 ---
-
 Is it must be overfitting when the loss is not small? Infact there are two possible reasons for this situation. The one is model bias and the other is the poor optimization.
 
 <!--more-->
@@ -66,7 +66,7 @@ $$
 L(\theta) \approx L(\theta^{\prime}) + v^T \mathbf{H} v
 $$
 
-where $v = \theta - \theta^{\prime}$. <u>For all</u> $v$:
+where $v = \theta - \theta^{\prime}$. `<u>`For all`</u>` $v$:
 
 - if $v^T \mathbf{H} v > 0$, namely $\mathbf{H}$ is *positive definite* (all eigen values are above zero): $L(\theta) > L(\theta^{\prime})$, which means the point $\theta^{\prime}$ is a ***local minima***
 - if $v^T \mathbf{H} v < 0$, namely $\mathbf{H}$ is *negtive definite* (all eigen values are below zero): $L(\theta) < L(\theta^{\prime})$, which means the point $\theta^{\prime}$ is a ***local maxima***
