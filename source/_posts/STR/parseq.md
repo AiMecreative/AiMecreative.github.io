@@ -118,6 +118,28 @@ permutation mask的方式如下所示
 
 通过permutation mask的方式，对不同的permutation都对 $t>T$ 时的字符进行了mask，防止“看到”后续的信息，但不同的排列结合后又 *有可能* 得到完整信息。
 
+在 `parseq` 的模型代码中，核心的生成排列mask的代码如下
+
+```python
+def generate_attn_masks(self, perm):
+    """Generate attention masks given a sequence permutation (includes pos. for bos and eos tokens)
+    :param perm: the permutation sequence. i = 0 is always the BOS
+    :return: lookahead attention masks
+    """
+    sz = perm.shape[0]
+    mask = torch.zeros((sz, sz), device=self._device)
+    for i in range(sz):
+        query_idx = perm[i]
+        masked_keys = perm[i + 1:]  # 生成mask的部分
+        mask[query_idx, masked_keys] = float('-inf')
+    content_mask = mask[:-1, :-1].clone()
+    mask[torch.eye(sz, dtype=torch.bool, device=self._device)] = float('-inf')  # mask "self"
+    query_mask = mask[1:, :-1]
+    return content_mask, query_mask
+```
+
+其中 `perm` 表示一个排列。这里mask的生成巧妙地运用了 *torch提供的列表索引方式*。
+
 ### Overall Formula
 
 模型输出

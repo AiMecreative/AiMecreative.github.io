@@ -35,6 +35,54 @@ tag:
 
 本文推测, 造成这样结果的原因可能是数据问题, 也就是 **模型不能很好地利用数据**. 因此为了能从数据角度解决STR, 本文提出了一种可以充分利用 **无标签** 数据的方式. 具体是使用自监督的预训练方式 **(self-supervised pre-training)** 训练 **Vision Transformer-based** STR 模型, 再在不同的真实标签上fine tune, 即可达到和SOTA类似的效果.
 
+## Related Works
+
+本文从三个方面进行了调研
+
+- 在数据分析方面，当前已经有研究人员发现训练数据和 benchmark 之间的失衡；也有研究人员发现在训练时加入一些 **real data** 会达到更好的效果。
+- 在数据偏移方面，synthetic data 和 real data 有着很大的 **domain gap**，并且 real data 更加接近于真实环境的情况。
+- 在STR的benchmark方面，当前常用的text benchmark包括 **IC13, IIIT, SVT, IC15, SVTP, CUTE**。
+
+## Preliminary: A Real Dataset for Analysis
+
+本文的作者团队根据传统数据集和现有模型中可能出现的问题和缺点，构建了一个较大的数据集 Union14M，其中包含了 4 million 的有标签的数据 Union14M-L 和 10 million 的无标签数据。数据集的构建工作主要是整理和重构其它数据集，对现有数据进行一些筛选和处理。有标签的数据处理如下：
+
+- crop text instances：统一使用 axis-aligned rectangle 进行图片的裁剪；但是问题是背景中会含有一定的噪音。
+- excluding duplicate samples：去除重复数据
+- remove non-latin and ignored samples
+
+无标签的数据处理如下：
+
+- we use three text detectors and and IoU voting mechanism to get text instances
+
+## Analysis of STR in Real World
+
+本节主要对构造的数据集进行了效果的度量。主要使用的方法是用不同的模型进行测试（也就是所谓的 test in real world）；其次是分析了数据集里面不同的类别。
+
+- 对于 13 个当前选择的 STR 模型，一些有代表性的错误如下图所示；这几个模型基本都是在人造数据上进行训练的，推理时使用的是默认参数，
+
+![errors in real world，其中蓝色框内代表的是 4 个为解决的问题，绿色框内代表的是其它的一些讨论较少的问题](image-2.png)
+
+- 在 Union14M 中，涵盖了以上所有的情况：
+  - Multi-Oriented Text
+  - Artistic Text
+  - Contextless Text: this issue can arise from the over-introduction of semantic information in both the model design and dataset corpus, which is also known as *vocabulary reliance*
+  - Salient Text: refers to the presence of *extra* characters that coexist with the primary characters of interest in a text image
+  - Multi-Words Text
+  - Incomplete Text
+
+## A Challenge-Driven Benchmark
+
+除了构建用于训练和自回归的数据集以外，作者还提供了benchmark用于衡量模型效果。Union14M-benchmark
+
+## Experiments and Analysis
+
+提出了 MAERec 模型，主要基于 ViT 进行预训练。
+
+![MAERec](image-3.png)
+
+模型先对 ViT 的 backbone 通过高达 75% 的 mask 进行预训练。decoder 负责从 token 中 **重建** 图像。
+
 ## Appendix
 
 ### Synthetic dataset VS Real dataset
