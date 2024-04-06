@@ -7,3 +7,8 @@ public
 .deploy*/
 ./source/_post/index_imgs/
 ./themes/*
+**.ttf
+**.eot
+**.woff
+**.woff2
+**.otf

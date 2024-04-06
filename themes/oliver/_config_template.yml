@@ -1,0 +1,15 @@
+favicon: /images/head_round.png
+avatar: /images/head_round.png
+
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+copyright: copyright
+
+gitalk:
+  client_id: ea931375ed1624a4f0fd
+  client_secret: f875d20ee1a5f645f91f994c61c267f1cb8dffb0
+  repo: https://github.com/Andrew-Rey/gitalkds.git
+  owner: Andrew-Rey
