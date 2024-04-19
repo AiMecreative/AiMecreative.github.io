@@ -131,7 +131,7 @@ for (int i = 1; i < p; i += 1) {
 
 分析：$T(n,p)=\theta(\log(n)), C(n)=pT(n,p)=\theta(\log(n))\times \theta(\frac{n}{\log(n)})=\theta(n)$
 
-### 网络拓扑
+## 网络拓扑
 
 互联网络的结点可能是交换机或处理器。几个概念：
 
@@ -155,3 +155,47 @@ for (int i = 1; i < p; i += 1) {
 | 二叉树      | $\mathcal{O}(1)$       | $\mathcal{O}(\log(n))$    | $\mathcal{O}(1)$        |
 | 超立方体    | $\mathcal{O}(\log(n))$ | $\mathcal{O}(\log(n))$    | $\mathcal{O}(n)$        |
 
+## Amdahl's Law and Gustafson's Law
+
+如果能在设计并行算法前，能对一个问题提前分析其并行效果，将会减少不必要的工作量，也能了解到并行算法是否值得，
+而 Amdahl 定律和 Gustafson 定律能帮助我们进行加速比的估计。
+
+一段程序的总执行时间可以分为未被并行化部分所花费的时间（即不能被并行化或没有被并行化的部分所花的时间）
+和并行运行的时间，分别用符号 $T_{ser}, T_{par}$ 表示。
+单个处理器运行一段程序的时间 $T(1)$ 即上述两部分的简单相加：
+
+$$
+T(1) = T_{ser} + T_{par}
+$$
+
+### Amdahl's Law
+
+在不考虑缓存效应的前提下，我们希望最佳加速比是线性的：
+也就是说如果有 $p$ 个处理器并行一段程序，其并行部分能比单个处理器运行快 $p$ 倍，
+因而可以导出一般情况下的运行时间下限：
+
+$$
+T(p) \geq T_{ser} + \frac{T_{par}}{p}
+$$
+
+因此可以得到其加速比的上限：
+
+$$
+S(p) = \frac{T(1)}{T(p)} \leq \frac{T_{ser} + T_{par}}{T_{ser} + \frac{T_{par}}{p}}
+$$
+
+一般而言，在只讨论串行时间和并行时间时，我们使用百分比来表示二者的关系：
+
+$$
+T_{ser} = f \times T(1), T_{par} = (1-f) \times T(1)
+$$
+
+其中 $f$ 是一个介于0，1之间的数，此时的加速比可以表示成 $f$ 的函数：
+
+$$
+S(p) \leq \frac{T_{ser} + T_{par}}{T_{ser} + \frac{T_{par}}{p}} = \frac{f T(1) + (1-f) T(1)}{f T(1) + \frac{(1-f) T(1)}{p}} = \frac{1}{f + \frac{1-f}{p}}
+$$
+
+这便是 **Amdahl** 定律。通过知道 $f$，我们就能预测使用多个处理器并行化程序的加速比理论上限。
+
+### Gustafson's Law
