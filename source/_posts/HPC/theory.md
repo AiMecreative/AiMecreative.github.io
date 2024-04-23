@@ -7,6 +7,10 @@ tag: HPC
 mathjax: true
 ---
 
+Parallel Programming: Concepts and Pracitce - Chapter 2
+
+<!--more-->
+
 首先介绍并行随机访问机器（PRAM）模型是抽象的共享内存模型，其忽略了现实计算机中的开销，但可以帮助设计一些并行算法。其次是对于分布式内存模型，会介绍一些基础图论知识。接着介绍并行程序中的两大定律：Amdahl定律和Gustafson定律，用于推断并行程序加速比能达到的上限。最后以并行算法设计的Foster方法论结束。
 
 ## 并行随机访问机器模型
@@ -196,6 +200,41 @@ $$
 S(p) \leq \frac{T_{ser} + T_{par}}{T_{ser} + \frac{T_{par}}{p}} = \frac{f T(1) + (1-f) T(1)}{f T(1) + \frac{(1-f) T(1)}{p}} = \frac{1}{f + \frac{1-f}{p}}
 $$
 
-这便是 **Amdahl** 定律。通过知道 $f$，我们就能预测使用多个处理器并行化程序的加速比理论上限。
+这便是 **Amdahl 定律**。通过知道 $f$，我们就能预测使用多个处理器并行化程序的加速比理论上限。
+
+**Amdahl定律的限制**：只适用于问题规模为 **常数**、处理器个数变化的情况，即强可扩展性。
 
 ### Gustafson's Law
+
+如果在增加处理器个数的情况下，同时增大问题规模，花在并行部分的时间 $T_{par}$ 比串行时间 $T_{ser}$ 增长得更快。
+为了同时考虑这些情况，可以按照问题的复杂性扩展两个部分的规模：
+
+- $\alpha$：根据问题规模的复杂度，不能从并行化中获益的程序部分的 **尺度函数**
+- $\beta$：根据问题规模的复杂度，能从并行化中获益的程序部分的尺度函数
+
+对于单个处理器的情况，程序运行时间为：
+
+$$
+T_{\alpha\beta}(1) = \alpha T_{ser} + \beta T_{par} = \alpha f T(1) + \beta (1-f) T(1)
+$$
+
+因此得到可达加速比（即并行的最高加速比按照线性加速比处理）：
+
+$$
+S_{\alpha\beta} 
+= \frac{T_{\alpha\beta}(1)}{T_{\alpha\beta}(p)} 
+\leq \frac{\alpha f T(1) + \beta (1-f) T(1)}{\alpha f T(1) + \frac{\beta (1-f) T(1)}{p}}
+= \frac{\alpha f + \beta (1-f) }{\alpha f + \frac{\beta (1-f)}{p}}
+$$
+
+令 $\gamma = \alpha / \beta$：
+
+$$
+S_{\gamma}(p) \leq \frac{f + \gamma (1-f)}{f + \frac{\gamma (1-f)}{p}}
+$$
+
+- 当 $\gamma = 1 (\alpha = \beta)$ 时，即问题规模增加时，串行和并行的尺度增加一致，此时为Amdahl定律；
+- （**Gustafson 定律**）当 $\gamma = p (\alpha = 1, \beta = p)$ 时，$S_{\gamma}(p) \leq f + p (1-f) = p + f (1-p)$，即可并行部分以线性 $p$ 增长，不可并行部分保持常数
+
+
+## Foster的并行算法设计方法学
