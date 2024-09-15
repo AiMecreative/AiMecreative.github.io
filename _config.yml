@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Andrew-Rey
+title: Mecreative
 subtitle: 醉后不知天在水，满船清梦压星河
 description: ''
 keywords:
@@ -16,7 +16,7 @@ force_https: true
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://Andrew-Rey.github.io
+url: https://aimecreative.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -128,7 +128,7 @@ plugins:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/Andrew-Rey/Andrew-Rey.github.io.git
+  repo: https://github.com/aimecreative/aimecreative.github.io.git
   branch: main
 
 markdown:

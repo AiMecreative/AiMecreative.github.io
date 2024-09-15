@@ -5,7 +5,7 @@
 # Link to a page that gives an overview of all your projects.
 # This can be an external link (e.g., to you GitHub profile) or to another
 # page within your website.
-projects_url: http://github.com/andrew-rey
+projects_url: https://github.com/aimecreative
 
 # Set the page direction to RTL or LTR. default is LTR. (if you set it 'rtl', the 'vazir' font will be loaded.)
 direction: ltr
@@ -17,7 +17,7 @@ nav:
   home: /
   about: /about/
   articles: /archives/
-  projects: http://github.com/andrew-rey
+  projects: https://github.com/aimecreative
 
 
 # Links to your social media accounts.
@@ -29,7 +29,7 @@ nav:
 social_links:
   -
     icon: github
-    link: http://github.com/andrew-rey
+    link: http://github.com/aimecreative
   -
     icon: bilibili
     link: https://space.bilibili.com/631454496
@@ -107,7 +107,7 @@ logo:
   enabled: true
   width: 100
   height: 100
-  url: /images/head_round.png
+  url: /images/head_round_1.png
   gravatar: false
   grayout: false
 
@@ -122,13 +122,13 @@ logo:
 #   - gravatar: whether to create a favicon from your Gravatar
 favicon:
   desktop:
-    url: /images/head_round.png
+    url: /images/head_round_1.png
     gravatar: false
   android:
-    url: /images/head_round.png
+    url: /images/head_round_1.png
     gravatar: false
   apple:
-    url: /images/head_round.png
+    url: /images/head_round_1.png
     gravatar: false
 
 # The color scheme that should be used to highlight codeblocks.
@@ -175,7 +175,7 @@ disqus:
 # Fill in your Utterances data to enable Utterances comments
 utterances:
   enabled: true
-  repo: Andrew-Rey/gitalkds
+  repo: aimecreative/gitalkds
   issue_term: pathname
   label: Comment
   theme: github-dark
