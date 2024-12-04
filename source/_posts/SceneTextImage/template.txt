@@ -1,0 +1,46 @@
+---
+title: Paper | Represention Learning in Scene Text Images
+author: Mecreative
+date: 2024-12-03 15:32:13
+category: Scene Text Image
+tag: Scene Text Image
+---
+
+<center>**---------- Abstracts ----------**</center>
+<center>**---------- Related Work ----------**</center>
+<center>**---------- Methods ----------**</center>
+
+## title
+
+---
+
+**[CVPR24] Choose What You Need: Disentangled Representation Learning for Scene Text Recognition Removal and Editing**
+[(Paper)](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Choose_What_You_Need_Disentangled_Representation_Learning_for_Scene_Text_CVPR_2024_paper.html)
+
+<center>**---------- Abstracts ----------**</center>
+
+![arch_1](image.png)
+
+- **Motivations**
+  - previous representation learning methods use tightly coupled features for all tasks, resulting in sub-optimal performance
+  - disentangling these two types (style feature and context feature) of features for improved adaptability in better addressing various downstream tasks
+- **Methods**
+  - <u>Dataset</u>: we synthesize a dataset of image pairs with identical style but different content
+  - <u>Losses</u>: content features are supervised by a text recognition loss, while an alignment loss aligns the style features in the image pairs
+
+<center>**---------- Related Work ----------**</center>
+
+To illustrate the drawbacks of using tightly coupled features.
+
+- STR with segementation preprocessing
+  - [SIGA](https://openaccess.thecvf.com/content/CVPR2023/papers/Guan_Self-Supervised_Implicit_Glyph_Attention_for_Text_Recognition_CVPR_2023_paper.pdf)
+  - [CCD](https://openaccess.thecvf.com/content/ICCV2023/papers/Guan_Self-Supervised_Character-to-Character_Distillation_for_Text_Recognition_ICCV_2023_paper.pdf)
+  - [Deformable CNN](https://zhuanlan.zhihu.com/p/138020203) use a learnable bias in convolution block to represent deformations
+
+<center>**---------- Methods ----------**</center>
+
+> **Attention**
+> - This model divides style and context fetures with the SAME lengths, which may constrain the ability to represent background information, because the background is assumed more complex than texts.
+
+---
+
