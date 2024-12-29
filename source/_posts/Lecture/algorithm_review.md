@@ -3,7 +3,9 @@ title: Lecture | Algorithm Review
 author: Mecreative
 date: 2024-12-03 15:32:13
 category: Lecture
-tag: Lecture
+tag: 
+- Lecture
+- Algorithm
 mathjax: true
 ---
 
