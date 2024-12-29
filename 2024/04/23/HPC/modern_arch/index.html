@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Parallel Programming: Concepts and Pracitce - Chapter 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HPC | Modern Architecture-Cache">
+<meta property="og:url" content="https://aimecreative.github.io/2024/04/23/HPC/modern_arch/index.html">
+<meta property="og:site_name" content="Mecreative">
+<meta property="og:description" content="Parallel Programming: Concepts and Pracitce - Chapter 3">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://aimecreative.github.io/2024/04/23/HPC/modern_arch/image.png">
+<meta property="article:published_time" content="2024-04-23T13:01:02.000Z">
+<meta property="article:modified_time" content="2024-07-28T09:46:29.398Z">
+<meta property="article:tag" content="HPC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aimecreative.github.io/2024/04/23/HPC/modern_arch/image.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/head_round_1.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/head_round_1.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/head_round_1.png">
+        
+      
+    
+    <!-- title -->
+    <title>HPC | Modern Architecture-Cache</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4Z4C0ZF8Y"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G4Z4C0ZF8Y');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/aimecreative">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/05/30/You/acknowledgement/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/11/HPC/theory/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&text=HPC | Modern Architecture-Cache"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&is_video=false&description=HPC | Modern Architecture-Cache"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HPC | Modern Architecture-Cache&body=Check out this article: https://aimecreative.github.io/2024/04/23/HPC/modern_arch/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&name=HPC | Modern Architecture-Cache&description=&lt;p&gt;Parallel Programming: Concepts and Pracitce - Chapter 3&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&t=HPC | Modern Architecture-Cache"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">缓存算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">缓存一致性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flynn%E5%88%86%E7%B1%BB%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Flynn分类法</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HPC | Modern Architecture-Cache
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Andrew-Rey</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-23T13:01:02.000Z" class="dt-published" itemprop="datePublished">2024-04-23</time>
+        
+        (Updated: <time datetime="2024-07-28T09:46:29.398Z" class="dt-updated" itemprop="dateModified">2024-07-28</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/HPC/">HPC<span class="category-count">3</span></a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HPC/" rel="tag">HPC<span class="tag-link-count">3</span></a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Parallel Programming: Concepts and Pracitce - Chapter 3</p>
+<span id="more"></span>
+<p>von Neumann bottleneck:
+现代微处理器能够以远高于从主存（DRAM）中读取数据的速率处理数据。
+导致的结果是，很多程序受限于访存，而非计算。当然，现在也有很多访存友好的算法，
+例如 BLAS 库中的 <a target="_blank" rel="noopener" href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">GEMM</a></p>
+<h2 id="缓存算法">缓存算法</h2>
+<p>缓存算法主要解决以下问题：</p>
+<ul>
+<li>我们需要从主存装载哪些数据，储存在何处</li>
+<li>缓存已满时，我们需要移出哪些数据</li>
+</ul>
+<p>缓存算法的目的在于优化其 <strong>命中率（cache
+hit）</strong>。算法遵循以下两条原则：</p>
+<ul>
+<li><strong>空间局部性</strong>：许多算法会从连续的内存位置访问数据，有较高的空间局部性。例如如下程序：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i += <span class="number">1</span>) {</span><br><span class="line">    max_value = <span class="built_in">max</span>(a[i], max_value);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>起始缓存为空，访问 <code>a[0]</code>
+时缓存未命中，需要载入数据，缓存一般一次载入一个完整的 <strong>cache
+line</strong>。 假设 cache line
+大小是64B，数组的值是双精度浮点数（<code>float64</code>），则连续的8个值
+<code>a[0:8]</code> 会一起被载入缓存， <code>a[1:8]</code>
+的数据全部缓存命中。</p>
+<ul>
+<li><strong>时间局部性</strong>：缓存被组织为一定数目的块，即 cache
+line。每个块有固定的大小。缓存映射策略可以决定主存的一个特定条目的备份在缓存中的存储位置。
+<ul>
+<li><strong>直接映射缓存 direct-mapping
+cache</strong>：主存每个特定条目在缓存中有唯一的存储位置。命中率较低。</li>
+<li><strong>2路组相联缓存 two-way set associative
+cache</strong>：从主存载入的数据可以存储在2个可能的块中，具体存储的位置由
+<strong>最近最少使用（least-recently used, LRU）</strong>
+原则决定，往往会选择最近时间最少使用的那个块用来存储主存载入的数据。命中率高于直接映射。常用的还有4路、8路等。</li>
+</ul></li>
+</ul>
+<h2 id="缓存一致性">缓存一致性</h2>
+<p>假设需要修改缓存中的值，则不仅需要修改缓存中的值，还需要修改主存中的值，不然会产生不一致（inconsistency），
+有两种策略去保证缓存和主存中的一致性（coherence）：</p>
+<ul>
+<li><strong>直写式</strong>：如果主存中的数据已经缓存，则主存数据发生变动的同时也要修改缓存的值。缺点每次写主存需要一次主存访问</li>
+<li><strong>回写式</strong>：缓存的值修改时，不会立马修改主存的值，而是会被标记为
+<code>dirty</code>，待数据移出缓存时，才写入主存</li>
+</ul>
+<p>多级缓存和多核处理器的情况会非常复杂，例如每个处理器有自己的本地缓存L1，同时所有的处理器又共享一个公共缓存L2，每个处理器修改L1时，如果没有约束条件，可能会导致其它处理器缓存的值与修改后不一致，L1的值与L2的值也不一样。</p>
+<p>一种方式是对于缓存且被修改的值，让其它处理器标记该数据的缓存行为失效，除非重新从主存中载入数据。常用的协议有MESI协议。</p>
+<p><strong>虚假共享</strong>：缓存一致性协议是对于 cache line
+而言的，每一行能存多个值，如果修改了某个值，其所在的 cache line
+以及其所关联的 cache line （其它核心的 cache
+line）将会整体失效。一个极端情况是，多个处理器同时修改一个缓存行的不同数据，任意一个写操作都会使缓存行失效，所有处理器都需要从共享主存重新载入数据，即使数据并没有改变。这种情况就是
+<strong>虚假共享</strong>。</p>
+<p>对于程序员的准则：</p>
+<ul>
+<li><strong>避免对存储在同一个缓存行中的条目进行过度更新</strong></li>
+<li><strong>尽量在寄存器而不是在缓存中存储中间结果</strong></li>
+</ul>
+<p>如果数据没有被缓存，则数据仍然需要从主存中缓慢地传送出来，其访问时间在CPU或者GPU上会高达几百个时钟周期，解决的方式有</p>
+<ul>
+<li><strong>并发多线程技术 simultaneous multi-threading,
+SMT</strong>：在多个线程之间快速切换，用计算时间掩盖访问时间</li>
+<li><strong>硬件预取技术 hardware
+prefetching</strong>：在能预先知道处理器需要的数据时，在使用这些数据前通过硬件（目前也可由程序员自行编程实现）提前将其装载在缓存中</li>
+</ul>
+<h2 id="flynn分类法">Flynn分类法</h2>
+<p>将处理器的并行性根据体系结构的指令和数据流分为4种类型：</p>
+<figure>
+<img src="/2024/04/23/HPC/modern_arch/image.png" alt="Flynn Taxonomy">
+<figcaption aria-hidden="true">Flynn Taxonomy</figcaption>
+</figure>
+<ul>
+<li>SISD：即传统的 von Neumann
+体系结构，单个串行的处理单元操作单个数据</li>
+<li>SIMD：在多个数据上并发地执行同一个操作</li>
+<li>MIMD：多个处理单元在多个数据上进行不同的指令</li>
+<li>MISD：多个处理单元在单个数据流上执行不同的指令，并行性少见，但可用于流水线体系结构</li>
+</ul>
+<p>现代CPU和GPU在不同层次上的并行：</p>
+<ul>
+<li>多重核心：集成一定数量的核心（或者多处理器构成的流水线），能异步独立执行多个线程，现代微处理器使用MIMD并行</li>
+<li>向量单元：基于每个处理器上的SIMD向量单元实现数据并行性，例如512位的向量单元可以并行执行16对单精度浮点数的加法操作</li>
+<li>指令级并行：通过指令流水线和超标量执行实现</li>
+</ul>
+<p><strong>SIMD</strong>：在每个时钟周期，通过向全体可用的处理单元（Processint
+Element, PE）或者计算逻辑单元（Arithetic Logical Unit,
+ALU）分发相同的指令，SIMD体系结构实现数据并行（data
+parallelism）机制。因此该体系结构只需要一个单独的控制单元。例如对于简单的向量逐元素相减：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i += <span class="number">1</span>) {</span><br><span class="line">  w[i] = u[i] - v[i];</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>由于循环中的每个迭代都是独立且规则的，考虑n个ALU在单独控制单元下运行，只需要将向量的每个元素<code>u[i], v[i]</code>放入对应的寄存器<code>U, V</code>，再执行简单的减法操作<code>U-V</code>，<code>ALU[i]</code>便能计算出对应的值<code>w[i]</code>。
+但并非所有算法都对SIMD友好，例如在循环中加入条件语句：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i += <span class="number">1</span>) {</span><br><span class="line">  <span class="keyword">if</span> (u[i] &gt; <span class="number">0</span>) {</span><br><span class="line">    w[i] = u[i] - v[i];</span><br><span class="line">  } <span class="keyword">else</span> {</span><br><span class="line">    w[i] = u[i] + v[i];</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>为了将带有条件语句的<code>for</code>语句映射到SIMD体系结构上，需要允许ALU存在idle状态，即跳过一次计算，此时上述代码可以分为三步进行数据并行：</p>
+<ol type="1">
+<li>判断向量<code>u</code>各个元素与0的大小并标记对应的ALU是否执行第1个条件语句块，是则非idle状态，否则为idle状态</li>
+<li>非idle状态的ALU执行语句</li>
+<li>反转各ALU的idle状态，执行语句</li>
+</ol>
+<p>在x86架构上已经可以使用SSE（流式SIMD扩展）进行向量计算。通过AVX（Advanced
+Vector
+Extension），可以使用内联函数（intrinsic）开发向量寄存器。可以实现下面程序，测试普通矩阵乘法、转置矩阵乘法和AVX转置矩阵乘法之间的性能差距：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;corecrt_math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdint&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;intrin.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// #include "include/hpc_helpers.hpp"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIMERSTART(label)                                                      \</span></span><br><span class="line"><span class="meta">  std::chrono::time_point<span class="string">&lt;std::chrono::system_clock&gt;</span> a##label, b##label;       \</span></span><br><span class="line"><span class="meta">  a##label = std::chrono::system_clock::now();</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIMERSTOP(label)                                                       \</span></span><br><span class="line"><span class="meta">  b##label = std::chrono::system_clock::now();                                 \</span></span><br><span class="line"><span class="meta">  std::chrono::duration<span class="string">&lt;double&gt;</span> delta##label = b##label - a##label;            \</span></span><br><span class="line"><span class="meta">  std::cout &lt;&lt; <span class="string">"# elapsed time ("</span> &lt;&lt; #label &lt;&lt; <span class="string">"): "</span> &lt;&lt; delta##label.count()   \</span></span><br><span class="line"><span class="meta">            &lt;&lt; <span class="string">"s"</span> &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PRINT_MATRIX(mat, row, col)                                            \</span></span><br><span class="line"><span class="meta">  for (int i = 0; i &lt; row; i += 1) {                                           \</span></span><br><span class="line"><span class="meta">    for (int j = 0; j &lt; col; j += 1) {                                         \</span></span><br><span class="line"><span class="meta">      std::cout &lt;&lt; mat[i * col + j] &lt;&lt; <span class="string">" "</span>;                                    \</span></span><br><span class="line"><span class="meta">    }                                                                          \</span></span><br><span class="line"><span class="meta">    std::cout &lt;&lt; std::endl;                                                    \</span></span><br><span class="line"><span class="meta">  }</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// If the matrices are too huge, don't use this function</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SISDNaiveMatrixMult</span><span class="params">(std::vector&lt;<span class="type">float</span>&gt; a, std::vector&lt;<span class="type">float</span>&gt; b,</span></span></span><br><span class="line"><span class="params"><span class="function">                         std::vector&lt;<span class="type">float</span>&gt; &amp;c, <span class="type">const</span> <span class="type">uint64_t</span> row_a,</span></span></span><br><span class="line"><span class="params"><span class="function">                         <span class="type">const</span> <span class="type">uint64_t</span> col_a, <span class="type">const</span> <span class="type">uint64_t</span> row_b,</span></span></span><br><span class="line"><span class="params"><span class="function">                         <span class="type">const</span> <span class="type">uint64_t</span> col_b)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (col_a != row_b) {</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Shape error, two matrices can't be multiplied."</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SISD_naive_mm)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">uint64_t</span> i = <span class="number">0</span>; i &lt; row_a; i += <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint64_t</span> j = <span class="number">0</span>; j &lt; col_b; j += <span class="number">1</span>) {</span><br><span class="line">      <span class="type">float</span> accum = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">uint64_t</span> k = <span class="number">0</span>; k &lt; col_a; k += <span class="number">1</span>) {</span><br><span class="line">        accum += a[i * col_a + k] * b[k * col_b + j];</span><br><span class="line">      }</span><br><span class="line">      c[i * col_b + j] = accum;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SISD_naive_mm)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// Transpose matrix b firstly, and then do multiply</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SISDTransposeMatrixMult</span><span class="params">(std::vector&lt;<span class="type">float</span>&gt; a, std::vector&lt;<span class="type">float</span>&gt; b,</span></span></span><br><span class="line"><span class="params"><span class="function">                             std::vector&lt;<span class="type">float</span>&gt; &amp;c, <span class="type">const</span> <span class="type">uint64_t</span> row_a,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">const</span> <span class="type">uint64_t</span> col_a, <span class="type">const</span> <span class="type">uint64_t</span> row_b,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">const</span> <span class="type">uint64_t</span> col_b)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (col_a != row_b) {</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Shape error, two matrices can't be multiplied."</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="function">std::vector&lt;<span class="type">float</span>&gt; <span class="title">bt</span><span class="params">(b)</span></span>;</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SISD_transpose_mm)</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SISD_transpose)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">uint64_t</span> i = <span class="number">0</span>; i &lt; row_b; i += <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint64_t</span> j = <span class="number">0</span>; j &lt; col_b; j += <span class="number">1</span>) {</span><br><span class="line">      bt[j * row_b + i] = b[i * col_b + j];</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SISD_transpose)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SISD_mm)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; row_a; i += <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; col_b; j += <span class="number">1</span>) {</span><br><span class="line">      <span class="type">float</span> accum = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; col_a; k += <span class="number">1</span>) {</span><br><span class="line">        accum += a[i * col_a + k] * bt[j * row_b + k];</span><br><span class="line">      }</span><br><span class="line">      c[i * col_b + j] = accum;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SISD_mm)</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SISD_transpose_mm)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SIMDTransposeMatrixMult</span><span class="params">(std::vector&lt;<span class="type">float</span>&gt; a, std::vector&lt;<span class="type">float</span>&gt; b,</span></span></span><br><span class="line"><span class="params"><span class="function">                             std::vector&lt;<span class="type">float</span>&gt; &amp;c, <span class="type">const</span> <span class="type">uint64_t</span> row_a,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">const</span> <span class="type">uint64_t</span> col_a, <span class="type">const</span> <span class="type">uint64_t</span> row_b,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">const</span> <span class="type">uint64_t</span> col_b)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (col_a != row_b) {</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Shape error, two matrices can't be multiplied."</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="function">std::vector&lt;<span class="type">float</span>&gt; <span class="title">bt</span><span class="params">(b)</span></span>;</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SIMD_transpose_mm)</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SIMD_transpose)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">uint64_t</span> i = <span class="number">0</span>; i &lt; row_b; i += <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint64_t</span> j = <span class="number">0</span>; j &lt; col_b; j += <span class="number">1</span>) {</span><br><span class="line">      bt[j * row_b + i] = b[i * col_b + j];</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SIMD_transpose)</span><br><span class="line">  <span class="built_in">TIMERSTART</span>(SIMD_mm)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">uint64_t</span> i = <span class="number">0</span>; i &lt; row_a; i += <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint64_t</span> j = <span class="number">0</span>; j &lt; col_b; j += <span class="number">1</span>) {</span><br><span class="line">      <span class="keyword">auto</span> accum = _mm_setzero_ps();</span><br><span class="line">      <span class="comment">// 128 bit, 4 float32</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">uint64_t</span> k = <span class="number">0</span>; k &lt; col_a; k += <span class="number">8</span>) {</span><br><span class="line">        <span class="keyword">auto</span> ai = _mm_loadu_ps(&amp;a[i * col_a + k]);</span><br><span class="line">        <span class="keyword">auto</span> bi = _mm_loadu_ps(&amp;bt[j * row_b + k]);</span><br><span class="line">        accum = _mm_add_ps(_mm_mul_ps(ai, bi), accum);</span><br><span class="line">        <span class="keyword">auto</span> ai2 = _mm_loadu_ps(&amp;a[i * col_a + k + <span class="number">4</span>]);</span><br><span class="line">        <span class="keyword">auto</span> bi2 = _mm_loadu_ps(&amp;bt[j * row_b + k + <span class="number">4</span>]);</span><br><span class="line">        accum = _mm_add_ps(_mm_mul_ps(ai2, bi2), accum);</span><br><span class="line">      }</span><br><span class="line">      c[i * row_a + j] = accum[<span class="number">0</span>] + accum[<span class="number">1</span>] + accum[<span class="number">2</span>] + accum[<span class="number">3</span>];</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SIMD_mm)</span><br><span class="line">  <span class="built_in">TIMERSTOP</span>(SIMD_transpose_mm)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="type">const</span> <span class="type">uint64_t</span> row_a = <span class="number">1</span> &lt;&lt; <span class="number">11</span>;</span><br><span class="line">  <span class="type">const</span> <span class="type">uint64_t</span> col_a = <span class="number">1</span> &lt;&lt; <span class="number">11</span>;</span><br><span class="line">  <span class="type">const</span> <span class="type">uint64_t</span> row_b = <span class="number">1</span> &lt;&lt; <span class="number">11</span>;</span><br><span class="line">  <span class="type">const</span> <span class="type">uint64_t</span> col_b = <span class="number">1</span> &lt;&lt; <span class="number">11</span>;</span><br><span class="line">  <span class="function">std::vector&lt;<span class="type">float</span>&gt; <span class="title">a</span><span class="params">(row_a * col_a, <span class="number">1.</span>)</span></span>;</span><br><span class="line">  <span class="function">std::vector&lt;<span class="type">float</span>&gt; <span class="title">b</span><span class="params">(row_b * col_b, <span class="number">1.</span>)</span></span>;</span><br><span class="line">  <span class="function">std::vector&lt;<span class="type">float</span>&gt; <span class="title">c</span><span class="params">(row_a * col_b, <span class="number">0.</span>)</span></span>;</span><br><span class="line">  <span class="comment">// SISDNaiveMatrixMult(a, b, c, row_a, col_a, row_b, col_b);</span></span><br><span class="line">  <span class="comment">// SISDTransposeMatrixMult(a, b, c, row_a, col_a, row_b, col_b);</span></span><br><span class="line">  <span class="built_in">SIMDTransposeMatrixMult</span>(a, b, c, row_a, col_a, row_b, col_b);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>上述程序的输出为（i7-11800H）：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># elapsed time (SISD_naive_mm): 174.542s</span><br><span class="line"># elapsed time (SISD_transpose): 0.0413579s</span><br><span class="line"># elapsed time (SISD_mm): 44.8414s</span><br><span class="line"># elapsed time (SISD_transpose_mm): 44.8848s</span><br><span class="line"># elapsed time (SIMD_transpose): 0.0398632s</span><br><span class="line"># elapsed time (SIMD_mm): 15.4761s</span><br><span class="line"># elapsed time (SIMD_transpose_mm): 15.5185s</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+<div class="blog-post-comments">
+  <noscript>Please enable JavaScript to view the comments.</noscript>
+  <div id="utterances_thread">
+    <!-- <script src="https://utteranc.es/client.js" repo="Andrew-Rey/gitalkds" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async>
+    </script> -->
+  </div>
+</div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/aimecreative">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">缓存算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">缓存一致性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flynn%E5%88%86%E7%B1%BB%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Flynn分类法</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&text=HPC | Modern Architecture-Cache"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&is_video=false&description=HPC | Modern Architecture-Cache"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HPC | Modern Architecture-Cache&body=Check out this article: https://aimecreative.github.io/2024/04/23/HPC/modern_arch/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&title=HPC | Modern Architecture-Cache"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&name=HPC | Modern Architecture-Cache&description=&lt;p&gt;Parallel Programming: Concepts and Pracitce - Chapter 3&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://aimecreative.github.io/2024/04/23/HPC/modern_arch/&t=HPC | Modern Architecture-Cache"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Mecreative
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/aimecreative">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'aimecreative/gitalkds';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
