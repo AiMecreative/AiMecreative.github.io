@@ -25,3 +25,5 @@ with open(md_path, "r+") as f:
     print("generate html file in \"{}\"".format(html_path))
 
 os.system("reveal-md " + md_path + " --static " + html_path)
+
+
